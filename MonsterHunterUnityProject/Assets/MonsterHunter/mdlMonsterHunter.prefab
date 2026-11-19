@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 3615960145494362830}
   - component: {fileID: 6909066397359719007}
   m_Layer: 0
-  m_Name: MeshSinDSDOpen
+  m_Name: meshGreatsword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,7 +222,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 066cef55953224e42b2a436d873ee799, type: 2}
+  - {fileID: 2100000, guid: fae1fe5419e929a4bafa3771609ed52f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -247,7 +247,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: -2407002495957915568, guid: 90c8e66fa7e0e01499f70097b816d9a6, type: 3}
+  m_Mesh: {fileID: -8233682954208949881, guid: 90c8e66fa7e0e01499f70097b816d9a6, type: 3}
   m_Bones:
   - {fileID: 6733660618677364364}
   - {fileID: 6733660618677364440}
@@ -2200,10 +2200,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6733660618677364432}
-  - component: {fileID: 612100335}
   - component: {fileID: 6733660618686712122}
+  - component: {fileID: 612100335}
   m_Layer: 0
-  m_Name: mdlMonsterHunter2
+  m_Name: mdlMonsterHunter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2230,6 +2230,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &6733660618686712122
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6733660618677205744}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cc5c7ae71d0848a47b37ed3fc0e0d6fa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &612100335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2317,25 +2336,6 @@ MonoBehaviour:
     transform: {fileID: 6333343776930914364}
   - name: UpslashMuzzle
     transform: {fileID: 2378530424452614692}
---- !u!95 &6733660618686712122
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6733660618677205744}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cc5c7ae71d0848a47b37ed3fc0e0d6fa, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6733660618677205746
 GameObject:
   m_ObjectHideFlags: 0
@@ -2997,7 +2997,7 @@ GameObject:
   - component: {fileID: 8603661221054467336}
   - component: {fileID: 4433311223190270000}
   m_Layer: 0
-  m_Name: meshHyperGuy
+  m_Name: meshMonsterHunter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3035,7 +3035,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fae1fe5419e929a4bafa3771609ed52f, type: 2}
+  - {fileID: 2100000, guid: efd157d6d4577924085cdd8ece22b5c4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3060,7 +3060,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: -3756818009502898426, guid: 90c8e66fa7e0e01499f70097b816d9a6, type: 3}
+  m_Mesh: {fileID: 2560736063301230419, guid: 90c8e66fa7e0e01499f70097b816d9a6, type: 3}
   m_Bones:
   - {fileID: 6733660618677364364}
   - {fileID: 6733660618677364440}

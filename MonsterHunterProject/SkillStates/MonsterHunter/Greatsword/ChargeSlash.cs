@@ -7,10 +7,10 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 {
     public class ChargeSlash : BaseMonsterHunterSkillState
     {
-        public float baseDuration = 0.9f;
+        public float baseDuration = 1.2f;
 
         private float duration;
-        private float lateWindow = 0.75f;
+        private float lateWindow = 0.9f;
         private float stopwatch;
         private int charge = 0;
         private bool airSlash = false;
@@ -19,13 +19,18 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
         {
             base.OnEnter();
             this.duration = this.baseDuration / this.attackSpeedStat;
-            base.PlayCrossfade("FullBody, Override", "ChargeDrive", "Action.playbackRate", 3f * this.duration, 0.1f);
 
             if (!this.isGrounded)
             {
-                this.characterMotor.velocity.y = 10f;
+                base.PlayAnimation("FullBody, Override", "ChargeAir", "Action.playbackRate", this.duration * 3f);
+                this.characterMotor.velocity *= 0.25f;
+                this.characterMotor.velocity.y = 3f;
                 this.airSlash = true;
-                this.duration *= 0.5f;
+                this.duration *= 0.33f;
+            }
+            else
+            {
+                base.PlayCrossfade("FullBody, Override", "ChargeGround", "Action.playbackRate", this.duration, 0.25f);
             }
         }
 
@@ -33,6 +38,12 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
         {
             base.FixedUpdate();
             this.stopwatch += Time.fixedDeltaTime;
+            this.StartAimMode(2f);
+            this.monsterHunter.jumpLockoutStopwatch = 0.1f;
+            this.characterBody.outOfCombatStopwatch = 0f;
+
+            if (this.isGrounded) this.characterMotor.moveDirection *= 0f;
+            else this.characterMotor.moveDirection *= 0.5f;
 
             if (this.characterMotor.velocity.y > 0f && this.airSlash) this.characterMotor.velocity.y *= this.monsterHunter.fallSpeedModifier;
 
@@ -43,11 +54,23 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                     // force slash with a penalty
                     if (base.isAuthority)
                     {
-                        this.outer.SetNextState(new AirSlash
+                        if (this.airSlash)
                         {
-                            charge = this.charge
-                        });
-                        return;
+                            // no penalty for aerial slash (:
+                            this.outer.SetNextState(new AirSlash
+                            {
+                                charge = this.charge
+                            });
+                            return;
+                        }
+                        else
+                        {
+                            this.outer.SetNextState(new LeapSlash
+                            {
+                                charge = Mathf.RoundToInt(Mathf.Clamp(this.charge - 1, 0, Mathf.Infinity))
+                            });
+                            return;
+                        }
                     }
                 }
             }
@@ -64,7 +87,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                     if (this.inputBank && !this.inputBank.skill2.down)
                     {
                         // grounded slash
-                        this.outer.SetNextState(new AirSlash
+                        this.outer.SetNextState(new LeapSlash
                         {
                             charge = this.charge
                         });
@@ -102,6 +125,12 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.stopwatch = 0f;
             if (this.skillLocator && this.skillLocator.secondary) this.skillLocator.secondary.DeductStock(1);
 
+            // animate
+            if (!this.airSlash)
+            {
+                base.PlayAnimation("FullBody, Override", "ChargeGround", "Action.playbackRate", this.duration);
+            }
+
             //if (this.airSlash)
             //{
                 // slight lift if midair
@@ -114,7 +143,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             {
                 EffectManager.SpawnEffect(Modules.MonsterHunterAssets.groundPunchEffectPrefab, new EffectData
                 {
-                    origin = this.transform.position,
+                    origin = this.transform.position + (Vector3.up * -0.75f),
                     rotation = Quaternion.identity,
                     scale = 1f
                 }, false);

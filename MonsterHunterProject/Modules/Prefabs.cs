@@ -174,7 +174,7 @@ namespace MonsterHunter.Modules
             modelTransform.parent = modelBase.transform;
             modelTransform.localPosition = Vector3.zero;
             modelTransform.localRotation = Quaternion.identity;
-            modelTransform.localScale = Vector3.one;//new Vector3(0.55f, 0.55f, 0.55f);
+            modelTransform.localScale = Vector3.one * 1.25f;//new Vector3(0.55f, 0.55f, 0.55f);
 
             return modelBase.transform;
         }

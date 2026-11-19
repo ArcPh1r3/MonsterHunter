@@ -34,33 +34,9 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.hasFired = false;
             this.hasLanded = false;
             this.animator = base.GetModelAnimator();
-            base.characterMotor.jumpCount = base.characterBody.maxJumpCount;
 
             this.previousAirControl = base.characterMotor.airControl;
             base.characterMotor.airControl = EntityStates.Croco.Leap.airControl;
-
-            Vector3 direction = base.GetAimRay().direction;
-
-            if (base.isAuthority)
-            {
-                base.characterBody.isSprinting = true;
-
-                direction.y = Mathf.Max(direction.y, 1.25f * EntityStates.Croco.Leap.minimumY);
-                Vector3 a = direction.normalized * (0.75f * EntityStates.Croco.Leap.aimVelocity) * this.moveSpeedStat * 0.25f;
-                Vector3 b = Vector3.up * 0.95f * EntityStates.Croco.Leap.upwardVelocity;
-                Vector3 b2 = new Vector3(direction.x, 0f, direction.z).normalized * (0.25f * EntityStates.Croco.Leap.forwardVelocity);
-
-                base.characterMotor.Motor.ForceUnground();
-                base.characterMotor.velocity = a + b + b2;
-
-                EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/BoostJumpEffect"), new EffectData
-                {
-                    origin = base.characterBody.footPosition,
-                    rotation = Util.QuaternionSafeLookRotation(base.characterMotor.velocity)
-                }, true);
-            }
-
-            base.characterDirection.moveVector = direction;
 
             base.characterBody.bodyFlags |= CharacterBody.BodyFlags.IgnoreFallDamage;
 
@@ -86,7 +62,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.attack.attacker = base.gameObject;
             this.attack.inflictor = base.gameObject;
             this.attack.teamIndex = base.GetTeam();
-            this.attack.damage = dmg * this.damageStat * this.charge;
+            this.attack.damage = dmg * this.damageStat * (1 + this.charge);
             this.attack.procCoefficient = 1;
             this.attack.hitEffectPrefab = Modules.MonsterHunterAssets.slashImpactEffect;
             this.attack.forceVector = -Vector3.up * 6000f;
@@ -99,8 +75,6 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
         public override void OnExit()
         {
             base.OnExit();
-
-            base.PlayAnimation("FullBody, Override", "BufferEmpty");
 
             base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
             base.characterMotor.airControl = this.previousAirControl;
@@ -119,7 +93,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                     //EffectManager.SimpleMuzzleFlash(this.swordController.swingEffect, base.gameObject, "SwingDown", true);
                     //UnityEngine.Object.Instantiate(this.swordController.swingEffect, FindModelChild("SwingDown"));
 
-                    base.characterMotor.velocity *= 0.25f;
+                    //base.characterMotor.velocity *= 0.25f;
                     base.characterMotor.velocity += Vector3.up * -AirSlash.dropVelocity;
                 }
             }
@@ -151,26 +125,15 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             base.FixedUpdate();
             base.StartAimMode(0.5f, false);
             this.stopwatch += Time.deltaTime;
+            this.monsterHunter.jumpLockoutStopwatch = 0.1f;
+            this.characterBody.outOfCombatStopwatch = 0f;
 
-            if (this.stopwatch >= this.duration)
-            {
-                this.FireAttack();
+            this.FireAttack();
 
-                /*if (base.isAuthority && base.inputBank.skill2.down)
-                {
-                    if (base.skillLocator.secondary.stock > 0)
-                    {
-                        EntityState nextState = new AirSlamAlt();
-                        this.outer.SetNextState(nextState);
-                        return;
-                    }
-                }*/
-            }
-
-            if (this.stopwatch >= this.duration && base.isAuthority && base.characterMotor.isGrounded)
+            if (base.isAuthority && base.characterMotor.isGrounded)
             {
                 this.GroundImpact();
-                this.outer.SetNextStateToMain();
+                this.outer.SetNextState(new SlashEnd());
                 return;
             }
         }

@@ -211,7 +211,7 @@ namespace MonsterHunter.Content.Survivors
                 damage = 12f,
                 healthGrowth = 27f,
                 healthRegen = 2.5f,
-                jumpCount = 2,
+                jumpCount = 1,
                 maxHealth = 90f,
                 subtitleNameToken = "ROB_MONSTERHUNTER_BODY_SUBTITLE",
                 podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
@@ -341,8 +341,8 @@ namespace MonsterHunter.Content.Survivors
             #region Model
             bodyRendererIndex = 0;
 
-            Material bodyMat = Modules.MonsterHunterAssets.CreateMaterial("matPlaceholder");
-            Material swordMat = Modules.MonsterHunterAssets.CreateMaterial("matDSD", 2f, Color.white);
+            Material bodyMat = Modules.MonsterHunterAssets.CreateMaterial("matMonsterHunter");
+            Material swordMat = Modules.MonsterHunterAssets.CreateMaterial("matPlaceholder");
 
             Modules.Prefabs.SetupCharacterModel(newPrefab, new CustomRendererInfo[] {
                 new CustomRendererInfo

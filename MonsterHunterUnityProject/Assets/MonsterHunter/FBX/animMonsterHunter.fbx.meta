@@ -105,6 +105,21 @@ ModelImporter:
   - first:
       74: 8635264967315530259
     second: Armature.001|Stunned
+  - first:
+      74: 7709686125681325085
+    second: Armature|Armature.001Action
+  - first:
+      74: -7602332586796651127
+    second: Armature|aa.001
+  - first:
+      74: 8320968882728391540
+    second: Armature|ChargeAir
+  - first:
+      74: -2715749271613670993
+    second: Armature|ChargeGround
+  - first:
+      74: 5293944179933865728
+    second: Armature|aa.002
   externalObjects: {}
   materials:
     materialImportMode: 1
