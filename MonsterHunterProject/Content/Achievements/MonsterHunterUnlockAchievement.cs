@@ -1,0 +1,38 @@
+﻿using RoR2;
+using RoR2.Achievements;
+using UnityEngine;
+
+namespace MonsterHunter.Content.Achievements
+{
+    //string identifier, string unlockableRewardIdentifier, string prerequisiteAchievementIdentifier, uint lunarCoinReward, Type serverTrackerType = null
+    //automatically creates language tokens "ACHIEVEMENT_{identifier.ToUpper()}_NAME" and "ACHIEVEMENT_{identifier.ToUpper()}_DESCRIPTION" 
+    //[RegisterAchievement(IDENTIFIER, UNLOCKABLE_IDENTIFIER, null, 10, null)]
+    internal class MonsterHunterUnlockAchievement : BaseAchievement
+    {
+        public const string IDENTIFIER = "";//ROB_HUNK_BODY_UNLOCKABLE_ACHIEVEMENT_ID
+        public const string UNLOCKABLE_IDENTIFIER = "";//ROB_HUNK_BODY_UNLOCKABLE_REWARD_ID
+        public static Sprite Sprite => Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Sprite>("texDanteIcon");
+
+        public override void OnInstall()
+        {
+            base.OnInstall();
+
+            //CharacterBody.onBodyStartGlobal += OnBodyStartGlobal;
+        }
+
+        public override void OnUninstall()
+        {
+            base.OnUninstall();
+
+            //CharacterBody.onBodyStartGlobal -= OnBodyStartGlobal;
+        }
+
+        private void OnBodyStartGlobal(CharacterBody characterBody)
+        {
+            if (Run.instance && Run.instance.stageClearCount >= 2 && Run.instance.time <= 900f)
+            {
+                base.Grant();
+            }
+        }
+    }
+}

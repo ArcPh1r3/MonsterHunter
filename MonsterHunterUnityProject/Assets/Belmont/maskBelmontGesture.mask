@@ -1,0 +1,273 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: maskBelmontGesture
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 0
+  - m_Path: Armature/ROOT
+    m_Weight: 0
+  - m_Path: Armature/ROOT/base
+    m_Weight: 0
+  - m_Path: Armature/ROOT/base/pelvis
+    m_Weight: 0
+  - m_Path: Armature/ROOT/base/pelvis/thigh.l
+    m_Weight: 0
+  - m_Path: Armature/ROOT/base/pelvis/thigh.l/calf.l
+    m_Weight: 0
+  - m_Path: Armature/ROOT/base/pelvis/thigh.l/calf.l/foot.l
+    m_Weight: 0
+  - m_Path: Armature/ROOT/base/pelvis/thigh.l/calf.l/foot.l/toe.l
+    m_Weight: 0
+  - m_Path: Armature/ROOT/base/pelvis/thigh.r
+    m_Weight: 0
+  - m_Path: Armature/ROOT/base/pelvis/thigh.r/calf.r
+    m_Weight: 0
+  - m_Path: Armature/ROOT/base/pelvis/thigh.r/calf.r/foot.r
+    m_Weight: 0
+  - m_Path: Armature/ROOT/base/pelvis/thigh.r/calf.r/foot.r/toe.r
+    m_Weight: 0
+  - m_Path: Armature/ROOT/base/stomach
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/head
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l/upperarm.l
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l/upperarm.l/lowerarm.l
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l/upperarm.l/lowerarm.l/blade.l
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l/upperarm.l/lowerarm.l/blade.l/blade.l.smear
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l/upperarm.l/lowerarm.l/hand.l
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l/upperarm.l/lowerarm.l/hand.l/indexfinger.l.01
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l/upperarm.l/lowerarm.l/hand.l/indexfinger.l.01/indexfinger.l.02
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l/upperarm.l/lowerarm.l/hand.l/middlefinger.l.01
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l/upperarm.l/lowerarm.l/hand.l/middlefinger.l.01/middlefinger.l.02
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l/upperarm.l/lowerarm.l/hand.l/pinky.l.01
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l/upperarm.l/lowerarm.l/hand.l/pinky.l.01/pinky.l.02
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l/upperarm.l/lowerarm.l/hand.l/ringfinger.l.01
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l/upperarm.l/lowerarm.l/hand.l/ringfinger.l.01/ringfinger.l.02
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l/upperarm.l/lowerarm.l/hand.l/thumb.l.01
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l/upperarm.l/lowerarm.l/hand.l/thumb.l.01/thumb.l.02
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l/upperarm.l/lowerarm.l/hand.l/weapon.l
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.l/upperarm.l/lowerarm.l/hand.l/weapon.l/weaponhead.l
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r/lowerarm.r
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r/lowerarm.r/blade.r
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r/lowerarm.r/blade.r/blade.r.smear
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r/lowerarm.r/hand.r
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r/lowerarm.r/hand.r/indexfinger.r.01
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r/lowerarm.r/hand.r/indexfinger.r.01/indexfinger.r.02
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r/lowerarm.r/hand.r/middlefinger.r.01
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r/lowerarm.r/hand.r/middlefinger.r.01/middlefinger.r.02
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r/lowerarm.r/hand.r/pinky.r.01
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r/lowerarm.r/hand.r/pinky.r.01/pinky.r.02
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r/lowerarm.r/hand.r/ringfinger.r.01
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r/lowerarm.r/hand.r/ringfinger.r.01/ringfinger.r.02
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r/lowerarm.r/hand.r/thumb.r.01
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r/lowerarm.r/hand.r/thumb.r.01/thumb.r.02
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r/lowerarm.r/hand.r/weapon.r
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r/lowerarm.r/hand.r/weapon.r/shotgun.barrel
+    m_Weight: 1
+  - m_Path: Armature/ROOT/base/stomach/chest/shoulder.r/upperarm.r/lowerarm.r/hand.r/weapon.r/weaponhead.r
+    m_Weight: 1
+  - m_Path: Armature/ROOT/ik.elbow.l
+    m_Weight: 0
+  - m_Path: Armature/ROOT/ik.elbow.r
+    m_Weight: 0
+  - m_Path: Armature/ROOT/ik.foot.l
+    m_Weight: 0
+  - m_Path: Armature/ROOT/ik.foot.r
+    m_Weight: 0
+  - m_Path: Armature/ROOT/ik.hand.l
+    m_Weight: 0
+  - m_Path: Armature/ROOT/ik.hand.r
+    m_Weight: 0
+  - m_Path: Armature/ROOT/ik.knee.l
+    m_Weight: 0
+  - m_Path: Armature/ROOT/ik.knee.r
+    m_Weight: 0
+  - m_Path: ClothArmature
+    m_Weight: 0
+  - m_Path: ClothArmature/Bone
+    m_Weight: 0
+  - m_Path: ClothArmature/Bone/Bone.002
+    m_Weight: 0
+  - m_Path: ClothArmature/Bone/Bone.002/Bone.001
+    m_Weight: 0
+  - m_Path: ClothArmature/Bone/Bone.002/Bone.001/Bone.003
+    m_Weight: 0
+  - m_Path: CoatArmature
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.001
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.001/coat.029
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.001/coat.029/coat.011
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.001/coat.029/coat.011/coat.030
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.001/coat.029/coat.011/coat.030/coat.006
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.001/coat.029/coat.011/coat.030/coat.006/coat.031
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.001/coat.029/coat.011/coat.030/coat.006/coat.031/coat.016
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.001/coat.029/coat.011/coat.030/coat.006/coat.031/coat.016/coat.032
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.002
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.002/coat.033
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.002/coat.033/coat.012
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.002/coat.033/coat.012/coat.034
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.002/coat.033/coat.012/coat.034/coat.007
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.002/coat.033/coat.012/coat.034/coat.007/coat.035
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.002/coat.033/coat.012/coat.034/coat.007/coat.035/coat.017
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.002/coat.033/coat.012/coat.034/coat.007/coat.035/coat.017/coat.036
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.003
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.003/coat.037
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.003/coat.037/coat.013
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.003/coat.037/coat.013/coat.038
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.003/coat.037/coat.013/coat.038/coat.008
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.003/coat.037/coat.013/coat.038/coat.008/coat.039
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.003/coat.037/coat.013/coat.038/coat.008/coat.039/coat.018
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.003/coat.037/coat.013/coat.038/coat.008/coat.039/coat.018/coat.040
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.004
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.004/coat.041
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.004/coat.041/coat.014
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.004/coat.041/coat.014/coat.042
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.004/coat.041/coat.014/coat.042/coat.009
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.004/coat.041/coat.014/coat.042/coat.009/coat.043
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.004/coat.041/coat.014/coat.042/coat.009/coat.043/coat.019
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.004/coat.041/coat.014/coat.042/coat.009/coat.043/coat.019/coat.044
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.005
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.005/coat.045
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.005/coat.045/coat.015
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.005/coat.045/coat.015/coat.046
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.005/coat.045/coat.015/coat.046/coat.010
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.005/coat.045/coat.015/coat.046/coat.010/coat.047
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.005/coat.045/coat.015/coat.046/coat.010/coat.047/coat.020
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.005/coat.045/coat.015/coat.046/coat.010/coat.047/coat.020/coat.048
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.021
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.021/coat.049
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.021/coat.049/coat.022
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.021/coat.049/coat.022/coat.050
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.021/coat.049/coat.022/coat.050/coat.023
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.021/coat.049/coat.022/coat.050/coat.023/coat.051
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.021/coat.049/coat.022/coat.050/coat.023/coat.051/coat.024
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.021/coat.049/coat.022/coat.050/coat.023/coat.051/coat.024/coat.052
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.025
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.025/coat.053
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.025/coat.053/coat.026
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.025/coat.053/coat.026/coat.054
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.025/coat.053/coat.026/coat.054/coat.027
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.025/coat.053/coat.026/coat.054/coat.027/coat.055
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.025/coat.053/coat.026/coat.054/coat.027/coat.055/coat.028
+    m_Weight: 0
+  - m_Path: CoatArmature/ROOT 1/ROOT.001/coat.025/coat.053/coat.026/coat.054/coat.027/coat.055/coat.028/coat.056
+    m_Weight: 0
+  - m_Path: meshBandana
+    m_Weight: 0
+  - m_Path: meshBelmont
+    m_Weight: 0
+  - m_Path: meshBlades
+    m_Weight: 0
+  - m_Path: meshCoat
+    m_Weight: 0
+  - m_Path: Sun
+    m_Weight: 0
+  - m_Path: Sun.001
+    m_Weight: 0
