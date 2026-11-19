@@ -50,7 +50,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                 hitBoxGroup = Array.Find<HitBoxGroup>(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == hitboxString);
             }
 
-            base.PlayAnimation("FullBody, Override", "Downslash", "Action.playbackRate", this.duration * 1.5f);
+            base.PlayAnimation("FullBody, Override", "AirSlash", "Action.playbackRate", 0.25f);
             //Util.PlaySound(Modules.Sounds.Lunge, base.gameObject);
             //Util.PlaySound(Modules.Sounds.Cloth2, base.gameObject);
 

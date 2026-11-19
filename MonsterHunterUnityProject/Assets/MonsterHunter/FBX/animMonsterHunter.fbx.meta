@@ -126,6 +126,12 @@ ModelImporter:
   - first:
       74: 8513732930258087330
     second: Armature|SlashEnd
+  - first:
+      74: -4856935422122172683
+    second: Armature|AirSlash
+  - first:
+      74: -227394932457411354
+    second: Armature|ChargeGroundStart
   externalObjects: {}
   materials:
     materialImportMode: 1
