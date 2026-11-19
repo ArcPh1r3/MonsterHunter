@@ -20,6 +20,8 @@ namespace MonsterHunter.Modules
         //public static ConfigEntry<bool> badass;
         public static ConfigEntry<bool> cursed;
 
+        public static ConfigEntry<bool> showAllParts;
+
         internal static void ReadConfig()
         {
             cursed
@@ -27,6 +29,8 @@ namespace MonsterHunter.Modules
 "Cursed",
 false,
 "Enables unfinished, stupid and old content.", true);
+
+            showAllParts = Config.BindAndOptions("01 - General", "Always Show Parts", false, "Displays all owned parts all the time.", false);
 
             #region Emotes
             restKey

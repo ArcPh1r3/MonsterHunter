@@ -12,6 +12,7 @@ using UnityEngine.AddressableAssets;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
+[assembly: HG.Reflection.SearchableAttribute.OptIn] // for part catalog
 
 namespace MonsterHunter
 {
@@ -84,7 +85,15 @@ namespace MonsterHunter
 
             new Modules.ContentPacks().Initialize();
 
+            // part catalog needs to be registered kind of late i guess?
+            RoR2.ItemCatalog.availability.onAvailable += Availability_onAvailable;
+
             RoR2.ContentManagement.ContentManager.onContentPacksAssigned += LateSetup;
+        }
+
+        private void Availability_onAvailable()
+        {
+            Modules.PartCatalog.Initalize();
         }
 
         private void LateSetup(global::HG.ReadOnlyArray<RoR2.ContentManagement.ReadOnlyContentPack> obj)
