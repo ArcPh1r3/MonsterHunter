@@ -120,6 +120,12 @@ ModelImporter:
   - first:
       74: 5293944179933865728
     second: Armature|aa.002
+  - first:
+      74: -9180895774499272927
+    second: Armature|Slash
+  - first:
+      74: 8513732930258087330
+    second: Armature|SlashEnd
   externalObjects: {}
   materials:
     materialImportMode: 1

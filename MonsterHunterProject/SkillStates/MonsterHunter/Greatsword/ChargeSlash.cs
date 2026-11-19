@@ -87,10 +87,17 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                     if (this.inputBank && !this.inputBank.skill2.down)
                     {
                         // grounded slash
-                        this.outer.SetNextState(new LeapSlash
+                        if (this.inputBank.moveVector.magnitude > 0.1f)
                         {
-                            charge = this.charge
-                        });
+                            this.outer.SetNextState(new LeapSlash
+                            {
+                                charge = this.charge
+                            });
+                        }
+                        else
+                        {
+                            this.outer.SetNextState(new SlashStartup());
+                        }
                         return;
                     }
                 }

@@ -7,16 +7,24 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 {
     public class SlashEnd : BaseMonsterHunterSkillState
     {
-        public float baseDuration = 0.75f;
+        public float baseDuration = 1f;
 
         private float duration;
-        private float earlyExitTime = 0.25f;
+        private float earlyExitTime = 0.35f;
 
         public override void OnEnter()
         {
             base.OnEnter();
             this.duration = this.baseDuration / this.attackSpeedStat;
-            base.PlayAnimation("FullBody, Override", "DownslashEnd", "Action.playbackRate", this.duration);
+            base.PlayAnimation("FullBody, Override", "SlashEnd", "Action.playbackRate", this.duration);
+
+            EffectManager.SpawnEffect(Modules.MonsterHunterAssets.groundPunchHeavyEffectPrefab, new EffectData
+            {
+                origin = this.characterBody.footPosition + (this.characterDirection.forward * 3f),
+                scale = 1f
+            }, true);
+
+            Util.PlaySound("PaladinSwordGroundImpact", this.gameObject);
         }
 
         public override void FixedUpdate()
@@ -26,7 +34,6 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.monsterHunter.jumpLockoutStopwatch = 0.1f;
             this.characterMotor.moveDirection *= 0f;
             this.characterBody.outOfCombatStopwatch = 0f;
-
 
             if (base.isAuthority && base.fixedAge >= this.duration)
             {

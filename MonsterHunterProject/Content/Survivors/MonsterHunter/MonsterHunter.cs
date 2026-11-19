@@ -654,6 +654,28 @@ namespace MonsterHunter.Content.Survivors
 
             skins.Add(defaultSkin);
             #endregion
+            #region HyperSkin
+
+            SkinDef hyperSkin = Modules.Skins.NewSkinDef(model,
+                "ROB_MONSTERHUNTER_BODY_HYPER_SKIN_NAME",
+                Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Sprite>("texDefaultSkin"),
+                defaultRenderers);
+
+            hyperSkin.skinDefParams.meshReplacements = new SkinDefParams.MeshReplacement[]
+            {
+                new SkinDefParams.MeshReplacement
+                {
+                    mesh = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Mesh>("meshHyperGuy"),
+                    renderer = mainRenderer,
+                }
+            };
+
+            Material hyperMat = Modules.MonsterHunterAssets.CreateMaterial("matPlaceholder");
+            hyperSkin.skinDefParams.rendererInfos[0].defaultMaterial = hyperMat;
+
+            skins.Add(hyperSkin);
+            #endregion
+
 
             skinController.skins = skins.ToArray();
         }

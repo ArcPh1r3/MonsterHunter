@@ -158,6 +158,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             {
                 this.hasFired = true;
 
+                Util.PlaySound("PaladinHeavySwing", this.gameObject);
                 if (this.characterMotor)
                 {
                     this.characterMotor.Motor.ForceUnground();
