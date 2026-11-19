@@ -18,11 +18,11 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
         public override void OnEnter()
         {
             base.OnEnter();
-            this.duration = this.baseDuration / this.attackSpeedStat;
+            this.duration = this.baseDuration;// / this.attackSpeedStat;
 
             if (!this.isGrounded)
             {
-                base.PlayAnimation("FullBody, Override", "ChargeAir", "Action.playbackRate", this.duration * 3f);
+                base.PlayAnimation("FullBody, Override", "ChargeAir", "Action.playbackRate", this.duration);
                 this.characterMotor.velocity *= 0.25f;
                 this.characterMotor.velocity.y = 3f;
                 this.airSlash = true;
@@ -30,7 +30,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             }
             else
             {
-                base.PlayCrossfade("FullBody, Override", "ChargeGround", "Action.playbackRate", this.duration, 0.25f);
+                base.PlayCrossfade("FullBody, Override", "ChargeGroundStart", "Action.playbackRate", this.duration, 0.1f);
             }
         }
 
@@ -65,10 +65,19 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                         }
                         else
                         {
-                            this.outer.SetNextState(new LeapSlash
+                            int newCharge = Mathf.RoundToInt(Mathf.Clamp(this.charge - 1, 0, Mathf.Infinity));
+
+                            if (this.inputBank.moveVector.magnitude > 0.1f)
                             {
-                                charge = Mathf.RoundToInt(Mathf.Clamp(this.charge - 1, 0, Mathf.Infinity))
-                            });
+                                this.outer.SetNextState(new LeapSlash
+                                {
+                                    charge = newCharge
+                                });
+                            }
+                            else
+                            {
+                                this.outer.SetNextState(new SlashStartup());
+                            }
                             return;
                         }
                     }
@@ -84,7 +93,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             {
                 if (!this.airSlash)
                 {
-                    if (this.inputBank && !this.inputBank.skill2.down)
+                    if (this.inputBank && !this.inputBank.skill2.down && base.fixedAge >= 0.5f)
                     {
                         // grounded slash
                         if (this.inputBank.moveVector.magnitude > 0.1f)
@@ -150,7 +159,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             {
                 EffectManager.SpawnEffect(Modules.MonsterHunterAssets.groundPunchEffectPrefab, new EffectData
                 {
-                    origin = this.transform.position + (Vector3.up * -0.75f),
+                    origin = this.transform.position + (Vector3.up * -1.1f),
                     rotation = Quaternion.identity,
                     scale = 1f
                 }, false);

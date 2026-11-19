@@ -25,6 +25,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.monsterHunter.jumpLockoutStopwatch = 0.1f;
             this.characterMotor.moveDirection *= 0f;
             this.characterBody.outOfCombatStopwatch = 0f;
+            this.characterMotor.velocity = this.characterDirection.forward * this.monsterHunter.slashMovementModifier;
 
             if (base.isAuthority && base.fixedAge >= this.duration)
             {

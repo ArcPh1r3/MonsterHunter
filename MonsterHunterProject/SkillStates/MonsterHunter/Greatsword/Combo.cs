@@ -162,6 +162,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                 if (this.characterMotor)
                 {
                     this.characterMotor.Motor.ForceUnground();
+                    this.characterMotor.velocity = (this.inputBank.moveVector * 16f) + (this.characterDirection.forward * 4f);
                     this.characterMotor.velocity.y = 8f;
                 }
 
@@ -198,7 +199,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             if (this.animator) this.animator.SetBool("inCombat", true);
             this.hitPauseTimer -= Time.deltaTime;
 
-            this.characterMotor.moveDirection *= 0.25f;
+            if (!this.hasFired) this.characterMotor.moveDirection *= 0.2f;
 
             if (this.characterMotor.velocity.y < 0f && !this.hasFired) this.characterMotor.velocity.y *= 0.9f;
 

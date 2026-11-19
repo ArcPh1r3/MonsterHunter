@@ -30,7 +30,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
         public override void OnEnter()
         {
             base.OnEnter();
-            this.duration = LeapSlash.leapDuration / (0.75f + (0.25f * this.attackSpeedStat));
+            this.duration = LeapSlash.leapDuration;// / (0.75f + (0.25f * this.attackSpeedStat));
             this.hasFired = false;
             this.hasLanded = false;
             this.animator = base.GetModelAnimator();
@@ -109,6 +109,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             {
                 this.hasFired = true;
                 Util.PlaySound("PaladinHeavySwing", this.gameObject);
+                base.PlayAnimation("FullBody, Override", "AirSlash", "Action.playbackRate", 0.25f);
 
                 if (base.isAuthority)
                 {
@@ -197,19 +198,9 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
         {
             if (!this.hasLanded)
             {
-                base.PlayAnimation("FullBody, Override", "DownslashEnd", "Action.playbackRate", 1f);
-
                 this.hasLanded = true;
 
                 this.FireShockwave();
-
-                EffectManager.SpawnEffect(Modules.MonsterHunterAssets.groundPunchHeavyEffectPrefab, new EffectData
-                {
-                    origin = this.characterBody.footPosition + (this.characterDirection.forward * 2.5f),
-                    scale = 1f
-                }, true);
-
-                Util.PlaySound("PaladinSwordGroundImpact", this.gameObject);
             }
         }
 
