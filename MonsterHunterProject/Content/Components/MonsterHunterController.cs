@@ -12,6 +12,8 @@ namespace MonsterHunter.Content.Components
 {
     public class MonsterHunterController : NetworkBehaviour
     {
+        public float fallSpeedModifier = 1.05f;
+
         public MeleeWeaponTrail swordTrail;
         public MeleeWeaponTrail swordTrailB;
         public float baseTurnSpeed { get; private set; }

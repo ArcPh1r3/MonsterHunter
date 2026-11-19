@@ -1,0 +1,199 @@
+fileFormatVersion: 2
+guid: 90c8e66fa7e0e01499f70097b816d9a6
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      74: -477475772434739003
+    second: Armature|aa
+  - first:
+      74: 1138058251333943779
+    second: Armature|Ascend
+  - first:
+      74: 4256349397537950452
+    second: Armature|Clash
+  - first:
+      74: 7716703115156078458
+    second: Armature|CSSIdle
+  - first:
+      74: -4131882330767466325
+    second: Armature|DefaultPose
+  - first:
+      74: -5392195937436897604
+    second: Armature|Descend
+  - first:
+      74: 5434418853472708053
+    second: Armature|DescendFast
+  - first:
+      74: -6732551908921115500
+    second: Armature|Flinch
+  - first:
+      74: -8945691123924629249
+    second: Armature|Idle
+  - first:
+      74: 2868896550796193110
+    second: Armature|Parry
+  - first:
+      74: 7977743771622619001
+    second: Armature|Parry2
+  - first:
+      74: 1600970289380035835
+    second: Armature|ParryBullet
+  - first:
+      74: -62420250452380510
+    second: Armature|ParryShoot
+  - first:
+      74: -6275188982484165146
+    second: Armature|ParryShoot2
+  - first:
+      74: -6228194583152913532
+    second: Armature|PreToIdle
+  - first:
+      74: -309044915989819050
+    second: Armature|PreToIdle.001
+  - first:
+      74: -7646926558962178391
+    second: Armature|Stunned
+  - first:
+      74: 3283045532964854228
+    second: Armature.001|aa
+  - first:
+      74: -6939050691364566900
+    second: Armature.001|Ascend
+  - first:
+      74: 1503004229958162648
+    second: Armature.001|Clash
+  - first:
+      74: -7448682539658800442
+    second: Armature.001|CSSIdle
+  - first:
+      74: 4761194648389250834
+    second: Armature.001|DefaultPose
+  - first:
+      74: 238826266100200761
+    second: Armature.001|Descend
+  - first:
+      74: -9215532095137886384
+    second: Armature.001|DescendFast
+  - first:
+      74: 3922852864863157865
+    second: Armature.001|Flinch
+  - first:
+      74: 4699274299699868179
+    second: Armature.001|Idle
+  - first:
+      74: 570096647148102645
+    second: Armature.001|Parry
+  - first:
+      74: 1443313540134947582
+    second: Armature.001|Parry2
+  - first:
+      74: 7098448194595023339
+    second: Armature.001|ParryBullet
+  - first:
+      74: 8291325495023396407
+    second: Armature.001|ParryShoot
+  - first:
+      74: 2816328706107799221
+    second: Armature.001|ParryShoot2
+  - first:
+      74: 2364914900189422938
+    second: Armature.001|PreToIdle
+  - first:
+      74: -1753361840717710423
+    second: Armature.001|PreToIdle.001
+  - first:
+      74: 8635264967315530259
+    second: Armature.001|Stunned
+  externalObjects: {}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

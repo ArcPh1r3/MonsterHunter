@@ -28,8 +28,6 @@ namespace MonsterHunter
         public const string MODNAME = "MonsterHunter";
         public const string MODVERSION = "0.0.1";
 
-        public const string developerPrefix = "ROB";
-
         public static MainPlugin instance;
 
         //public static bool scepterInstalled => BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter");

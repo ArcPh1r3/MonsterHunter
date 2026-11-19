@@ -27,10 +27,10 @@ namespace MonsterHunter.Modules
 
         internal static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, string namePrefix, UnlockableDef unlockableDef)
         {
-            string fullNameString = MainPlugin.developerPrefix + "_" + namePrefix + "_BODY_NAME";
-            string fullDescString = MainPlugin.developerPrefix + "_" + namePrefix + "_BODY_DESCRIPTION";
-            string fullOutroString = MainPlugin.developerPrefix + "_" + namePrefix + "_BODY_OUTRO_FLAVOR";
-            string fullFailureString = MainPlugin.developerPrefix + "_" + namePrefix + "_BODY_OUTRO_FAILURE";
+            string fullNameString = "ROB_" + namePrefix + "_BODY_NAME";
+            string fullDescString = "ROB_" + namePrefix + "_BODY_DESCRIPTION";
+            string fullOutroString = "ROB_" + namePrefix + "_BODY_OUTRO_FLAVOR";
+            string fullFailureString = "ROB_" + namePrefix + "_BODY_OUTRO_FAILURE";
 
             SurvivorDef survivorDef = ScriptableObject.CreateInstance<SurvivorDef>();
             survivorDef.bodyPrefab = bodyPrefab;

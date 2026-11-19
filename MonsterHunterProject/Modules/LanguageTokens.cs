@@ -13,6 +13,7 @@ namespace MonsterHunter.Modules
                 return System.IO.Path.GetDirectoryName(Files.PluginInfo.Location);
             }
         }
+
         public LanguageTokens()
         {
             RegisterLanguageTokens();

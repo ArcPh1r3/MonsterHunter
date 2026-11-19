@@ -206,7 +206,7 @@ namespace MonsterHunter.Content.Survivors
                 bodyName = "RobMonsterHunterBody",
                 bodyNameToken = bodyNameToken,
                 bodyColor = characterColor,
-                characterPortrait = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Texture>(""),
+                characterPortrait = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Texture>("texDanteIcon"),
                 crosshair = Modules.MonsterHunterAssets.crosshairPrefab,
                 damage = 12f,
                 healthGrowth = 27f,
@@ -341,16 +341,8 @@ namespace MonsterHunter.Content.Survivors
             #region Model
             bodyRendererIndex = 0;
 
-            Material bodyMat = Modules.MonsterHunterAssets.CreateMaterial("matDante", 2f, Color.white);
-            Material gunsMat = Modules.MonsterHunterAssets.CreateMaterial("matPistols", 0f, Color.black);
-
-            Material devilTriggerMat = Material.Instantiate(Addressables.LoadAssetAsync<Material>("RoR2/DLC1/VoidSurvivor/matVoidSurvivorFlesh.mat").WaitForCompletion());
-
-            devilTriggerMat.SetTexture("_MainTex", Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Texture>("texDevilTrigger"));
-            devilTriggerMat.SetTexture("_RemapTex", Addressables.LoadAssetAsync<Texture>("RoR2/DLC2/Scorchling/texRampScorchling.png").WaitForCompletion());
-            devilTriggerMat.SetTexture("_EmTex", Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Texture>("texDevilTriggerEmission"));
-            devilTriggerMat.SetFloat("_EmPower", 5f);
-            devilTriggerMat.SetColor("_Color", new Color(154f / 255f, 121f / 255f, 118f / 255f));
+            Material bodyMat = Modules.MonsterHunterAssets.CreateMaterial("matPlaceholder");
+            Material swordMat = Modules.MonsterHunterAssets.CreateMaterial("matDSD", 2f, Color.white);
 
             Modules.Prefabs.SetupCharacterModel(newPrefab, new CustomRendererInfo[] {
                 new CustomRendererInfo
@@ -361,7 +353,7 @@ namespace MonsterHunter.Content.Survivors
                 new CustomRendererInfo
                 {
                     childName = "SwordModel",
-                    material = bodyMat
+                    material = swordMat
                 }}, bodyRendererIndex);
             #endregion
 
@@ -524,7 +516,7 @@ namespace MonsterHunter.Content.Survivors
             #endregion
 
             #region Primary
-            SkillDef primary = Modules.Skills.CreatePrimarySteppedSkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.MonsterHunter.MainState)),
+            SkillDef primary = Modules.Skills.CreatePrimarySteppedSkillDef(new EntityStates.SerializableEntityStateType(typeof(SkillStates.MonsterHunter.Greatsword.Combo)),
                 "Weapon",
                 "ROB_MONSTERHUNTER_BODY_PRIMARY_NAME",
                 "ROB_MONSTERHUNTER_BODY_PRIMARY_DESCRIPTION",
@@ -535,25 +527,25 @@ namespace MonsterHunter.Content.Survivors
 
             #region Secondary
             SkillDef chargeSlashSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
+            {   
                 skillName = "MonsterHunterChargeSlash",
                 skillNameToken = "ROB_DANTE_BODY_MELEE_NAME",
                 skillDescriptionToken = "ROB_DANTE_BODY_MELEE_DESCRIPTION",
                 icon = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Sprite>("texMeleeIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MonsterHunter.MainState)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MonsterHunter.Greatsword.ChargeSlash)),
                 activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
-                baseRechargeInterval = 0.1f,
-                beginSkillCooldownOnSkillEnd = false,
+                baseMaxStock = 3,
+                baseRechargeInterval = 4f,
+                beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.Any,
-                resetCooldownTimerOnUse = false,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = true,
                 isCombatSkill = true,
-                mustKeyPress = true,
+                mustKeyPress = false,
                 cancelSprintingOnActivation = true,
-                rechargeStock = 1,
+                rechargeStock = 3,
                 requiredStock = 1,
                 stockToConsume = 0,
                 keywordTokens = new string[0]
@@ -656,7 +648,7 @@ namespace MonsterHunter.Content.Survivors
             #region DefaultSkin
 
             SkinDef defaultSkin = Modules.Skins.NewSkinDef(model,
-                MainPlugin.developerPrefix + "_MONSTERHUNTER_BODY_DEFAULT_SKIN_NAME",
+                "ROB_MONSTERHUNTER_BODY_DEFAULT_SKIN_NAME",
                 Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Sprite>("texDefaultSkin"),
                 defaultRenderers);
 
