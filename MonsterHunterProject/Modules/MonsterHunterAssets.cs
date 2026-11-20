@@ -142,13 +142,13 @@ namespace MonsterHunter.Modules
             finisherImpactEffect.GetComponent<OmniEffect>().enabled = false;
 
             var sex2 = finisherImpactEffect.transform.Find("Impact Slash").GetComponent<ParticleSystem>().main;
-            sex2.startLifetimeMultiplier *= 16f;
+            sex2.startLifetimeMultiplier *= 10f;
             sex2 = finisherImpactEffect.transform.Find("Dash, Bright").GetComponent<ParticleSystem>().main;
-            sex2.startLifetimeMultiplier *= 18f;
+            sex2.startLifetimeMultiplier *= 12f;
             sex2 = finisherImpactEffect.transform.Find("ScaledSmokeRing, Mesh").GetComponent<ParticleSystem>().main;
-            sex2.startLifetimeMultiplier *= 16f;
+            sex2.startLifetimeMultiplier *= 10f;
             sex2 = finisherImpactEffect.transform.Find("Flash, Hard").GetComponent<ParticleSystem>().main;
-            sex2.startLifetimeMultiplier *= 13f;
+            sex2.startLifetimeMultiplier *= 2f;
 
             finisherImpactEffect.transform.Find("Scaled Hitspark 3, Radial (Random Color)").gameObject.SetActive(true);
             finisherImpactEffect.transform.Find("Flash, Hard").gameObject.SetActive(true);

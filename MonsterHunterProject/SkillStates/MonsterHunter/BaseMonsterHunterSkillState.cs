@@ -61,7 +61,13 @@ namespace MonsterHunter.SkillStates.MonsterHunter
 
         public override void FixedUpdate()
         {
+            if (!this.turningAllowed) this.characterBody.aimTimer = -1f;
             base.FixedUpdate();
+            if (!this.turningAllowed)
+            {
+                this.characterBody.aimTimer = -1f;
+                this.characterDirection.moveVector = this.characterDirection.forward;
+            }
 
             if (this._animator)
             {
@@ -75,7 +81,11 @@ namespace MonsterHunter.SkillStates.MonsterHunter
             this.ValidateControllerReference();
             base.OnEnter();
             this._animator = this.GetModelAnimator();
-            if (!this.turningAllowed) this.characterDirection.turnSpeed = 0f;
+            if (!this.turningAllowed)
+            {
+                //this.characterDirection.turnSpeed = 0f;
+                this.characterDirection.moveVector = this.characterDirection.forward;
+            }
             if (this.normalizeModel) this.modelLocator.normalizeToFloor = true;
             if (this.noCollision)
             {

@@ -2,11 +2,16 @@
 using RoR2;
 using EntityStates;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Networking;
 
 namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 {
     public class ChargeSlash : BaseMonsterHunterSkillState
     {
+        protected override bool normalizeModel => true;
+        protected override bool turningAllowed
+            { get { return this.airSlash; } }
+
         public float baseDuration = 1.2f;
 
         private float duration;
@@ -19,6 +24,9 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
         {
             base.OnEnter();
             this.duration = this.baseDuration;// / this.attackSpeedStat;
+            this.characterMotor.mass *= 100f;
+
+            if (NetworkServer.active) this.characterBody.AddBuff(RoR2Content.Buffs.ArmorBoost);
 
             if (!this.isGrounded)
             {
@@ -34,11 +42,17 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             }
         }
 
+        public override void OnExit()
+        {
+            base.OnExit();
+            this.characterMotor.mass *= 0.01f;
+            if (NetworkServer.active) this.characterBody.RemoveBuff(RoR2Content.Buffs.ArmorBoost);
+        }
+
         public override void FixedUpdate()
         {
             base.FixedUpdate();
             this.stopwatch += Time.fixedDeltaTime;
-            this.StartAimMode(2f);
             this.monsterHunter.jumpLockoutStopwatch = 0.1f;
             this.characterBody.outOfCombatStopwatch = 0f;
 
@@ -93,7 +107,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             {
                 if (!this.airSlash)
                 {
-                    if (this.inputBank && !this.inputBank.skill2.down && base.fixedAge >= 0.5f)
+                    if (this.inputBank && !this.inputBank.skill2.down && base.fixedAge >= 0.25f)
                     {
                         // grounded slash
                         if (this.inputBank.moveVector.magnitude > 0.1f)
@@ -112,7 +126,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                 }
                 else
                 {
-                    if (this.inputBank && !this.inputBank.skill2.down)
+                    if (this.inputBank && !this.inputBank.skill2.down && base.fixedAge >= 0.25f)
                     {
                         // standard aerial slash
                         this.outer.SetNextState(new AirSlash

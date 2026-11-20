@@ -26,6 +26,10 @@ namespace MonsterHunter.Modules
             entityStates.Add(typeof(SkillStates.MonsterHunter.Greatsword.Combo));
             entityStates.Add(typeof(SkillStates.MonsterHunter.Greatsword.ChargeSlash));
             entityStates.Add(typeof(SkillStates.MonsterHunter.Greatsword.AirSlash));
+            entityStates.Add(typeof(SkillStates.MonsterHunter.Greatsword.Slash));
+            entityStates.Add(typeof(SkillStates.MonsterHunter.Greatsword.SlashStartup));
+            entityStates.Add(typeof(SkillStates.MonsterHunter.Greatsword.SlashEnd));
+            entityStates.Add(typeof(SkillStates.MonsterHunter.Greatsword.LeapSlash));
         }
 
         internal static void AddSkill(Type t)

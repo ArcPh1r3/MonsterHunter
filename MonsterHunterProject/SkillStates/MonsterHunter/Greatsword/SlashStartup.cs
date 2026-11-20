@@ -1,21 +1,64 @@
-﻿using UnityEngine;
+﻿using EntityStates;
 using RoR2;
-using EntityStates;
+using System;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 {
     public class SlashStartup : BaseMonsterHunterSkillState
     {
+        public static float damageCoefficient = 8f;
+
+        protected override bool normalizeModel => true;
+
         public float baseDuration = 0.4f;
+        public int charge;
 
         private float duration;
+        private OverlapAttack attack;
 
         public override void OnEnter()
         {
             base.OnEnter();
             this.duration = this.baseDuration / this.attackSpeedStat;
             base.PlayAnimation("FullBody, Override", "Slash", "Action.playbackRate", this.duration);
+
+            HitBoxGroup hitBoxGroup = null;
+            Transform modelTransform = base.GetModelTransform();
+
+            string hitboxString = "Sword";
+
+            if (modelTransform)
+            {
+                hitBoxGroup = Array.Find<HitBoxGroup>(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == hitboxString);
+            }
+
+            //Util.PlaySound(Modules.Sounds.Lunge, base.gameObject);
+            //Util.PlaySound(Modules.Sounds.Cloth2, base.gameObject);
+
+            float dmg = SlashStartup.damageCoefficient;
+
+            this.attack = new OverlapAttack();
+            this.attack.damageType = DamageType.Generic;
+            this.attack.damageType.damageSource = DamageSource.Secondary;
+            this.attack.attacker = base.gameObject;
+            this.attack.inflictor = base.gameObject;
+            this.attack.teamIndex = base.GetTeam();
+            this.attack.damage = dmg * this.damageStat * (1 + this.charge);
+            this.attack.procCoefficient = 1;
+            this.attack.hitEffectPrefab = Modules.MonsterHunterAssets.slashImpactEffect;
+            this.attack.forceVector = -Vector3.up * 6000f;
+            this.attack.pushAwayForce = 500f;
+            this.attack.hitBoxGroup = hitBoxGroup;
+            this.attack.isCrit = base.RollCrit();
+            this.attack.impactSound = Modules.MonsterHunterAssets.swordImpactSoundEvent.index;
+
+            if (this.charge >= 1)
+            {
+                this.attack.hitEffectPrefab = Modules.MonsterHunterAssets.finisherImpactEffect;
+                this.attack.damageType = DamageTypeCombo.GenericSecondary | DamageType.Stun1s;
+            }
         }
 
         public override void FixedUpdate()
@@ -26,6 +69,11 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.characterMotor.moveDirection *= 0f;
             this.characterBody.outOfCombatStopwatch = 0f;
             this.characterMotor.velocity = this.characterDirection.forward * this.monsterHunter.slashMovementModifier;
+
+            if (base.fixedAge >= (0.95f * this.duration))
+            {
+                if (base.isAuthority) this.attack.Fire();
+            }
 
             if (base.isAuthority && base.fixedAge >= this.duration)
             {

@@ -44,10 +44,10 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             {
                 base.characterBody.isSprinting = true;
 
-                direction.y = Mathf.Max(direction.y, 1.25f * EntityStates.Croco.Leap.minimumY);
+                direction.y = Mathf.Max(direction.y, 1.5f * EntityStates.Croco.Leap.minimumY);
                 Vector3 a = direction.normalized * (0.75f * EntityStates.Croco.Leap.aimVelocity) * this.moveSpeedStat;
                 Vector3 b = Vector3.up * 0.95f * EntityStates.Croco.Leap.upwardVelocity;
-                Vector3 b2 = new Vector3(direction.x, 0f, direction.z).normalized * (0.75f * EntityStates.Croco.Leap.forwardVelocity);
+                Vector3 b2 = new Vector3(direction.x, 0f, direction.z).normalized * (0.95f * EntityStates.Croco.Leap.forwardVelocity);
 
                 base.characterMotor.Motor.ForceUnground();
                 base.characterMotor.velocity = a + b + b2;
@@ -80,12 +80,12 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             float dmg = LeapSlash.damageCoefficient;
 
             this.attack = new OverlapAttack();
-            this.attack.damageType = DamageType.Stun1s;
+            this.attack.damageType = DamageType.Generic;
             this.attack.damageType.damageSource = DamageSource.Secondary;
             this.attack.attacker = base.gameObject;
             this.attack.inflictor = base.gameObject;
             this.attack.teamIndex = base.GetTeam();
-            this.attack.damage = dmg * this.damageStat * this.charge;
+            this.attack.damage = dmg * this.damageStat * (1 + this.charge);
             this.attack.procCoefficient = 1;
             this.attack.hitEffectPrefab = Modules.MonsterHunterAssets.slashImpactEffect;
             this.attack.forceVector = -Vector3.up * 6000f;
@@ -93,6 +93,12 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.attack.hitBoxGroup = hitBoxGroup;
             this.attack.isCrit = base.RollCrit();
             this.attack.impactSound = Modules.MonsterHunterAssets.swordImpactSoundEvent.index;
+
+            if (this.charge >= 1)
+            {
+                this.attack.hitEffectPrefab = Modules.MonsterHunterAssets.finisherImpactEffect;
+                this.attack.damageType = DamageTypeCombo.GenericSecondary | DamageType.Stun1s;
+            }
         }
 
         public override void OnExit()

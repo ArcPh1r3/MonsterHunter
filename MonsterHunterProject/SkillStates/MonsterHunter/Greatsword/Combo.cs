@@ -11,8 +11,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 {
     public class Combo : BaseMonsterHunterSkillState, SteppedSkillDef.IStepSetter
     {
-        public static float damageCoefficient = 6f;
-        public float baseDuration = 1f;
+        public static float damageCoefficient = 4.44f;
+        public float baseDuration = 1.2f;
         public static float attackRecoil = 3f;
         public static float hitHopVelocity = 6f;
         private const float attackStartTime = 0.18f;
@@ -162,8 +162,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                 if (this.characterMotor)
                 {
                     this.characterMotor.Motor.ForceUnground();
-                    this.characterMotor.velocity = (this.inputBank.moveVector * 16f) + (this.characterDirection.forward * 4f);
-                    this.characterMotor.velocity.y = 8f;
+                    this.characterMotor.velocity = (this.inputBank.moveVector * 10f) + (this.characterDirection.forward * 4f);
+                    this.characterMotor.velocity.y = 10f;
                 }
 
                 if (base.isAuthority)
@@ -227,7 +227,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             {
                 this.stopwatch += 0.05f * Time.deltaTime;
                 if (base.characterMotor) base.characterMotor.velocity = Vector3.zero;
-                if (this.animator) this.animator.SetFloat("Slash.playbackRate", 0.05f);
+                if (this.animator) this.animator.SetFloat("Action.playbackRate", 0.05f);
             }
 
             float startTime = Combo.attackStartTime;

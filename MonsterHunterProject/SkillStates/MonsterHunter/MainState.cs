@@ -45,7 +45,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter
 		{
 			base.FixedUpdate();
 
-			if (this.inputBank.moveVector != Vector3.zero && this.characterBody.isSprinting)
+			/*if (this.inputBank.moveVector != Vector3.zero && this.characterBody.isSprinting)
 			{
 				if (this.isGrounded) this.sprintTimer += Time.fixedDeltaTime;
 				else if (this.sprintTimer >= 1f)
@@ -60,7 +60,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter
 			}
 			else this.sprintTimer = 0f;
 			if (this.characterBody.outOfCombatStopwatch <= 0.1f) this.sprintTimer = 0f;
-			this.wasGrounded2 = this.isGrounded;
+			this.wasGrounded2 = this.isGrounded;*/
 
 			//this.characterBody.isSprinting = this.sprintTimer >= 1f;
 
@@ -162,6 +162,12 @@ namespace MonsterHunter.SkillStates.MonsterHunter
 				this.CheckMovingEmote<ToggleMusic>(Config.danceKey);
 			}
 		}
+
+        public override void ProcessJump()
+        {
+			if (this.monsterHunter && this.monsterHunter.jumpLockoutStopwatch > 0f) return;
+            base.ProcessJump();
+        }
 
 		private bool HasItem(ItemDef itemDef)
         {

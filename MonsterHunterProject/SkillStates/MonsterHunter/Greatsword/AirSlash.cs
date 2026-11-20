@@ -10,7 +10,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 {
     public class AirSlash : BaseMonsterHunterSkillState
     {
-        public static float damageCoefficient = 8f;
+        public static float damageCoefficient = 6f;
         public static float leapDuration = 0.6f;
         public static float dropVelocity = 18f;
 
@@ -57,7 +57,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             float dmg = AirSlash.damageCoefficient;
 
             this.attack = new OverlapAttack();
-            this.attack.damageType = DamageType.Stun1s;
+            this.attack.damageType = DamageType.Generic;
             this.attack.damageType.damageSource = DamageSource.Secondary;
             this.attack.attacker = base.gameObject;
             this.attack.inflictor = base.gameObject;
@@ -70,6 +70,12 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.attack.hitBoxGroup = hitBoxGroup;
             this.attack.isCrit = base.RollCrit();
             this.attack.impactSound = Modules.MonsterHunterAssets.swordImpactSoundEvent.index;
+
+            if (this.charge >= 1)
+            {
+                this.attack.hitEffectPrefab = Modules.MonsterHunterAssets.finisherImpactEffect;
+                this.attack.damageType = DamageTypeCombo.GenericSecondary | DamageType.Stun1s;
+            }
         }
 
         public override void OnExit()

@@ -201,7 +201,7 @@ namespace MonsterHunter.Content.Survivors
             #region Body
             GameObject newPrefab = Modules.Prefabs.CreatePrefab(bodyName, "mdlMonsterHunter", new BodyInfo
             {
-                armor = 0f,
+                armor = 30f,
                 armorGrowth = 0f,
                 bodyName = "RobMonsterHunterBody",
                 bodyNameToken = bodyNameToken,
@@ -209,14 +209,14 @@ namespace MonsterHunter.Content.Survivors
                 characterPortrait = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Texture>("texDanteIcon"),
                 crosshair = Modules.MonsterHunterAssets.crosshairPrefab,
                 damage = 12f,
-                healthGrowth = 27f,
-                healthRegen = 2.5f,
+                healthGrowth = 39f,
+                healthRegen = 1f,
                 jumpCount = 1,
-                maxHealth = 90f,
+                maxHealth = 130f,
                 subtitleNameToken = "ROB_MONSTERHUNTER_BODY_SUBTITLE",
                 podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
                 moveSpeed = 7f,
-                acceleration = 60f,
+                acceleration = 80f,
                 jumpPower = 15f,
                 attackSpeed = 1f,
                 crit = 1f,
@@ -302,6 +302,8 @@ namespace MonsterHunter.Content.Survivors
             //footstep.baseFootstepString = "Play_moonBrother_step";
             //footstep.sprintFootstepOverrideString = "Play_moonBrother_sprint";
 
+            CharacterMotor characterMotor = newPrefab.GetComponent<CharacterMotor>();
+            characterMotor.mass = 300f;
             //KinematicCharacterMotor characterController = newPrefab.GetComponent<KinematicCharacterMotor>();
             //characterController.CapsuleRadius = 4f;
             //characterController.CapsuleHeight = 9f;
