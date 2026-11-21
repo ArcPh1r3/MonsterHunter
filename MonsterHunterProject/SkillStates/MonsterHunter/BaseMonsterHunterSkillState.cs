@@ -14,7 +14,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter
 
         protected virtual void CancelAttack() { }
 
-        protected void PlaySound(string soundString, bool useOverrides = true)
+        protected uint PlaySound(string soundString, bool useOverrides = true)
         {
             /*if (useOverrides && this.dante && this.dante.weaponDef)
             {
@@ -31,7 +31,27 @@ namespace MonsterHunter.SkillStates.MonsterHunter
                 }
             }*/
 
-            Util.PlaySound(soundString, this.gameObject);
+            return Util.PlaySound(soundString, this.gameObject);
+        }
+
+        protected uint PlaySound(string soundString, float pitch)
+        {
+            /*if (useOverrides && this.dante && this.dante.weaponDef)
+            {
+                if (this.dante.weaponDef.soundStringOverrides != null && this.dante.weaponDef.soundStringOverrides.Length > 0)
+                {
+                    for (int i = 0; i < this.dante.weaponDef.soundStringOverrides.Length; i++)
+                    {
+                        if (this.dante.weaponDef.soundStringOverrides[i].originalSoundString == soundString)
+                        {
+                            soundString = this.dante.weaponDef.soundStringOverrides[i].newSoundString;
+                            break;
+                        }
+                    }
+                }
+            }*/
+
+            return Util.PlayAttackSpeedSound(soundString, this.gameObject, pitch);
         }
 
         protected virtual bool HasItem(ItemDef itemDef)

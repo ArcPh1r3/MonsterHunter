@@ -142,11 +142,11 @@ namespace MonsterHunter.Modules
             finisherImpactEffect.GetComponent<OmniEffect>().enabled = false;
 
             var sex2 = finisherImpactEffect.transform.Find("Impact Slash").GetComponent<ParticleSystem>().main;
-            sex2.startLifetimeMultiplier *= 10f;
+            sex2.startLifetimeMultiplier *= 8f;
             sex2 = finisherImpactEffect.transform.Find("Dash, Bright").GetComponent<ParticleSystem>().main;
-            sex2.startLifetimeMultiplier *= 12f;
-            sex2 = finisherImpactEffect.transform.Find("ScaledSmokeRing, Mesh").GetComponent<ParticleSystem>().main;
             sex2.startLifetimeMultiplier *= 10f;
+            sex2 = finisherImpactEffect.transform.Find("ScaledSmokeRing, Mesh").GetComponent<ParticleSystem>().main;
+            sex2.startLifetimeMultiplier *= 8f;
             sex2 = finisherImpactEffect.transform.Find("Flash, Hard").GetComponent<ParticleSystem>().main;
             sex2.startLifetimeMultiplier *= 2f;
 
@@ -249,8 +249,8 @@ namespace MonsterHunter.Modules
 
             //
 
-            swordImpactSoundEvent = CreateNetworkSoundEventDef("sfx_dante_slash_impact");
-            kickImpactSoundEvent = CreateNetworkSoundEventDef("sfx_dante_kick_impact");
+            swordImpactSoundEvent = CreateNetworkSoundEventDef("sfx_mh_sword_impact");
+            kickImpactSoundEvent = CreateNetworkSoundEventDef("sfx_mh_sword_impact");
 
             //
 

@@ -206,6 +206,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             {
                 this.hasLanded = true;
 
+                if (this.charge >= 3) this.PlaySound("sfx_mh_impact_ground_strong");
+
                 this.FireShockwave();
             }
         }

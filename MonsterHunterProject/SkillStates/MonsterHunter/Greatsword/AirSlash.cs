@@ -167,19 +167,11 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
         {
             if (!this.hasLanded)
             {
-                //base.PlayAnimation("FullBody, Override", "DownslashEnd", "Action.playbackRate", 1f);
-
                 this.hasLanded = true;
 
+                if (this.charge >= 3) this.PlaySound("sfx_mh_impact_ground_strong");
+
                 this.FireShockwave();
-
-                /*EffectManager.SpawnEffect(Modules.MonsterHunterAssets.groundPunchHeavyEffectPrefab, new EffectData
-                {
-                    origin = this.characterBody.footPosition + (this.characterDirection.forward * 2.5f),
-                    scale = 1f
-                }, true);
-
-                Util.PlaySound("PaladinSwordGroundImpact", this.gameObject);*/
             }
         }
 

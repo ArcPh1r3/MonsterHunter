@@ -30,7 +30,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                 scale = 1f
             }, true);
 
-            Util.PlaySound("PaladinSwordGroundImpact", this.gameObject);
+            Util.PlaySound("sfx_mh_impact_ground", this.gameObject);
         }
 
         public override void OnExit()
@@ -53,7 +53,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 
             if (this.modelAnimator)
             {
-                float value = Mathf.Clamp01(Util.Remap(this.age, 1.25f, 0f, 0f, 1f));
+                float value = Mathf.Clamp01(Util.Remap(this.age, 0.5f, this.duration, 0f, 1f));
                 this.modelAnimator.SetFloat(AnimationParameters.aimWeight, value);
                 this.modelAnimator.SetLayerWeight(this.modelAnimator.GetLayerIndex("AimPitch"), value);
                 this.modelAnimator.SetLayerWeight(this.modelAnimator.GetLayerIndex("AimYaw"), value);

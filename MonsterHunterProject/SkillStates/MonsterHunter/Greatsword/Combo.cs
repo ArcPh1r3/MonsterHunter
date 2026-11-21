@@ -15,9 +15,9 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
         public float baseDuration = 1.2f;
         public static float attackRecoil = 3f;
         public static float hitHopVelocity = 6f;
-        private const float attackStartTime = 0.18f;
-        private const float attackEndTime = 0.35f;
-        public static float earlyExitTime = 0.65f;
+        private const float attackStartTime = 0.384f;
+        private const float attackEndTime = 0.5f;
+        public static float earlyExitTime = 0.67f;
         public int swingIndex;
 
         private bool inCombo;
@@ -67,7 +67,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             //Util.PlaySound(Modules.Sounds.Cloth1, base.gameObject);
 
             //Slash1 is first swing, Slash2 is second swing
-            string animString = "Slash" + (1 + swingIndex).ToString();
+            string animString = "Combo1";//"Slash" + (1 + swingIndex).ToString();
             //SlashCombo1 is Slash1 but coming off Slash2
             base.PlayCrossfade("FullBody, Override", animString, "Action.playbackRate", this.duration, 0.05f * duration);
 
@@ -131,9 +131,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             {
                 if (base.characterMotor.velocity != Vector3.zero) this.storedVelocity = base.characterMotor.velocity;
                 this.hitStopCachedState = base.CreateHitStopCachedState(base.characterMotor, this.animator, "Action.playbackRate");
-                float g = 0.075f;
-                if (this.swingIndex == 1) g = 0.22f;
-                this.hitPauseTimer = g / this.attackSpeedStat;
+                this.hitPauseTimer = 0.25f / this.attackSpeedStat;
                 this.inHitPause = true;
 
                 if (this.swingEffectInstance)

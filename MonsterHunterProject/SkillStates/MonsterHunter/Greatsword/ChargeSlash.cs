@@ -26,10 +26,13 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.duration = this.baseDuration;// / this.attackSpeedStat;
             this.characterMotor.mass *= 100f;
 
+            this.PlaySound("sfx_mh_charge_start");
+
             if (NetworkServer.active) this.characterBody.AddBuff(RoR2Content.Buffs.ArmorBoost);
 
             if (!this.isGrounded)
             {
+                this.PlaySound("sfx_mh_foley_02");
                 base.PlayAnimation("FullBody, Override", "ChargeAir", "Action.playbackRate", this.duration);
                 this.characterMotor.velocity *= 0.25f;
                 this.characterMotor.velocity.y = 3f;
@@ -38,6 +41,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             }
             else
             {
+                this.PlaySound("sfx_mh_foley_01");
                 base.PlayCrossfade("FullBody, Override", "ChargeGroundStart", "Action.playbackRate", this.duration, 0.1f);
             }
         }
@@ -90,7 +94,10 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                             }
                             else
                             {
-                                this.outer.SetNextState(new SlashStartup());
+                                this.outer.SetNextState(new SlashStartup
+                                {
+                                    charge = newCharge
+                                });
                             }
                             return;
                         }
@@ -98,7 +105,9 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                 }
             }
 
-            if (this.stopwatch >= this.duration)
+            float chargeTimer = this.duration;
+            if (this.charge == 0 && !this.airSlash) chargeTimer *= 0.65f;
+            if (this.stopwatch >= chargeTimer)
             {
                 this.AddCharge();
             }
@@ -107,7 +116,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             {
                 if (!this.airSlash)
                 {
-                    if (this.inputBank && !this.inputBank.skill2.down && base.fixedAge >= 0.25f)
+                    if (this.inputBank && !this.inputBank.skill2.down && base.fixedAge >= 0.4f)
                     {
                         // grounded slash
                         if (this.inputBank.moveVector.magnitude > 0.1f)
@@ -119,7 +128,10 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                         }
                         else
                         {
-                            this.outer.SetNextState(new SlashStartup());
+                            this.outer.SetNextState(new SlashStartup
+                            {
+                                charge = this.charge
+                            });
                         }
                         return;
                     }
@@ -163,14 +175,15 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 
             //if (this.airSlash)
             //{
-                // slight lift if midair
-                //if (this.characterMotor.velocity.y <= 2f) this.characterMotor.velocity.y = 2f;
+            //      slight lift if midair
+            //      if (this.characterMotor.velocity.y <= 2f) this.characterMotor.velocity.y = 2f;
             //}
 
+            float pitch = 1f + (this.charge * 0.2f);
             // spawn effect
-            this.PlaySound("");
             if (!this.airSlash)
             {
+                this.PlaySound("sfx_mh_charge", pitch);
                 EffectManager.SpawnEffect(Modules.MonsterHunterAssets.groundPunchEffectPrefab, new EffectData
                 {
                     origin = this.transform.position + (Vector3.up * -1.1f),
@@ -178,6 +191,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                     scale = 1f
                 }, false);
             }
+            else this.PlaySound("sfx_mh_charge_air", pitch);
 
             // add temporaryoverlay
             if (this.modelLocator && this.modelLocator.modelTransform)

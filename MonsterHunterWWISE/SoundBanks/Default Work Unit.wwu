@@ -3,7 +3,7 @@
 	<SoundBanks>
 		<WorkUnit Name="Default Work Unit" ID="{BCF18DB8-7B1E-485F-AE96-3E1C6533D26C}" PersistMode="Standalone">
 			<ChildrenList>
-				<SoundBank Name="dante_bank" ID="{87289139-BDAC-4446-ACCB-92C688EEED32}">
+				<SoundBank Name="mh_bank" ID="{87289139-BDAC-4446-ACCB-92C688EEED32}">
 					<ObjectInclusionList>
 						<ObjectRef Name="Default Work Unit" ID="{0E6DDC47-9831-4C9F-9E50-5872B4A7E01C}" WorkUnitID="{0E6DDC47-9831-4C9F-9E50-5872B4A7E01C}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>

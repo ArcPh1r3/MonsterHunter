@@ -77,6 +77,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 
             if (base.isAuthority && base.fixedAge >= this.duration)
             {
+                if (this.charge >= 3) this.PlaySound("sfx_mh_impact_ground_strong");
                 this.outer.SetNextState(new SlashEnd());
                 return;
             }

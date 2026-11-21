@@ -132,6 +132,15 @@ ModelImporter:
   - first:
       74: -227394932457411354
     second: Armature|ChargeGroundStart
+  - first:
+      74: -3692564187089589101
+    second: Armature|RunF
+  - first:
+      74: 5899019434074405257
+    second: Armature|Combo1
+  - first:
+      74: 578911394456503950
+    second: Armature|Combo1Air
   externalObjects: {}
   materials:
     materialImportMode: 1
