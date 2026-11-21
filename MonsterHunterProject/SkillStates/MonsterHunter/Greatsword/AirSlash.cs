@@ -30,7 +30,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
         public override void OnEnter()
         {
             base.OnEnter();
-            this.duration = AirSlash.leapDuration / (0.75f + (0.25f * this.attackSpeedStat));
+            this.duration = AirSlash.leapDuration;// / (0.75f + (0.25f * this.attackSpeedStat));
             this.hasFired = false;
             this.hasLanded = false;
             this.animator = base.GetModelAnimator();
@@ -62,7 +62,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.attack.attacker = base.gameObject;
             this.attack.inflictor = base.gameObject;
             this.attack.teamIndex = base.GetTeam();
-            this.attack.damage = dmg * this.damageStat * (1 + this.charge);
+            this.attack.damage = dmg * this.damageStat * (1 + this.charge) * this.attackSpeedStat;
             this.attack.procCoefficient = 1;
             this.attack.hitEffectPrefab = Modules.MonsterHunterAssets.slashImpactEffect;
             this.attack.forceVector = -Vector3.up * 6000f;
@@ -169,7 +169,16 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             {
                 this.hasLanded = true;
 
-                if (this.charge >= 3) this.PlaySound("sfx_mh_impact_ground_strong");
+                if (this.charge >= 3)
+                {
+                    this.PlaySound("sfx_mh_impact_ground_strong");
+
+                    EffectManager.SpawnEffect(Modules.MonsterHunterAssets.groundSlamImpact, new EffectData
+                    {
+                        origin = this.characterBody.footPosition + (this.characterDirection.forward * 3f),
+                        scale = 1f
+                    }, false);
+                }
 
                 this.FireShockwave();
             }

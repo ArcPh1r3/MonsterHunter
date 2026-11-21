@@ -28,7 +28,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             {
                 origin = this.characterBody.footPosition + (this.characterDirection.forward * 3f),
                 scale = 1f
-            }, true);
+            }, false);
 
             Util.PlaySound("sfx_mh_impact_ground", this.gameObject);
         }

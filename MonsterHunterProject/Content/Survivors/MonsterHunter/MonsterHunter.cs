@@ -537,7 +537,7 @@ namespace MonsterHunter.Content.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MonsterHunter.Greatsword.ChargeSlash)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 3,
-                baseRechargeInterval = 4f,
+                baseRechargeInterval = 2f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,

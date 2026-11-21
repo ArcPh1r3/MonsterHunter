@@ -17,8 +17,11 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
         private float duration;
         private float lateWindow = 0.9f;
         private float stopwatch;
-        private int charge = 0;
+        public int charge = 0;
         private bool airSlash = false;
+        private float teemp;
+        private float z;
+        private CharacterCameraParams cameraParams;
 
         public override void OnEnter()
         {
@@ -42,15 +45,20 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             else
             {
                 this.PlaySound("sfx_mh_foley_01");
-                base.PlayCrossfade("FullBody, Override", "ChargeGroundStart", "Action.playbackRate", this.duration, 0.1f);
+                base.PlayCrossfade("FullBody, Override", "ChargeGroundStart", "Action.playbackRate", this.duration * 0.6f, 0.1f);
             }
+
+            //this.cameraParams = this.GetComponent<CameraTargetParams>().cameraParams;
+            //if (this.cameraParams && base.isAuthority) this.z = this.cameraParams.data.idealLocalCameraPos.value.z;
         }
 
         public override void OnExit()
         {
             base.OnExit();
+            //if (this.cameraParams && base.isAuthority) this.cameraParams.data.idealLocalCameraPos.value.z = this.z;
             this.characterMotor.mass *= 0.01f;
             if (NetworkServer.active) this.characterBody.RemoveBuff(RoR2Content.Buffs.ArmorBoost);
+            Chat.AddMessage(teemp.ToString());
         }
 
         public override void FixedUpdate()
@@ -59,9 +67,25 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.stopwatch += Time.fixedDeltaTime;
             this.monsterHunter.jumpLockoutStopwatch = 0.1f;
             this.characterBody.outOfCombatStopwatch = 0f;
+            this.characterBody.isSprinting = false;
+            if (this.airSlash) this.StartAimMode(0.1f);
+
+            if (this.characterMotor.velocity.y >= 3f) this.characterMotor.velocity.y = 3f;
 
             if (this.isGrounded) this.characterMotor.moveDirection *= 0f;
-            else this.characterMotor.moveDirection *= 0.5f;
+            else this.characterMotor.moveDirection *= 0.75f;
+
+            if (!this.airSlash && base.isAuthority)
+            {
+                if (this.inputBank.jump.justPressed && base.fixedAge >= 0.5f)
+                {
+                    this.outer.SetNextState(new Quickstep
+                    {
+                        charge = this.charge
+                    });
+                    return;
+                }
+            }
 
             if (this.characterMotor.velocity.y > 0f && this.airSlash) this.characterMotor.velocity.y *= this.monsterHunter.fallSpeedModifier;
 
@@ -106,11 +130,17 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             }
 
             float chargeTimer = this.duration;
-            if (this.charge == 0 && !this.airSlash) chargeTimer *= 0.65f;
+            if (this.charge == 0 && !this.airSlash) chargeTimer *= 0.6f;
             if (this.stopwatch >= chargeTimer)
             {
                 this.AddCharge();
             }
+
+            //if (this.cameraParams && base.isAuthority)
+            //{
+                //float desiredZ = this.z * Util.Remap(this.charge, 0f, 1f, 1f, 1.75f);
+                //this.cameraParams.data.idealLocalCameraPos.value.z = desiredZ;
+            //}
 
             if (base.isAuthority)
             {
@@ -179,7 +209,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             //      if (this.characterMotor.velocity.y <= 2f) this.characterMotor.velocity.y = 2f;
             //}
 
-            float pitch = 1f + (this.charge * 0.2f);
+            float pitch = 1f + (this.charge * 0.5f);
             // spawn effect
             if (!this.airSlash)
             {

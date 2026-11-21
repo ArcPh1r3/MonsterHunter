@@ -21,8 +21,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
         public override void OnEnter()
         {
             base.OnEnter();
-            this.duration = this.baseDuration / this.attackSpeedStat;
-            base.PlayAnimation("FullBody, Override", "Slash", "Action.playbackRate", this.duration);
+            this.duration = this.baseDuration;// / this.attackSpeedStat;
+            base.PlayCrossfade("FullBody, Override", "Slash", "Action.playbackRate", this.duration, 0.1f);
 
             HitBoxGroup hitBoxGroup = null;
             Transform modelTransform = base.GetModelTransform();
@@ -45,7 +45,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.attack.attacker = base.gameObject;
             this.attack.inflictor = base.gameObject;
             this.attack.teamIndex = base.GetTeam();
-            this.attack.damage = dmg * this.damageStat * (1 + this.charge);
+            this.attack.damage = dmg * this.damageStat * (1 + this.charge) * this.attackSpeedStat;
             this.attack.procCoefficient = 1;
             this.attack.hitEffectPrefab = Modules.MonsterHunterAssets.slashImpactEffect;
             this.attack.forceVector = -Vector3.up * 6000f;
@@ -77,7 +77,16 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 
             if (base.isAuthority && base.fixedAge >= this.duration)
             {
-                if (this.charge >= 3) this.PlaySound("sfx_mh_impact_ground_strong");
+                if (this.charge >= 3)
+                {
+                    this.PlaySound("sfx_mh_impact_ground_strong");
+
+                    EffectManager.SpawnEffect(Modules.MonsterHunterAssets.groundSlamImpact, new EffectData
+                    {
+                        origin = this.characterBody.footPosition + (this.characterDirection.forward * 3f),
+                        scale = 1f
+                    }, false);
+                }
                 this.outer.SetNextState(new SlashEnd());
                 return;
             }

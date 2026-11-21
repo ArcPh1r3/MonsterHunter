@@ -45,9 +45,9 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                 base.characterBody.isSprinting = true;
 
                 direction.y = Mathf.Max(direction.y, 1.5f * EntityStates.Croco.Leap.minimumY);
-                Vector3 a = direction.normalized * (0.75f * EntityStates.Croco.Leap.aimVelocity) * this.moveSpeedStat;
+                Vector3 a = direction.normalized * (0.9f * EntityStates.Croco.Leap.aimVelocity) * this.moveSpeedStat;
                 Vector3 b = Vector3.up * 0.95f * EntityStates.Croco.Leap.upwardVelocity;
-                Vector3 b2 = new Vector3(direction.x, 0f, direction.z).normalized * (0.95f * EntityStates.Croco.Leap.forwardVelocity);
+                Vector3 b2 = new Vector3(direction.x, 0f, direction.z).normalized * (1.25f * EntityStates.Croco.Leap.forwardVelocity);
 
                 base.characterMotor.Motor.ForceUnground();
                 base.characterMotor.velocity = a + b + b2;
@@ -85,7 +85,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.attack.attacker = base.gameObject;
             this.attack.inflictor = base.gameObject;
             this.attack.teamIndex = base.GetTeam();
-            this.attack.damage = dmg * this.damageStat * (1 + this.charge);
+            this.attack.damage = dmg * this.damageStat * (1 + this.charge) * this.attackSpeedStat;
             this.attack.procCoefficient = 1;
             this.attack.hitEffectPrefab = Modules.MonsterHunterAssets.slashImpactEffect;
             this.attack.forceVector = -Vector3.up * 6000f;
@@ -206,7 +206,16 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             {
                 this.hasLanded = true;
 
-                if (this.charge >= 3) this.PlaySound("sfx_mh_impact_ground_strong");
+                if (this.charge >= 3)
+                {
+                    this.PlaySound("sfx_mh_impact_ground_strong");
+
+                    EffectManager.SpawnEffect(Modules.MonsterHunterAssets.groundSlamImpact, new EffectData
+                    {
+                        origin = this.characterBody.footPosition + (this.characterDirection.forward * 3f),
+                        scale = 1f
+                    }, false);
+                }
 
                 this.FireShockwave();
             }

@@ -161,7 +161,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                 {
                     this.characterMotor.Motor.ForceUnground();
                     this.characterMotor.velocity = (this.inputBank.moveVector * 10f) + (this.characterDirection.forward * 4f);
-                    this.characterMotor.velocity.y = 10f;
+                    this.characterMotor.velocity.y = 6f;
                 }
 
                 if (base.isAuthority)
