@@ -31,13 +31,13 @@ namespace MonsterHunter.SkillStates.MonsterHunter
 			this.monsterHunter = this.GetComponent<MonsterHunterController>();
 			this.momentumController = this.GetComponent<MomentumController>();
 			this.FindLocalUser();
-			if (this.characterBody.modelLocator) this.characterBody.modelLocator.normalizeToFloor = false;
+			//if (this.characterBody.modelLocator) this.characterBody.modelLocator.normalizeToFloor = false;
 		}
 
         public override void OnExit()
         {
             base.OnExit();
-			if (this.characterBody.modelLocator) this.characterBody.modelLocator.normalizeToFloor = false;
+			//if (this.characterBody.modelLocator) this.characterBody.modelLocator.normalizeToFloor = false;
 			AkSoundEngine.StopPlayingID(this.slidePlayID);
 		}
 
@@ -120,7 +120,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter
 			}
 			else this.isSliding = false;
 
-			if (this.characterBody.modelLocator) this.characterBody.modelLocator.normalizeToFloor = this.sprintTimer >= 1f;
+			//if (this.characterBody.modelLocator) this.characterBody.modelLocator.normalizeToFloor = this.sprintTimer >= 1f;
 
 			this.animator.SetBool("isSliding", this.isSliding);
 

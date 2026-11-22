@@ -12,15 +12,13 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
         protected override bool turningAllowed
             { get { return this.airSlash; } }
 
-        public float baseDuration = 1.2f;
+        public float baseDuration = 1f;
 
         private float duration;
         private float lateWindow = 0.9f;
         private float stopwatch;
         public int charge = 0;
         private bool airSlash = false;
-        private float teemp;
-        private float z;
         private CharacterCameraParams cameraParams;
 
         public override void OnEnter()
@@ -40,7 +38,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                 this.characterMotor.velocity *= 0.25f;
                 this.characterMotor.velocity.y = 3f;
                 this.airSlash = true;
-                this.duration *= 0.33f;
+                this.duration = 0.36f;
             }
             else
             {
@@ -58,7 +56,6 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             //if (this.cameraParams && base.isAuthority) this.cameraParams.data.idealLocalCameraPos.value.z = this.z;
             this.characterMotor.mass *= 0.01f;
             if (NetworkServer.active) this.characterBody.RemoveBuff(RoR2Content.Buffs.ArmorBoost);
-            Chat.AddMessage(teemp.ToString());
         }
 
         public override void FixedUpdate()

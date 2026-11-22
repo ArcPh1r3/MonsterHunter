@@ -537,7 +537,7 @@ namespace MonsterHunter.Content.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MonsterHunter.Greatsword.ChargeSlash)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 3,
-                baseRechargeInterval = 2f,
+                baseRechargeInterval = 5f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -554,6 +554,7 @@ namespace MonsterHunter.Content.Survivors
             });
 
             chargeSlashSkillDef.autoHandleLuminousShot = true;
+            chargeSlashSkillDef.attackSpeedBuffsRestockSpeed = true;
 
             Modules.Skills.AddSecondarySkills(prefab, chargeSlashSkillDef);
             #endregion

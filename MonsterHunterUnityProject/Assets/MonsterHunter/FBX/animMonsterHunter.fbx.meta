@@ -141,6 +141,36 @@ ModelImporter:
   - first:
       74: 578911394456503950
     second: Armature|Combo1Air
+  - first:
+      74: 1318910632918906003
+    second: Armature|aa.003
+  - first:
+      74: -4874635154707729856
+    second: Armature|Combo1.001
+  - first:
+      74: 3189483110512977423
+    second: Armature|FreefallB
+  - first:
+      74: 5064462899078577662
+    second: Armature|FreefallF
+  - first:
+      74: -3831441978792079136
+    second: Armature|FreefallL
+  - first:
+      74: 6810230314652945474
+    second: Armature|FreefallN
+  - first:
+      74: 6993930908934380776
+    second: Armature|FreefallR
+  - first:
+      74: 1079665108409675491
+    second: Armature|Jump
+  - first:
+      74: 6350413328148286187
+    second: Armature|SprintF
+  - first:
+      74: 2016551237921944054
+    second: Armature|LightImpact
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -220,7 +250,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: ROOT
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
@@ -228,7 +258,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
