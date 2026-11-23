@@ -8,7 +8,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 {
     public class SlashStartup : BaseMonsterHunterSkillState
     {
-        public static float damageCoefficient = 8f;
+        public static float damageCoefficient = 6f;
 
         protected override bool normalizeModel => true;
 
@@ -61,6 +61,12 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             }
         }
 
+        public override void OnExit()
+        {
+            if (base.isAuthority) this.attack.Fire();
+            base.OnExit();
+        }
+
         public override void FixedUpdate()
         {
             base.FixedUpdate();
@@ -69,6 +75,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.characterMotor.moveDirection *= 0f;
             this.characterBody.outOfCombatStopwatch = 0f;
             this.characterMotor.velocity = this.characterDirection.forward * this.monsterHunter.slashMovementModifier;
+
+            this.monsterHunter.SetZoom(0.5f + (this.charge * 0.75f), 1f);
 
             if (base.fixedAge >= (0.95f * this.duration))
             {

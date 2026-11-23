@@ -21,6 +21,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             base.OnEnter();
             this.duration = this.baseDuration / this.attackSpeedStat;
             this.characterBody.aimTimer = -1f;
+            this.characterMotor.velocity *= 0f;
             this.modelAnimator = this.GetModelAnimator();
             base.PlayAnimation("FullBody, Override", "SlashEnd", "Action.playbackRate", this.duration);
 

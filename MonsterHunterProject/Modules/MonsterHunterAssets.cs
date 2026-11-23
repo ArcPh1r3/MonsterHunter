@@ -46,10 +46,13 @@ namespace MonsterHunter.Modules
         public static GameObject groundSlamImpact;
         public static GameObject groundSlamImpactLunar;
 
+        public static GameObject tackleEffect;
+
         public static GameObject trackerPrefab;
 
         internal static NetworkSoundEventDef swordImpactSoundEvent;
         internal static NetworkSoundEventDef kickImpactSoundEvent;
+        internal static NetworkSoundEventDef tackleImpactSoundEvent;
 
         //public static Dictionary<ItemDef, string> customItemInteractionNotifications = new Dictionary<ItemDef, string>();
 
@@ -61,7 +64,7 @@ namespace MonsterHunter.Modules
 
             //
 
-            crosshairPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/StandardCrosshair.prefab").WaitForCompletion().InstantiateClone("RobMonsterHunterCrosshair", false);
+            crosshairPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/SimpleDotCrosshair.prefab").WaitForCompletion().InstantiateClone("RobMonsterHunterCrosshair", false);
             crosshairPrefab.GetComponent<RawImage>().enabled = false;
 
             //
@@ -216,7 +219,7 @@ namespace MonsterHunter.Modules
 
             //
 
-            kickImpactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Loader/OmniImpactVFXLoader.prefab").WaitForCompletion().InstantiateClone("DanteKickImpact", false);
+            kickImpactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Loader/OmniImpactVFXLoader.prefab").WaitForCompletion().InstantiateClone("RobMonsterHunterKickImpact", false);
             kickImpactEffect.GetComponent<OmniEffect>().enabled = false;
 
             hitsparkMat = Material.Instantiate(Addressables.LoadAssetAsync<Material>("RoR2/Base/Huntress/matOmniHitspark1Huntress.mat").WaitForCompletion());
@@ -251,10 +254,11 @@ namespace MonsterHunter.Modules
 
             swordImpactSoundEvent = CreateNetworkSoundEventDef("sfx_mh_sword_impact");
             kickImpactSoundEvent = CreateNetworkSoundEventDef("sfx_mh_sword_impact");
+            tackleImpactSoundEvent = CreateNetworkSoundEventDef("sfx_mh_tackle_impact");
 
             //
 
-            groundPunchEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/BeetleGuard/BeetleGuardGroundSlam.prefab").WaitForCompletion().InstantiateClone("RobDanteGroundPunchImpact", false);
+            groundPunchEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/BeetleGuard/BeetleGuardGroundSlam.prefab").WaitForCompletion().InstantiateClone("RobMonsterHunterGroundPunchImpact", false);
 
             groundPunchEffectPrefab.transform.Find("ParticleInitial/Debris, 3D").localScale *= 0.35f;
             groundPunchEffectPrefab.transform.Find("ParticleInitial/Debris").localScale *= 0.35f;
@@ -276,7 +280,7 @@ namespace MonsterHunter.Modules
 
             //
 
-            groundPunchHeavyEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/BeetleGuard/BeetleGuardGroundSlam.prefab").WaitForCompletion().InstantiateClone("RobDanteGroundPunchHeavyImpact", false);
+            groundPunchHeavyEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/BeetleGuard/BeetleGuardGroundSlam.prefab").WaitForCompletion().InstantiateClone("RobMonsterHunterGroundPunchHeavyImpact", false);
 
             groundPunchHeavyEffectPrefab.transform.Find("ParticleInitial/Debris, 3D").localScale *= 0.5f;
             groundPunchHeavyEffectPrefab.transform.Find("ParticleInitial/Debris").localScale *= 0.5f;
@@ -327,38 +331,63 @@ namespace MonsterHunter.Modules
             //
             
 
-            groundSlamImpact = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherSlamImpact.prefab").WaitForCompletion().InstantiateClone("RobDanteGroundSlamImpact", false);
+            groundSlamImpact = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherSlamImpact.prefab").WaitForCompletion().InstantiateClone("RobMonsterHunterGroundSlamImpact", false);
 
             groundSlamImpact.transform.Find("Spikes, Small").gameObject.SetActive(false);
-            //groundSlamImpact.transform.Find("PP").gameObject.SetActive(false);
+            groundSlamImpact.transform.Find("PP").gameObject.SetActive(false);
             groundSlamImpact.transform.Find("Point light").gameObject.SetActive(false);
             groundSlamImpact.transform.Find("Flash Lines, Fire").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matFirePillarParticle.mat").WaitForCompletion();
             groundSlamImpact.transform.Find("Fire").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matFirePillarParticle.mat").WaitForCompletion();
             groundSlamImpact.transform.Find("Physics").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/MagmaWorm/matFracturedGround.mat").WaitForCompletion();
-            //groundSlamImpact.transform.Find("Decal").GetComponent<Decal>().Material = Addressables.LoadAssetAsync<Material>("RoR2/Base/Beetle/matBeetleGuardSlamDecal.mat").WaitForCompletion();
+            groundSlamImpact.transform.Find("Decal").GetComponent<Decal>().Material = Addressables.LoadAssetAsync<Material>("RoR2/Base/BeetleGroup/matBeetleGuardSlamDecal.mat").WaitForCompletion();
 
-            AddNewEffectDef(groundSlamImpact, "sfx_dante_ground_impact");
-
-            //
-
-            groundSlamImpactLunar = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherSlamImpact.prefab").WaitForCompletion().InstantiateClone("RobDanteGroundSlamImpactLunar", false);
-            AddNewEffectDef(groundSlamImpactLunar, "sfx_dante_ground_impact");
+            AddNewEffectDef(groundSlamImpact);
 
             //
 
-            swordChargeEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ClayBruiser/ChargeClayBruiserMinigun.prefab").WaitForCompletion().InstantiateClone("RobDanteTitanChargeEffect", false);
-
-            swordChargeEffect.transform.Find("FlameTrails, World").GetComponent<ParticleSystemRenderer>().trailMaterial = Addressables.LoadAssetAsync<Material>("RoR2/Base/DeathMark/matDeathMarkSkull.mat").WaitForCompletion();
-            swordChargeEffect.transform.Find("FlameBillboards, Local").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/DLC1/VoidSurvivor/matVoidBlinkBillboardCorrupted.mat").WaitForCompletion();
-            swordChargeEffect.transform.Find("FlameBillboards, Local").localScale *= 0.5f;
-            swordChargeEffect.transform.Find("SmokeBillboard").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/Brother/matBrotherSwingDistortion.mat").WaitForCompletion();
-            swordChargeEffect.transform.Find("SmokeBillboard").localScale *= 0.35f;
-            swordChargeEffect.transform.Find("Sparks").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/DeathMark/matDeathMarkFire.mat").WaitForCompletion();
-            swordChargeEffect.transform.Find("Ring, Dark").gameObject.SetActive(false);//.GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/moon2/matMoonBatteryTrailBloodSiphon.mat").WaitForCompletion();
-            swordChargeEffect.GetComponentInChildren<Light>().color = Color.red;
-            swordChargeEffect.GetComponentInChildren<Light>().range *= 0.25f;
+            groundSlamImpactLunar = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherSlamImpact.prefab").WaitForCompletion().InstantiateClone("RobMonsterHunterGroundSlamImpactLunar", false);
+            AddNewEffectDef(groundSlamImpactLunar);
 
             //
+
+            swordChargeEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC2/FalseSon/FalseSonLaserCharge.prefab").WaitForCompletion().InstantiateClone("RobMonsterHunterChargeEffect", false);
+
+            Material poopfart6767 = Material.Instantiate(Addressables.LoadAssetAsync<Material>("RoR2/DLC2/FalseSonBoss/matLunarGazeFireLaser3.mat").WaitForCompletion());
+            poopfart6767.SetColor("_TintColor", new Color(48f / 255f, 146f / 255f, 1f, 1f));
+            poopfart6767.SetFloat("_InvFade", 3f);
+
+            Material poopfart676767 = Material.Instantiate(Addressables.LoadAssetAsync<Material>("RoR2/Base/LunarWisp/matLunarWispMuzzleBurst.mat").WaitForCompletion());
+            poopfart676767.SetTexture("_MainTex", Addressables.LoadAssetAsync<Texture>("RoR2/Base/Common/VFX/ParticleMasks/texSoftGlowRing.png").WaitForCompletion());
+
+            swordChargeEffect.transform.Find("Sparks").localScale = Vector3.one * 0.35f;
+            swordChargeEffect.transform.Find("Backdrop").localScale = Vector3.one * 0.5f;
+            swordChargeEffect.transform.Find("Backdrop").GetComponent<ParticleSystemRenderer>().trailMaterial = poopfart676767;
+            swordChargeEffect.transform.Find("Flare (3)").localScale = Vector3.one * 0.5f;
+            swordChargeEffect.transform.Find("Flare (3)").GetComponent<ParticleSystemRenderer>().trailMaterial = poopfart6767;
+            //swordChargeEffect.transform.Find("FlameTrails, World").GetComponent<ParticleSystemRenderer>().trailMaterial = Addressables.LoadAssetAsync<Material>("RoR2/Base/DeathMark/matDeathMarkSkull.mat").WaitForCompletion();
+            //swordChargeEffect.transform.Find("FlameBillboards, Local").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/DLC1/VoidSurvivor/matVoidBlinkBillboardCorrupted.mat").WaitForCompletion();
+            //swordChargeEffect.transform.Find("FlameBillboards, Local").localScale *= 0.5f;
+            //swordChargeEffect.transform.Find("SmokeBillboard").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/Brother/matBrotherSwingDistortion.mat").WaitForCompletion();
+            //swordChargeEffect.transform.Find("SmokeBillboard").localScale *= 0.35f;
+            //swordChargeEffect.transform.Find("Sparks").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/DeathMark/matDeathMarkFire.mat").WaitForCompletion();
+            //swordChargeEffect.transform.Find("Ring, Dark").gameObject.SetActive(false);//.GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/moon2/matMoonBatteryTrailBloodSiphon.mat").WaitForCompletion();
+            //swordChargeEffect.GetComponentInChildren<Light>().color = Color.red;
+            //swordChargeEffect.GetComponentInChildren<Light>().range *= 0.25f;
+
+            //
+
+            tackleEffect = PrefabAPI.InstantiateClone(RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/BrotherDashEffect"), "RobMonsterHunterTackleEffect", false);
+            tackleEffect.GetComponent<EffectComponent>().applyScale = true;
+            tackleEffect.transform.localScale *= 0.5f;
+
+            //tackleEffect.transform.Find("Dash").gameObject.SetActive(false);
+            //tackleEffect.transform.Find("Flash, White").gameObject.SetActive(false);
+            tackleEffect.transform.Find("Donut").transform.localScale = Vector3.one * 0.35f;
+            tackleEffect.transform.Find("Donut").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matOpaqueDustSpeckledHuge.mat").WaitForCompletion();
+            tackleEffect.transform.Find("Donut, Distortion").transform.localScale = Vector3.one * 0.35f;
+            //tackleEffect.GetComponentInChildren<Light>().color = Color.red;
+
+            AddNewEffectDef(tackleEffect);
 
             //Material bloodMat = Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matBloodHumanLarge.mat").WaitForCompletion();
             //Material bloodMat2 = Addressables.LoadAssetAsync<Material>("RoR2/Base/moon2/matBloodSiphon.mat").WaitForCompletion();

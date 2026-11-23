@@ -353,6 +353,24 @@ namespace MonsterHunter.Modules
 
             hitBoxGroup.groupName = hitboxName;
         }
+
+        internal static void SetupHitbox(GameObject prefab, Transform hitboxTransform, Transform hitboxTransform2, string hitboxName)
+        {
+            HitBoxGroup hitBoxGroup = prefab.AddComponent<HitBoxGroup>();
+
+            HitBox hitBox = hitboxTransform.gameObject.AddComponent<HitBox>();
+            hitboxTransform.gameObject.layer = LayerIndex.projectile.intVal;
+            HitBox hitBox2 = hitboxTransform2.gameObject.AddComponent<HitBox>();
+            hitboxTransform2.gameObject.layer = LayerIndex.projectile.intVal;
+
+            hitBoxGroup.hitBoxes = new HitBox[]
+            {
+                hitBox,
+                hitBox2
+            };
+
+            hitBoxGroup.groupName = hitboxName;
+        }
         #endregion
     }
 }

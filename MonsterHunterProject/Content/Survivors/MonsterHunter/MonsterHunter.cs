@@ -209,10 +209,10 @@ namespace MonsterHunter.Content.Survivors
                 characterPortrait = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Texture>("texDanteIcon"),
                 crosshair = Modules.MonsterHunterAssets.crosshairPrefab,
                 damage = 12f,
-                healthGrowth = 39f,
+                healthGrowth = 64f,
                 healthRegen = 1f,
                 jumpCount = 1,
-                maxHealth = 130f,
+                maxHealth = 180f,
                 subtitleNameToken = "ROB_MONSTERHUNTER_BODY_SUBTITLE",
                 podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
                 moveSpeed = 7f,
@@ -416,8 +416,10 @@ namespace MonsterHunter.Content.Survivors
             GameObject model = childLocator.gameObject;
 
             Transform hitboxTransform = childLocator.FindChild("SlashHitbox");
-            Modules.Prefabs.SetupHitbox(model, hitboxTransform, "Sword");
+            Modules.Prefabs.SetupHitbox(model, hitboxTransform, childLocator.FindChild("SlashHitbox2"), "Sword");
 
+            hitboxTransform = childLocator.FindChild("TackleHitbox");
+            Modules.Prefabs.SetupHitbox(model, hitboxTransform, "Body");
             /*hitboxTransform = childLocator.FindChild("KickHitbox");
             Modules.Prefabs.SetupHitbox(model, hitboxTransform, "Kick");
 
@@ -560,32 +562,32 @@ namespace MonsterHunter.Content.Survivors
             #endregion
 
             #region Utility
-            SkillDef shoulderBashSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef tackleSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
                 {
-                    skillName = "MonsterHunterShoulderBash",
-                    skillNameToken = "ROB_MONSTERHUNTER_BODY_UTILITY_NAME",
-                    skillDescriptionToken = "ROB_MONSTERHUNTER_BODY_UTILITY_DESCRIPTION",
+                    skillName = "MonsterHunterTackle",
+                    skillNameToken = "ROB_MONSTERHUNTER_BODY_TACKLE_NAME",
+                    skillDescriptionToken = "ROB_MONSTERHUNTER_BODY_TACKLE_DESCRIPTION",
                     icon = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Sprite>("texTricksterIcon"),
-                    activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MonsterHunter.MainState)),
+                    activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MonsterHunter.Skill.ChargeTackleMobile)),
                     activationStateMachineName = "Weapon",
-                    baseMaxStock = 2,
-                    baseRechargeInterval = 8f,
+                    baseMaxStock = 1,
+                    baseRechargeInterval = 14f,
                     beginSkillCooldownOnSkillEnd = true,
                     canceledFromSprinting = false,
                     forceSprintDuringState = false,
                     fullRestockOnAssign = true,
                     interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
-                    resetCooldownTimerOnUse = false,
-                    isCombatSkill = false,
+                    resetCooldownTimerOnUse = true,
+                    isCombatSkill = true,
                     mustKeyPress = true,
-                    cancelSprintingOnActivation = false,
+                    cancelSprintingOnActivation = true,
                     rechargeStock = 1,
                     requiredStock = 1,
                     stockToConsume = 1,
                     keywordTokens = new string[0]
                 });
 
-            Modules.Skills.AddUtilitySkills(prefab, shoulderBashSkillDef);
+            Modules.Skills.AddUtilitySkills(prefab, tackleSkillDef);
 
             //Modules.Skills.AddUnlockablesToFamily(skillLocator.utility.skillFamily, null);
             #endregion

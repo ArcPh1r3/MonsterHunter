@@ -126,6 +126,61 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="sfx_mh_tackle" ID="{BA06CD9D-C26E-4879-ACA9-97ABF79B0640}">
+							<ChildrenList>
+								<Action Name="" ID="{37E48847-4DFA-4F09-B6EB-7D715E824777}" ShortID="508051051">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="sfx_mh_tackle" ID="{D88248A2-250E-4BC9-A414-E34A46633FF2}" WorkUnitID="{FE3FA7C5-9E89-40FE-8C7C-97CE0994E519}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="sfx_mh_tackle_charge" ID="{A7857689-5BCE-4476-8400-55526F818F43}">
+							<ChildrenList>
+								<Action Name="" ID="{BFF25BE3-A1DB-41E7-8AB2-CD8BCA8586CA}" ShortID="76242317">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="sfx_mh_tackle_charge" ID="{33957276-7F89-432C-A89B-ECB787D3C690}" WorkUnitID="{FE3FA7C5-9E89-40FE-8C7C-97CE0994E519}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="sfx_mh_tackle_charge_max" ID="{38028733-C64F-4225-A492-1A41D2D5200D}">
+							<ChildrenList>
+								<Action Name="" ID="{C156A6B8-7E59-4A93-B47D-C13DDF093215}" ShortID="316370230">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="sfx_mh_tackle_charge_max" ID="{D6EC900D-B2DF-4FB5-8FF8-63C9EEF68FB3}" WorkUnitID="{FE3FA7C5-9E89-40FE-8C7C-97CE0994E519}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="sfx_mh_tackle_charge_foley" ID="{6DB5A163-8272-48DB-97B3-6399DCC4ABBC}">
+							<ChildrenList>
+								<Action Name="" ID="{96E6AA30-4AB9-4251-AB28-41557CA237CE}" ShortID="1040045846">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="sfx_mh_tackle_charge_foley" ID="{25686252-F4D4-4574-80C0-38636B6854EA}" WorkUnitID="{FE3FA7C5-9E89-40FE-8C7C-97CE0994E519}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="sfx_mh_tackle_impact" ID="{2B61D451-C1C6-4E85-9B60-3B36DEFD166F}">
+							<ChildrenList>
+								<Action Name="" ID="{906A76F4-4091-49D1-B6F7-521E2ECC4C6E}" ShortID="248582420">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="sfx_mh_tackle_impact" ID="{3FE9AF94-FED8-430C-BEFB-874A1B550D85}" WorkUnitID="{FE3FA7C5-9E89-40FE-8C7C-97CE0994E519}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>

@@ -1,6 +1,7 @@
 ﻿using EntityStates;
 using R2API.Networking;
 using R2API.Networking.Interfaces;
+using Rewired.Utils;
 using RoR2;
 using System;
 using System.Reflection;
@@ -14,7 +15,12 @@ namespace MonsterHunter.Content.Components
     {
         public float fallSpeedModifier = 1.1665f;
         public float slashMovementModifier = 3f;
+        public float boostTimer = 0f;
+        private float zoom;
+        private float targetZoom;
+        public float zoomSmoothSpeed = 8f;
 
+        private float z = 0.01337f;
         public MeleeWeaponTrail swordTrail;
         public MeleeWeaponTrail swordTrailB;
         public float baseTurnSpeed { get; private set; }
@@ -27,6 +33,7 @@ namespace MonsterHunter.Content.Components
         public SkillLocator skillLocator { get; private set; }
         public ChildLocator childLocator { get; private set; }
         public CameraRigController cameraController;
+        private CharacterCameraParamsData cameraParams;
         public MonsterHunterPassive passive { get; private set; }
         public MonsterHunterTracker tracker { get; private set; }
 
@@ -35,6 +42,9 @@ namespace MonsterHunter.Content.Components
         public float stopwatch;
         public float jumpLockoutStopwatch;
         private float notMovingStopwatch;
+        private float zoomResetStopwatch;
+
+        public GameObject tackleEffect;
 
         private Inventory inventory
         {
@@ -66,6 +76,22 @@ namespace MonsterHunter.Content.Components
         private void Start()
         {
             this.Invoke("ValidateWeapon", 0.1f);
+            this.CreateTackleEffect();
+        }
+
+        private void CreateTackleEffect()
+        {
+            this.tackleEffect = GameObject.Instantiate(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bison/BisonBody.prefab").WaitForCompletion().GetComponent<ModelLocator>().modelTransform.Find("BisonArmature/ROOT/SprintEffect").gameObject, this.childLocator.FindChild("Chest"));
+            this.tackleEffect.transform.localPosition = new Vector3(0f, 1f, 1f);
+            this.tackleEffect.transform.localRotation = Quaternion.identity;
+            this.tackleEffect.transform.localScale = Vector3.one;
+
+            /*this.chargeEffect.GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/DLC1/VoidSurvivor/matVoidBlinkTrailCorrupted.mat").WaitForCompletion();
+            this.chargeEffect.GetComponent<ParticleSystemRenderer>().trailMaterial = Addressables.LoadAssetAsync<Material>("RoR2/DLC1/VoidSurvivor/matVoidBlinkTrailCorrupted.mat").WaitForCompletion();
+            this.chargeEffect.transform.Find("SmokeRings").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/DeathMark/matDeathMarkFire.mat").WaitForCompletion();
+            this.chargeEffect.transform.Find("Glow").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/DeathMark/matDeathMarkSkull.mat").WaitForCompletion();*/
+
+            this.tackleEffect.SetActive(false);
         }
 
         private void ValidateWeapon()
@@ -117,11 +143,42 @@ namespace MonsterHunter.Content.Components
         {
             this.stopwatch += Time.fixedDeltaTime;
             this.jumpLockoutStopwatch -= Time.fixedDeltaTime;
+            this.zoomResetStopwatch -= Time.fixedDeltaTime;
+            this.boostTimer -= Time.fixedDeltaTime;
 
-            if (this.characterBody.hasAuthority)
+            if (this.hasAuthority)
             {
                 if (this.characterBody.inputBank.moveVector.magnitude <= 0.1f && this.characterBody.characterMotor.isGrounded) this.notMovingStopwatch += Time.fixedDeltaTime;
                 else this.notMovingStopwatch = 0f;
+
+                if (this.cameraController)
+                {
+                    this.cameraParams = this.cameraController.targetParams.currentCameraParamsData;
+                    if (this.z == 0.01337f && !this.cameraParams.IsNullOrDestroyed())
+                    {
+                        this.z = this.cameraParams.idealLocalCameraPos.value.z;
+
+                        if (this.zoomResetStopwatch <= 0f) this.targetZoom = 0f;
+
+                        this.zoom = Mathf.Lerp(this.zoom, this.targetZoom, Time.fixedDeltaTime * this.zoomSmoothSpeed);
+
+                        this.cameraParams.idealLocalCameraPos.value.z = this.z + this.zoom;
+                    }
+                }
+            }
+        }
+
+        public void SetZoom(float newZoom, float duration)
+        {
+            this.targetZoom = newZoom;
+            this.zoomResetStopwatch = duration;
+        }
+
+        private void OnDestroy()
+        {
+            if (this.z != 0.01337f && !this.cameraParams.IsNullOrDestroyed())
+            {
+                this.cameraParams.idealLocalCameraPos.value.z = this.z;
             }
         }
 

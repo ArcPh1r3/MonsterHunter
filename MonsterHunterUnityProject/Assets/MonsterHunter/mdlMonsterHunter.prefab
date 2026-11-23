@@ -638,8 +638,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3729809607530592533}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3.46}
-  m_LocalScale: {x: 3.4251568, y: 6.0149183, z: 9.027}
+  m_LocalPosition: {x: 0, y: 1.38, z: 5.1}
+  m_LocalScale: {x: 7.871664, y: 6.9742203, z: 12.015841}
   m_Children: []
   m_Father: {fileID: 8972849615707872416}
   m_RootOrder: 0
@@ -831,6 +831,36 @@ Transform:
   - {fileID: 6283373398893599575}
   m_Father: {fileID: 6194089176987818626}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4945270172469346533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4617238055049221157}
+  m_Layer: 0
+  m_Name: TackleHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4617238055049221157
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4945270172469346533}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.88, z: 1.84}
+  m_LocalScale: {x: 7.075522, y: 7.600143, z: 9.005682}
+  m_Children: []
+  m_Father: {fileID: 6733660618677364432}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5163230212642496573
 GameObject:
@@ -2227,6 +2257,7 @@ Transform:
   - {fileID: 995984507}
   - {fileID: 8972849615707872416}
   - {fileID: 8262634131942200408}
+  - {fileID: 4617238055049221157}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2290,6 +2321,10 @@ MonoBehaviour:
     transform: {fileID: 8972849615707872416}
   - name: SlashHitbox
     transform: {fileID: 8348722235245510116}
+  - name: SlashHitbox2
+    transform: {fileID: 7268622000752330505}
+  - name: TackleHitbox
+    transform: {fileID: 4617238055049221157}
   - name: TrailBase
     transform: {fileID: 6733660618677364428}
   - name: TrailBaseB
@@ -2708,6 +2743,7 @@ Transform:
   m_LocalScale: {x: 1.0000001, y: 1.0000002, z: 1}
   m_Children:
   - {fileID: 6733660618677364384}
+  - {fileID: 7268622000752330505}
   m_Father: {fileID: 6733660618677364424}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -6.9318404, y: -9.087879, z: 9.087848}
@@ -3153,6 +3189,36 @@ Transform:
   m_Father: {fileID: 1302656091358445007}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 320, y: 270, z: 70}
+--- !u!1 &7480295916196120384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7268622000752330505}
+  m_Layer: 0
+  m_Name: SlashHitbox2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7268622000752330505
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7480295916196120384}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.54, z: 0}
+  m_LocalScale: {x: 1.2889, y: 12.34018, z: 4.672907}
+  m_Children: []
+  m_Father: {fileID: 6733660618677364396}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7668860023261641448
 GameObject:
   m_ObjectHideFlags: 0

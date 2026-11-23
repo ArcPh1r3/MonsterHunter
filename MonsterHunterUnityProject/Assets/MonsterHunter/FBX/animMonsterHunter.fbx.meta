@@ -171,6 +171,33 @@ ModelImporter:
   - first:
       74: 2016551237921944054
     second: Armature|LightImpact
+  - first:
+      74: 492195958014975739
+    second: Armature|ChargeTackle
+  - first:
+      74: 7709918832269199868
+    second: Armature|Tackle
+  - first:
+      74: 3810434090361602846
+    second: Armature|ChargeTackleGesture
+  - first:
+      74: -4977467369951201492
+    second: Armature|TackleDown
+  - first:
+      74: 8519015064175588731
+    second: Armature|TackleLanding
+  - first:
+      74: -6723798984195311775
+    second: Armature|TackleUp
+  - first:
+      74: -1599240910502438823
+    second: Armature|AirSlashBoosted
+  - first:
+      74: -2480585843324079525
+    second: Armature|ChargeAirBoosted
+  - first:
+      74: -7523079345230924935
+    second: Armature|TackleImpact
   externalObjects: {}
   materials:
     materialImportMode: 1

@@ -20,12 +20,16 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
         public int charge = 0;
         private bool airSlash = false;
         private CharacterCameraParams cameraParams;
+        private bool isBoosted = false;
 
         public override void OnEnter()
         {
             base.OnEnter();
             this.duration = this.baseDuration;// / this.attackSpeedStat;
             this.characterMotor.mass *= 100f;
+
+            this.isBoosted = this.monsterHunter.boostTimer > 0f;
+            this.monsterHunter.boostTimer = 0f;
 
             this.PlaySound("sfx_mh_charge_start");
 
@@ -34,7 +38,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             if (!this.isGrounded)
             {
                 this.PlaySound("sfx_mh_foley_02");
-                base.PlayAnimation("FullBody, Override", "ChargeAir", "Action.playbackRate", this.duration);
+                if (!this.isBoosted) base.PlayAnimation("FullBody, Override", "ChargeAir", "Action.playbackRate", this.duration);
+                else base.PlayAnimation("FullBody, Override", "ChargeAirBoosted");
                 this.characterMotor.velocity *= 0.25f;
                 this.characterMotor.velocity.y = 3f;
                 this.airSlash = true;
@@ -66,6 +71,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.characterBody.outOfCombatStopwatch = 0f;
             this.characterBody.isSprinting = false;
             if (this.airSlash) this.StartAimMode(0.1f);
+
+            this.monsterHunter.SetZoom(0.5f + (this.charge * 0.75f), 1f);
 
             if (this.characterMotor.velocity.y >= 3f) this.characterMotor.velocity.y = 3f;
 
@@ -193,6 +200,9 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.charge++;
             this.stopwatch = 0f;
             if (this.skillLocator && this.skillLocator.secondary) this.skillLocator.secondary.DeductStock(1);
+
+            // woo!
+            this.duration *= 0.95f;
 
             // animate
             if (!this.airSlash)

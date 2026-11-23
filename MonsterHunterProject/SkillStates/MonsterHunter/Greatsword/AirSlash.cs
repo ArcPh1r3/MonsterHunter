@@ -57,7 +57,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             float dmg = AirSlash.damageCoefficient;
 
             this.attack = new OverlapAttack();
-            this.attack.damageType = DamageType.Generic;
+            this.attack.damageType = DamageTypeCombo.GenericSecondary;
             this.attack.damageType.damageSource = DamageSource.Secondary;
             this.attack.attacker = base.gameObject;
             this.attack.inflictor = base.gameObject;
@@ -80,6 +80,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 
         public override void OnExit()
         {
+            this.FireAttack();
             base.OnExit();
 
             base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
@@ -133,6 +134,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.stopwatch += Time.deltaTime;
             this.monsterHunter.jumpLockoutStopwatch = 0.1f;
             this.characterBody.outOfCombatStopwatch = 0f;
+
+            this.monsterHunter.SetZoom(0.5f + (this.charge * 0.75f), 1f);
 
             this.FireAttack();
 

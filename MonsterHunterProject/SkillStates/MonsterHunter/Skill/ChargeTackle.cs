@@ -3,6 +3,7 @@ using RoR2;
 using EntityStates;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
+using System.Runtime.CompilerServices;
 
 namespace MonsterHunter.SkillStates.MonsterHunter.Skill
 {
@@ -10,10 +11,12 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
     {
         protected override bool normalizeModel => true;
 
-        public float baseDuration = 1f;
+        public float baseDuration = 1.5f;
 
         private float duration;
         private float stopwatch;
+        private bool charged;
+        private GameObject chargeEffectInstance;
 
         public override void OnEnter()
         {
@@ -21,12 +24,18 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
             this.duration = this.baseDuration;// / this.attackSpeedStat;
             this.characterMotor.mass *= 100f;
 
-            this.PlaySound("sfx_mh_charge_start");
+            this.PlaySound("sfx_mh_tackle_charge");
+            this.PlaySound("sfx_mh_tackle_charge_foley");
 
             if (NetworkServer.active) this.characterBody.AddBuff(RoR2Content.Buffs.ArmorBoost);
 
-            this.PlaySound("sfx_mh_foley_02");
-            base.PlayAnimation("FullBody, Override", "ChargeAir", "Action.playbackRate", this.duration);
+            base.PlayAnimation("FullBody, Override", "ChargeTackle", "Action.playbackRate", this.duration + 0.5f);
+
+            this.chargeEffectInstance = GameObject.Instantiate(Modules.MonsterHunterAssets.swordChargeEffect, this.FindModelChild("Chest"));
+            this.chargeEffectInstance.transform.localPosition = Vector3.zero;
+            this.chargeEffectInstance.transform.localRotation = Quaternion.identity;
+
+            this.monsterHunter.SetZoom(3f, this.duration);
         }
 
         public override void OnExit()
@@ -34,6 +43,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
             base.OnExit();
             this.characterMotor.mass *= 0.01f;
             if (NetworkServer.active) this.characterBody.RemoveBuff(RoR2Content.Buffs.ArmorBoost);
+            if (this.chargeEffectInstance) Destroy(this.chargeEffectInstance);
         }
 
         public override void FixedUpdate()
@@ -47,17 +57,47 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
             this.characterMotor.moveDirection *= 0f;
             this.characterMotor.velocity *= 0f;
 
+            if (this.stopwatch >= this.duration && !this.charged)
+            {
+                this.charged = true;
+
+                this.PlaySound("sfx_mh_tackle_charge_max");
+
+                // add temporaryoverlay
+                if (this.modelLocator && this.modelLocator.modelTransform)
+                {
+                    TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(this.modelLocator.modelTransform.gameObject);
+                    temporaryOverlay.duration = 0.5f;
+                    temporaryOverlay.destroyComponentOnEnd = true;
+                    temporaryOverlay.originalMaterial = Addressables.LoadAssetAsync<Material>("RoR2/DLC2/Chef/matYesChefOverlay.mat").WaitForCompletion();
+                    temporaryOverlay.inspectorCharacterModel = this.modelLocator.modelTransform.GetComponent<CharacterModel>();
+                    temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                    temporaryOverlay.animateShaderAlpha = true;
+                }
+            }
+
+            if (this.charged)
+            {
+                this.monsterHunter.SetZoom(-1f, 0.1f);
+            }
+
             if (base.isAuthority)
             {
-                if (this.inputBank && !this.inputBank.skill3.down && base.fixedAge >= 0.25f)
+                if (this.inputBank && !this.inputBank.skill3.down && this.stopwatch >= 0.25f)
                 {
-                    this.outer.SetNextStateToMain();
+                    this.outer.SetNextState(new Tackle
+                    {
+                        charge = Mathf.Clamp01(Util.Remap(this.stopwatch, 0f, this.duration, 0f, 1f))
+                    });
                     return;
                 }
 
-                if (this.fixedAge >= this.duration)
+                if (this.stopwatch >= this.duration + 0.5f)
                 {
-                    this.outer.SetNextStateToMain();
+                    this.outer.SetNextState(new Tackle
+                    {
+                        charge = Mathf.Clamp01(Util.Remap(this.stopwatch, 0f, this.duration, 0f, 1f))
+                    });
                     return;
                 }
             }

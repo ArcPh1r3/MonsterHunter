@@ -6312,6 +6312,290 @@
 										<ActiveSource Name="sfx_mh_sword_impact" ID="{B96AD7D1-31B0-4AB8-A4CA-D5307AD45997}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
+								<Sound Name="sfx_mh_bbq" ID="{BE0404B3-34AB-46A6-B4F7-4CB6C6F7EAFF}" ShortID="1058380363">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{140D52C2-62AC-4006-AE21-98F493D2358C}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{92A1A0F3-7047-4165-95AE-D5CFCC30AE61}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_mh_bbq" ID="{F4707C10-6F0A-4B7E-8DB7-C31C4A371C6A}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_mh_bbq.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="531231399"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_mh_bbq" ID="{F4707C10-6F0A-4B7E-8DB7-C31C4A371C6A}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="sfx_mh_bbq_success" ID="{E20FE8E8-BE61-4F27-ABDC-2A16C56871D6}" ShortID="213348995">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{140D52C2-62AC-4006-AE21-98F493D2358C}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{92A1A0F3-7047-4165-95AE-D5CFCC30AE61}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_mh_bbq_success" ID="{D324500F-A597-4404-B260-75EE513CCFEE}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_mh_bbq_success.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="345075012"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_mh_bbq_success" ID="{D324500F-A597-4404-B260-75EE513CCFEE}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="sfx_mh_explosion" ID="{1867E907-3F97-49DC-80E9-85A78F355A39}" ShortID="35424973">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{140D52C2-62AC-4006-AE21-98F493D2358C}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{92A1A0F3-7047-4165-95AE-D5CFCC30AE61}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_mh_explosion" ID="{25A44EC6-73C8-45E8-8FAA-48FF9739F0BB}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_mh_explosion.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="174488892"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_mh_explosion" ID="{25A44EC6-73C8-45E8-8FAA-48FF9739F0BB}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="sfx_mh_foley_03" ID="{C3421CCB-D147-4AE1-B502-3C07C836415E}" ShortID="475161362">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-2</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{140D52C2-62AC-4006-AE21-98F493D2358C}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{92A1A0F3-7047-4165-95AE-D5CFCC30AE61}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_mh_foley_03" ID="{747D4C77-8758-4A40-B391-432599BDC111}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_mh_foley_03.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="685563567"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_mh_foley_03" ID="{747D4C77-8758-4A40-B391-432599BDC111}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="sfx_mh_itemget" ID="{5985BF4A-0025-4F25-8053-11949BC6391D}" ShortID="335386188">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{140D52C2-62AC-4006-AE21-98F493D2358C}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{92A1A0F3-7047-4165-95AE-D5CFCC30AE61}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_mh_itemget" ID="{FFEAFF4B-BD60-49F5-B308-68955FE8334F}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_mh_itemget.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="255926072"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_mh_itemget" ID="{FFEAFF4B-BD60-49F5-B308-68955FE8334F}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="sfx_mh_sotasty" ID="{9A21E01C-E551-4530-A3A6-3D9F70005CEA}" ShortID="821603682">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{140D52C2-62AC-4006-AE21-98F493D2358C}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{92A1A0F3-7047-4165-95AE-D5CFCC30AE61}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_mh_sotasty" ID="{1B11F735-339A-428F-8667-206C40842F50}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_mh_sotasty.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="151041400"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_mh_sotasty" ID="{1B11F735-339A-428F-8667-206C40842F50}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="sfx_mh_tackle" ID="{D88248A2-250E-4BC9-A414-E34A46633FF2}" ShortID="253773278">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>2</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{140D52C2-62AC-4006-AE21-98F493D2358C}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{92A1A0F3-7047-4165-95AE-D5CFCC30AE61}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_mh_tackle" ID="{F9F060C5-D1E7-425F-8200-DACF6C071600}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_mh_tackle.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="367140483"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_mh_tackle" ID="{F9F060C5-D1E7-425F-8200-DACF6C071600}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="sfx_mh_tackle_charge" ID="{33957276-7F89-432C-A89B-ECB787D3C690}" ShortID="916969516">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{140D52C2-62AC-4006-AE21-98F493D2358C}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{92A1A0F3-7047-4165-95AE-D5CFCC30AE61}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_mh_tackle_charge" ID="{A1E32D8F-6EB3-455E-B9E9-DCA18067C14A}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_mh_tackle_charge.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="966123191"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_mh_tackle_charge" ID="{A1E32D8F-6EB3-455E-B9E9-DCA18067C14A}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="sfx_mh_tackle_charge_foley" ID="{25686252-F4D4-4574-80C0-38636B6854EA}" ShortID="405581035">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{140D52C2-62AC-4006-AE21-98F493D2358C}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{92A1A0F3-7047-4165-95AE-D5CFCC30AE61}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_mh_tackle_charge_foley" ID="{06568AE5-C49E-45F8-99B9-EB00C690D00C}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_mh_tackle_charge_foley.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="965487463"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_mh_tackle_charge_foley" ID="{06568AE5-C49E-45F8-99B9-EB00C690D00C}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="sfx_mh_tackle_charge_max" ID="{D6EC900D-B2DF-4FB5-8FF8-63C9EEF68FB3}" ShortID="411223353">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{140D52C2-62AC-4006-AE21-98F493D2358C}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{92A1A0F3-7047-4165-95AE-D5CFCC30AE61}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_mh_tackle_charge_max" ID="{73751EB4-6C52-4A6C-A813-75781B08CDC0}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_mh_tackle_charge_max.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="744368627"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_mh_tackle_charge_max" ID="{73751EB4-6C52-4A6C-A813-75781B08CDC0}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="sfx_mh_tackle_impact" ID="{3FE9AF94-FED8-430C-BEFB-874A1B550D85}" ShortID="480792184">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{140D52C2-62AC-4006-AE21-98F493D2358C}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{92A1A0F3-7047-4165-95AE-D5CFCC30AE61}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="sfx_mh_tackle_impact" ID="{017A5481-5007-44C4-9A62-B6A56B0562A1}">
+											<Language>SFX</Language>
+											<AudioFile>sfx_mh_tackle_impact.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="389655005"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="sfx_mh_tackle_impact" ID="{017A5481-5007-44C4-9A62-B6A56B0562A1}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</ActorMixer>
 						<Folder Name="DONTE" ID="{711B0852-7A5F-4236-9D4B-5A98209AB151}" ShortID="199625760">
