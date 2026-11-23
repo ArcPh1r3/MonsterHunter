@@ -159,7 +159,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.monsterHunter.jumpLockoutStopwatch = 0.1f;
             this.characterBody.outOfCombatStopwatch = 0f;
 
-            this.monsterHunter.SetZoom(0.5f + (this.charge * 0.75f), 1f);
+            this.monsterHunter.SetZoom(0.25f + (this.charge * -2.5f), 1f);
 
             if (this.stopwatch >= this.duration)
             {

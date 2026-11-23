@@ -198,6 +198,9 @@ ModelImporter:
   - first:
       74: -7523079345230924935
     second: Armature|TackleImpact
+  - first:
+      74: -3097013815288819039
+    second: Armature|ChargeAirBoosted.001
   externalObjects: {}
   materials:
     materialImportMode: 1

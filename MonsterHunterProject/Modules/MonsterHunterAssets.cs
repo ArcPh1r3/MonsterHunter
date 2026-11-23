@@ -65,7 +65,7 @@ namespace MonsterHunter.Modules
             //
 
             crosshairPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/SimpleDotCrosshair.prefab").WaitForCompletion().InstantiateClone("RobMonsterHunterCrosshair", false);
-            crosshairPrefab.GetComponent<RawImage>().enabled = false;
+            //crosshairPrefab.GetComponent<RawImage>().enabled = false;
 
             //
 
@@ -330,7 +330,6 @@ namespace MonsterHunter.Modules
 
             //
             
-
             groundSlamImpact = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherSlamImpact.prefab").WaitForCompletion().InstantiateClone("RobMonsterHunterGroundSlamImpact", false);
 
             groundSlamImpact.transform.Find("Spikes, Small").gameObject.SetActive(false);
@@ -360,10 +359,10 @@ namespace MonsterHunter.Modules
             poopfart676767.SetTexture("_MainTex", Addressables.LoadAssetAsync<Texture>("RoR2/Base/Common/VFX/ParticleMasks/texSoftGlowRing.png").WaitForCompletion());
 
             swordChargeEffect.transform.Find("Sparks").localScale = Vector3.one * 0.35f;
-            swordChargeEffect.transform.Find("Backdrop").localScale = Vector3.one * 0.5f;
-            swordChargeEffect.transform.Find("Backdrop").GetComponent<ParticleSystemRenderer>().trailMaterial = poopfart676767;
-            swordChargeEffect.transform.Find("Flare (3)").localScale = Vector3.one * 0.5f;
-            swordChargeEffect.transform.Find("Flare (3)").GetComponent<ParticleSystemRenderer>().trailMaterial = poopfart6767;
+            swordChargeEffect.transform.Find("Sparks/Backdrop").localScale = Vector3.one * 0.5f;
+            swordChargeEffect.transform.Find("Sparks/Backdrop").GetComponent<ParticleSystemRenderer>().material = poopfart676767;
+            swordChargeEffect.transform.Find("Sparks/Flare (3)").localScale = Vector3.one * 0.5f;
+            swordChargeEffect.transform.Find("Sparks/Flare (3)").GetComponent<ParticleSystemRenderer>().material = poopfart6767;
             //swordChargeEffect.transform.Find("FlameTrails, World").GetComponent<ParticleSystemRenderer>().trailMaterial = Addressables.LoadAssetAsync<Material>("RoR2/Base/DeathMark/matDeathMarkSkull.mat").WaitForCompletion();
             //swordChargeEffect.transform.Find("FlameBillboards, Local").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/DLC1/VoidSurvivor/matVoidBlinkBillboardCorrupted.mat").WaitForCompletion();
             //swordChargeEffect.transform.Find("FlameBillboards, Local").localScale *= 0.5f;

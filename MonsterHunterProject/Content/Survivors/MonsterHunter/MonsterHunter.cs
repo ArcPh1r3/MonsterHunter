@@ -110,8 +110,8 @@ namespace MonsterHunter.Content.Survivors
             LanguageAPI.Add(string.Format(nameFormat, Achievements.MonsterHunterMasteryAchievement.IDENTIFIER), "Hunter: Mastery");
             LanguageAPI.Add(string.Format(descFormat, Achievements.MonsterHunterMasteryAchievement.IDENTIFIER), "As <color=#B70027>Hunter</color>, beat the game or obliterate on Monsoon.");
 
-            LanguageAPI.Add(string.Format(nameFormat, Achievements.MonsterHunterEarlySupporterAchievement.IDENTIFIER), "MonsterHunter: Early Supporter");
-            LanguageAPI.Add(string.Format(descFormat, Achievements.MonsterHunterEarlySupporterAchievement.IDENTIFIER), "<color=#B70027>Unlock Dante's full potential.</color>");
+            LanguageAPI.Add(string.Format(nameFormat, Achievements.MonsterHunterEarlySupporterAchievement.IDENTIFIER), "Hunter: Early Supporter");
+            LanguageAPI.Add(string.Format(descFormat, Achievements.MonsterHunterEarlySupporterAchievement.IDENTIFIER), "Play <color=#B70027>Hunter</color> in beta.");
 
             masteryUnlockableDef = CreateAndAddUnlockableDef(Content.Achievements.MonsterHunterMasteryAchievement.IDENTIFIER, Content.Achievements.MonsterHunterMasteryAchievement.UNLOCKABLE_IDENTIFIER, Content.Achievements.MonsterHunterMasteryAchievement.Sprite);
             completionUnlockableDef = CreateAndAddUnlockableDef(Content.Achievements.MonsterHunterCompletionAchievement.IDENTIFIER, Content.Achievements.MonsterHunterCompletionAchievement.UNLOCKABLE_IDENTIFIER, Content.Achievements.MonsterHunterCompletionAchievement.Sprite);
@@ -206,7 +206,7 @@ namespace MonsterHunter.Content.Survivors
                 bodyName = "RobMonsterHunterBody",
                 bodyNameToken = bodyNameToken,
                 bodyColor = characterColor,
-                characterPortrait = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Texture>("texDanteIcon"),
+                characterPortrait = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Texture>("texMonsterHunterIcon"),
                 crosshair = Modules.MonsterHunterAssets.crosshairPrefab,
                 damage = 12f,
                 healthGrowth = 64f,
@@ -524,7 +524,7 @@ namespace MonsterHunter.Content.Survivors
                 "Weapon",
                 "ROB_MONSTERHUNTER_BODY_PRIMARY_NAME",
                 "ROB_MONSTERHUNTER_BODY_PRIMARY_DESCRIPTION",
-                Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Sprite>("texEbonyIvoryIcon"), false);
+                Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Sprite>("texWIPIcon"), false);
 
             Modules.Skills.AddPrimarySkills(prefab, primary);
             #endregion
@@ -535,11 +535,11 @@ namespace MonsterHunter.Content.Survivors
                 skillName = "MonsterHunterChargeSlash",
                 skillNameToken = "ROB_DANTE_BODY_MELEE_NAME",
                 skillDescriptionToken = "ROB_DANTE_BODY_MELEE_DESCRIPTION",
-                icon = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Sprite>("texMeleeIcon"),
+                icon = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Sprite>("texWIPIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MonsterHunter.Greatsword.ChargeSlash)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 3,
-                baseRechargeInterval = 5f,
+                baseRechargeInterval = 3f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -567,11 +567,11 @@ namespace MonsterHunter.Content.Survivors
                     skillName = "MonsterHunterTackle",
                     skillNameToken = "ROB_MONSTERHUNTER_BODY_TACKLE_NAME",
                     skillDescriptionToken = "ROB_MONSTERHUNTER_BODY_TACKLE_DESCRIPTION",
-                    icon = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Sprite>("texTricksterIcon"),
+                    icon = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Sprite>("texWIPIcon"),
                     activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MonsterHunter.Skill.ChargeTackleMobile)),
                     activationStateMachineName = "Weapon",
                     baseMaxStock = 1,
-                    baseRechargeInterval = 14f,
+                    baseRechargeInterval = 10f,
                     beginSkillCooldownOnSkillEnd = true,
                     canceledFromSprinting = false,
                     forceSprintDuringState = false,
@@ -598,7 +598,7 @@ namespace MonsterHunter.Content.Survivors
                 skillName = "DanteDevilTrigger",
                 skillNameToken = "ROB_DANTE_BODY_SPECIAL_DEVILTRIGGER_NAME",
                 skillDescriptionToken = "ROB_DANTE_BODY_SPECIAL_DEVILTRIGGER_DESCRIPTION",
-                icon = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Sprite>("texDevilTriggerIcon2"),
+                icon = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Sprite>("texWIPIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MonsterHunter.MainState)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,

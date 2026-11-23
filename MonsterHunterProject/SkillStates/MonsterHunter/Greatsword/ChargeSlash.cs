@@ -21,6 +21,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
         private bool airSlash = false;
         private CharacterCameraParams cameraParams;
         private bool isBoosted = false;
+        private float cap = 3f;
 
         public override void OnEnter()
         {
@@ -38,10 +39,15 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             if (!this.isGrounded)
             {
                 this.PlaySound("sfx_mh_foley_02");
-                if (!this.isBoosted) base.PlayAnimation("FullBody, Override", "ChargeAir", "Action.playbackRate", this.duration);
-                else base.PlayAnimation("FullBody, Override", "ChargeAirBoosted");
+                if (this.isBoosted) base.PlayAnimation("FullBody, Override", "ChargeAirBoosted", "Action.playbackRate", this.duration);
+                else base.PlayAnimation("FullBody, Override", "ChargeAir", "Action.playbackRate", this.duration);
                 this.characterMotor.velocity *= 0.25f;
                 this.characterMotor.velocity.y = 3f;
+                if (this.isBoosted)
+                {
+                    this.characterMotor.velocity.y = 8f;
+                    this.cap = 8f;
+                }
                 this.airSlash = true;
                 this.duration = 0.36f;
             }
@@ -72,9 +78,9 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.characterBody.isSprinting = false;
             if (this.airSlash) this.StartAimMode(0.1f);
 
-            this.monsterHunter.SetZoom(0.5f + (this.charge * 0.75f), 1f);
+            this.monsterHunter.SetZoom(0.25f + (this.charge * -2f), 1f);
 
-            if (this.characterMotor.velocity.y >= 3f) this.characterMotor.velocity.y = 3f;
+            if (this.characterMotor.velocity.y >= this.cap) this.characterMotor.velocity.y = this.cap;
 
             if (this.isGrounded) this.characterMotor.moveDirection *= 0f;
             else this.characterMotor.moveDirection *= 0.75f;

@@ -11,7 +11,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
     {
         protected override bool normalizeModel => true;
 
-        public float baseDuration = 1.5f;
+        public float baseDuration = 3f;
 
         private float duration;
         private float stopwatch;

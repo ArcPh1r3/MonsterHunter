@@ -18,7 +18,7 @@ namespace MonsterHunter.Content.Components
         public float boostTimer = 0f;
         private float zoom;
         private float targetZoom;
-        public float zoomSmoothSpeed = 8f;
+        public float zoomSmoothSpeed = 2f;
 
         private float z = 0.01337f;
         public MeleeWeaponTrail swordTrail;
@@ -32,8 +32,8 @@ namespace MonsterHunter.Content.Components
         public CharacterModel characterModel { get; private set; }
         public SkillLocator skillLocator { get; private set; }
         public ChildLocator childLocator { get; private set; }
-        public CameraRigController cameraController;
-        private CharacterCameraParamsData cameraParams;
+        public CameraTargetParams cameraController;
+        private CharacterCameraParams cameraParams;
         public MonsterHunterPassive passive { get; private set; }
         public MonsterHunterTracker tracker { get; private set; }
 
@@ -69,6 +69,7 @@ namespace MonsterHunter.Content.Components
             this.skinController = this.GetComponentInChildren<ModelSkinController>();
             this.passive = this.GetComponent<MonsterHunterPassive>();
             this.tracker = this.GetComponent<MonsterHunterTracker>();
+            this.cameraController = this.GetComponent<CameraTargetParams>();
 
             this.Invoke("SetInventoryHook", 0.5f);
         }
@@ -82,14 +83,15 @@ namespace MonsterHunter.Content.Components
         private void CreateTackleEffect()
         {
             this.tackleEffect = GameObject.Instantiate(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Bison/BisonBody.prefab").WaitForCompletion().GetComponent<ModelLocator>().modelTransform.Find("BisonArmature/ROOT/SprintEffect").gameObject, this.childLocator.FindChild("Chest"));
-            this.tackleEffect.transform.localPosition = new Vector3(0f, 1f, 1f);
-            this.tackleEffect.transform.localRotation = Quaternion.identity;
+            this.tackleEffect.transform.localPosition = new Vector3(0f, 0.35f, 0f);
+            this.tackleEffect.transform.localRotation = Quaternion.Euler(new Vector3(270f, 0f, 0f));
             this.tackleEffect.transform.localScale = Vector3.one;
 
-            /*this.chargeEffect.GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/DLC1/VoidSurvivor/matVoidBlinkTrailCorrupted.mat").WaitForCompletion();
-            this.chargeEffect.GetComponent<ParticleSystemRenderer>().trailMaterial = Addressables.LoadAssetAsync<Material>("RoR2/DLC1/VoidSurvivor/matVoidBlinkTrailCorrupted.mat").WaitForCompletion();
-            this.chargeEffect.transform.Find("SmokeRings").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/DeathMark/matDeathMarkFire.mat").WaitForCompletion();
-            this.chargeEffect.transform.Find("Glow").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/DeathMark/matDeathMarkSkull.mat").WaitForCompletion();*/
+            this.tackleEffect.GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/DLC1/VoidSurvivor/matVoidBlinkTrailCorrupted.mat").WaitForCompletion();
+            this.tackleEffect.GetComponent<ParticleSystemRenderer>().trailMaterial = Addressables.LoadAssetAsync<Material>("RoR2/DLC3/ExplosiveJunkBombDestructible/matJunkDroneBombExplosionChargePuffs.mat").WaitForCompletion();
+            this.tackleEffect.transform.Find("SmokeRings").localScale = new Vector3(0.25f, 0.25f, 0.75f);
+            this.tackleEffect.transform.Find("SmokeRings").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matDustDirectional.mat").WaitForCompletion();
+            this.tackleEffect.transform.Find("Glow").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/DLC3/ExplosiveJunkBombDestructible/matJunkDroneBombExplosionChargePuffs.mat").WaitForCompletion();
 
             this.tackleEffect.SetActive(false);
         }
@@ -153,16 +155,13 @@ namespace MonsterHunter.Content.Components
 
                 if (this.cameraController)
                 {
-                    this.cameraParams = this.cameraController.targetParams.currentCameraParamsData;
-                    if (this.z == 0.01337f && !this.cameraParams.IsNullOrDestroyed())
+                    this.cameraParams = this.cameraController.cameraParams;
+                    if (!this.cameraParams.IsNullOrDestroyed())
                     {
-                        this.z = this.cameraParams.idealLocalCameraPos.value.z;
-
+                        if (this.z == 0.01337f) this.z = this.cameraParams.data.idealLocalCameraPos.value.z;
                         if (this.zoomResetStopwatch <= 0f) this.targetZoom = 0f;
-
                         this.zoom = Mathf.Lerp(this.zoom, this.targetZoom, Time.fixedDeltaTime * this.zoomSmoothSpeed);
-
-                        this.cameraParams.idealLocalCameraPos.value.z = this.z + this.zoom;
+                        this.cameraParams.data.idealLocalCameraPos.value.z = this.z + this.zoom;
                     }
                 }
             }
@@ -178,7 +177,7 @@ namespace MonsterHunter.Content.Components
         {
             if (this.z != 0.01337f && !this.cameraParams.IsNullOrDestroyed())
             {
-                this.cameraParams.idealLocalCameraPos.value.z = this.z;
+                this.cameraParams.data.idealLocalCameraPos.value.z = this.z;
             }
         }
 

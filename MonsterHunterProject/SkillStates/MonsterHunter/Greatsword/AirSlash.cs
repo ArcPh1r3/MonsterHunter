@@ -15,6 +15,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
         public static float dropVelocity = 18f;
 
         public int charge;
+        public bool isBoosted;
+
         private float duration;
         private bool hasFired;
         private bool hasLanded;
@@ -50,7 +52,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                 hitBoxGroup = Array.Find<HitBoxGroup>(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == hitboxString);
             }
 
-            base.PlayAnimation("FullBody, Override", "AirSlash", "Action.playbackRate", 0.25f);
+            if (this.isBoosted) base.PlayAnimation("FullBody, Override", "AirSlashBoosted", "Action.playbackRate", 0.25f);
+            else base.PlayAnimation("FullBody, Override", "AirSlash", "Action.playbackRate", 0.25f);
             //Util.PlaySound(Modules.Sounds.Lunge, base.gameObject);
             //Util.PlaySound(Modules.Sounds.Cloth2, base.gameObject);
 
@@ -70,6 +73,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.attack.hitBoxGroup = hitBoxGroup;
             this.attack.isCrit = base.RollCrit();
             this.attack.impactSound = Modules.MonsterHunterAssets.swordImpactSoundEvent.index;
+
+            if (this.isBoosted) this.attack.damage *= 1.5f;
 
             if (this.charge >= 1)
             {
@@ -102,6 +107,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 
                     //base.characterMotor.velocity *= 0.25f;
                     base.characterMotor.velocity += Vector3.up * -AirSlash.dropVelocity;
+                    if (this.isBoosted) base.characterMotor.velocity += Vector3.up * -AirSlash.dropVelocity;
                 }
             }
 
@@ -135,7 +141,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.monsterHunter.jumpLockoutStopwatch = 0.1f;
             this.characterBody.outOfCombatStopwatch = 0f;
 
-            this.monsterHunter.SetZoom(0.5f + (this.charge * 0.75f), 1f);
+            this.monsterHunter.SetZoom(0.25f + (this.charge * -2.5f), 1f);
 
             this.FireAttack();
 

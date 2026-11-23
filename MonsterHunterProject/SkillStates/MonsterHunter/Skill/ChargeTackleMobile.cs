@@ -10,7 +10,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
     {
         protected override bool normalizeModel => true;
 
-        public float baseDuration = 2f;
+        public float baseDuration = 3f;
 
         private float duration;
         private float stopwatch;
@@ -34,7 +34,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
             this.chargeEffectInstance.transform.localPosition = new Vector3(0f, 0f, -0.3f);
             this.chargeEffectInstance.transform.localRotation = Quaternion.identity;
 
-            this.monsterHunter.SetZoom(3f, this.duration);
+            this.monsterHunter.SetZoom(1.5f, this.duration);
         }
 
         public override void OnExit()
@@ -61,16 +61,41 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
                 this.charged = true;
 
                 this.PlaySound("sfx_mh_tackle_charge_max");
+
+                // add temporaryoverlay
+                if (this.modelLocator && this.modelLocator.modelTransform)
+                {
+                    TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(this.modelLocator.modelTransform.gameObject);
+                    temporaryOverlay.duration = 0.5f;
+                    temporaryOverlay.destroyComponentOnEnd = true;
+                    temporaryOverlay.originalMaterial = Addressables.LoadAssetAsync<Material>("RoR2/DLC2/Chef/matYesChefOverlay.mat").WaitForCompletion();
+                    temporaryOverlay.inspectorCharacterModel = this.modelLocator.modelTransform.GetComponent<CharacterModel>();
+                    temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+                    temporaryOverlay.animateShaderAlpha = true;
+                }
+
+                if (this.chargeEffectInstance)
+                {
+                    this.chargeEffectInstance.transform.Find("Sparks").localScale = Vector3.one * 0.1f;
+                    this.chargeEffectInstance.transform.Find("Sparks/Backdrop").localScale = Vector3.one * 0.75f;
+                    this.chargeEffectInstance.transform.Find("Sparks/Flare (3)").localScale = Vector3.one * 0.75f;
+
+                    EffectManager.SpawnEffect(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/LunarGolem/MuzzleflashLunarGolemTwinShot.prefab").WaitForCompletion(), new EffectData
+                    {
+                        origin = this.chargeEffectInstance.transform.position,
+                        rotation = this.chargeEffectInstance.transform.rotation
+                    }, false);
+                }
             }
 
             if (this.charged)
             {
-                this.monsterHunter.SetZoom(-1f, 0.1f);
+                this.monsterHunter.SetZoom(-3f, 0.1f);
             }
 
             if (base.isAuthority)
             {
-                if (this.inputBank && !this.inputBank.skill3.down && this.stopwatch >= 0.5f)
+                if (this.inputBank && !this.inputBank.skill3.down && this.stopwatch >= 0.25f)
                 {
                     this.outer.SetNextState(new Tackle
                     {
