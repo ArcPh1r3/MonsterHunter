@@ -93,7 +93,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
                 {
                     this.chargeEffectInstance.transform.Find("Sparks").localScale = Vector3.one * 0.1f;
                     this.chargeEffectInstance.transform.Find("Sparks/Backdrop").localScale = Vector3.one * 0.75f;
-                    this.chargeEffectInstance.transform.Find("Sparks/Flare (3)").localScale = Vector3.one * 0.75f;
+                    this.chargeEffectInstance.transform.Find("Sparks/Flare (3)").localScale = Vector3.one * 1.25f;
 
                     EffectManager.SpawnEffect(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/LunarGolem/MuzzleflashLunarGolemTwinShot.prefab").WaitForCompletion(), new EffectData
                     {

@@ -39,8 +39,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             if (!this.isGrounded)
             {
                 this.PlaySound("sfx_mh_foley_02");
-                if (this.isBoosted) this.PlaySound("sfx_mh_foley_03");
-                //if (this.isBoosted) base.PlayAnimation("FullBody, Override", "ChargeAirBoosted", "Action.playbackRate", this.duration);
+                //if (this.isBoosted) this.PlaySound("sfx_mh_foley_03");
+                if (this.isBoosted) base.PlayAnimation("FullBody, Override", "ChargeAirBoosted", "Action.playbackRate", this.duration);
                 else base.PlayAnimation("FullBody, Override", "ChargeAir", "Action.playbackRate", this.duration);
                 this.characterMotor.velocity *= 0.25f;
                 this.characterMotor.velocity.y = 3f;
