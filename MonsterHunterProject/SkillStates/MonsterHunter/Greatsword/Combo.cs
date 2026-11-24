@@ -86,6 +86,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.attack.hitBoxGroup = hitBoxGroup;
             this.attack.isCrit = base.RollCrit();
             this.attack.impactSound = Modules.MonsterHunterAssets.swordImpactSoundEvent.index;
+
+            this.PlaySound("sfx_mh_swordfoley");
         }
 
         private void CharacterBody_OnJump()
@@ -156,7 +158,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             {
                 this.hasFired = true;
 
-                Util.PlaySound("PaladinHeavySwing", this.gameObject);
+                this.PlaySound("sfx_mh_swing");
                 if (this.characterMotor)
                 {
                     this.characterMotor.Motor.ForceUnground();
@@ -260,7 +262,10 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             if (this.stopwatch >= this.earlyExitDuration)
                 return InterruptPriority.Any;
 
-            return InterruptPriority.Pain;
+            if (this.hasHopped)
+                return InterruptPriority.Skill;
+
+            return InterruptPriority.PrioritySkill;
         }
 
         public void SetStep(int i)

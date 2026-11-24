@@ -213,6 +213,15 @@ ModelImporter:
   - first:
       74: -3341685027351213494
     second: Armature|Combo2Air
+  - first:
+      74: 9115115818954613908
+    second: Armature|RunB
+  - first:
+      74: -8651651518101165635
+    second: Armature|RunL
+  - first:
+      74: -7304068189903988303
+    second: Armature|RunR
   externalObjects: {}
   materials:
     materialImportMode: 1

@@ -31,7 +31,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                 scale = 1f
             }, false);
 
-            Util.PlaySound("sfx_mh_impact_ground", this.gameObject);
+            this.PlaySound("sfx_mh_impact_ground");
         }
 
         public override void OnExit()

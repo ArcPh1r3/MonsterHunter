@@ -96,7 +96,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             if (!this.hasFired)
             {
                 this.hasFired = true;
-                Util.PlaySound("PaladinHeavySwing", this.gameObject);
+                this.PlaySound("sfx_mh_swing");
 
                 if (base.isAuthority)
                 {

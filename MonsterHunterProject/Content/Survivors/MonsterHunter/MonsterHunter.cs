@@ -32,7 +32,7 @@ namespace MonsterHunter.Content.Survivors
         //internal static ConfigEntry<bool> forceUnlock;
         //internal static ConfigEntry<bool> characterEnabled;
 
-        public static Color characterColor = new Color(183f / 255f, 0f, 39f / 255f);
+        public static Color characterColor = new Color(214f / 255f, 78f / 255f, 70f / 255f);
 
         public const string bodyName = "RobMonsterHunterBody";
 
@@ -292,15 +292,15 @@ namespace MonsterHunter.Content.Survivors
             trail._material = trailMat;
             //dante.flameTrailMat = trailMat;
 
-            //SfxLocator sfx = newPrefab.GetComponent<SfxLocator>();
+            SfxLocator sfx = newPrefab.GetComponent<SfxLocator>();
             //sfx.barkSound = "";
-            //sfx.landingSound = "";
+            sfx.landingSound = "sfx_mh_landing";
             //sfx.deathSound = "";
             //sfx.fallDamageSound = "";
 
-            //FootstepHandler footstep = newPrefab.GetComponentInChildren<FootstepHandler>();
+            FootstepHandler footstep = newPrefab.GetComponentInChildren<FootstepHandler>();
             //footstep.footstepDustPrefab = Resources.Load<GameObject>("Prefabs/GenericHugeFootstepDust");
-            //footstep.baseFootstepString = "Play_moonBrother_step";
+            footstep.baseFootstepString = "sfx_mh_step";
             //footstep.sprintFootstepOverrideString = "Play_moonBrother_sprint";
 
             CharacterMotor characterMotor = newPrefab.GetComponent<CharacterMotor>();
@@ -336,9 +336,11 @@ namespace MonsterHunter.Content.Survivors
             // schizophrenia
             newPrefab.GetComponent<CharacterDeathBehavior>().deathState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.FuckMyAss));
 
-            newPrefab.AddComponent<Content.Components.MonsterHunterTracker>();
-            //newPrefab.AddComponent<Content.Components.EnemyStepController>();
-            newPrefab.AddComponent<Content.Components.MomentumController>();
+            
+
+            //newPrefab.AddComponent<Content.Components.MonsterHunterTracker>(); // for targeted skills. i don't think we'll be doing any of those
+            //newPrefab.AddComponent<Content.Components.EnemyStepController>(); // for enemy step. leftover from dante
+            //newPrefab.AddComponent<Content.Components.MomentumController>(); // for sliding anim. possibly?
             #endregion
 
             #region Model

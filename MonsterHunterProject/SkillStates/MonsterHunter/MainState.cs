@@ -169,6 +169,12 @@ namespace MonsterHunter.SkillStates.MonsterHunter
             base.ProcessJump();
         }
 
+        public override bool TryPerformJump(float horizontalBonus, float verticalBonus)
+        {
+			Util.PlaySound("sfx_mh_jump", this.gameObject);
+            return base.TryPerformJump(horizontalBonus, verticalBonus);
+        }
+
 		private bool HasItem(ItemDef itemDef)
         {
 			if (this.characterBody && this.characterBody.inventory)

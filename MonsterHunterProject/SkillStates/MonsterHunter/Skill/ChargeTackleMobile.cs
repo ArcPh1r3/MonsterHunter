@@ -15,6 +15,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
         private float stopwatch;
         private bool charged;
         private GameObject chargeEffectInstance;
+        private uint playID;
 
         public override void OnEnter()
         {
@@ -24,6 +25,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
 
             this.PlaySound("sfx_mh_tackle_charge");
             this.PlaySound("sfx_mh_tackle_charge_foley");
+            this.playID = this.PlaySound("sfx_mh_tackle_loop");
 
             if (NetworkServer.active) this.characterBody.AddBuff(RoR2Content.Buffs.ArmorBoost);
 
@@ -36,7 +38,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
 
             this.monsterHunter.SetZoom(1.5f, this.duration);
             // add temporaryoverlay
-            if (this.modelLocator && this.modelLocator.modelTransform)
+            /*if (this.modelLocator && this.modelLocator.modelTransform)
             {
                 TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(this.modelLocator.modelTransform.gameObject);
                 temporaryOverlay.duration = this.duration;
@@ -45,7 +47,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
                 temporaryOverlay.inspectorCharacterModel = this.modelLocator.modelTransform.GetComponent<CharacterModel>();
                 temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
                 temporaryOverlay.animateShaderAlpha = true;
-            }
+            }*/
         }
 
         public override void OnExit()
@@ -55,6 +57,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
             this.characterMotor.mass *= 0.01f;
             if (NetworkServer.active) this.characterBody.RemoveBuff(RoR2Content.Buffs.ArmorBoost);
             if (this.chargeEffectInstance) Destroy(this.chargeEffectInstance);
+            AkSoundEngine.StopPlayingID(this.playID);
         }
 
         public override void FixedUpdate()
@@ -72,7 +75,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
             {
                 this.charged = true;
 
-                this.PlaySound("sfx_mh_tackle_charge_max");
+                this.PlaySound("sfx_mh_charge_max");
 
                 // add temporaryoverlay
                 if (this.modelLocator && this.modelLocator.modelTransform)

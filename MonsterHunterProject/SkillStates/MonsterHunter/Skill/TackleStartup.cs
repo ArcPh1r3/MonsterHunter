@@ -19,6 +19,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
             this.duration = Util.Remap(this.charge, 0f, 1f, 0.15f, 0.4f);
             base.PlayAnimation("FullBody, Override", "ChargeTackle", "Action.playbackRate", this.duration, 0.1f);
             this.characterMotor.velocity *= 0f;
+            this.PlaySound("sfx_mh_tackle_charge_max");
 
             // add temporaryoverlay
             if (this.modelLocator && this.modelLocator.modelTransform)

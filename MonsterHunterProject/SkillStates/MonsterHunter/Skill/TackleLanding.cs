@@ -37,7 +37,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
                 scale = 3f
             }, false);
 
-            Util.PlaySound("sfx_mh_impact_ground", this.gameObject);
+            this.PlaySound("sfx_mh_impact_ground");
+            this.PlaySound("sfx_mh_impact_blast");
 
             // add temporaryoverlay
             if (this.modelLocator && this.modelLocator.modelTransform)

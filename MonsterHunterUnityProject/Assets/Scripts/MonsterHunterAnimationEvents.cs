@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace DanteMod.Content.Components
+namespace MonsterHunter.Content.Components
 {
-    public class DanteAnimationEvents : MonoBehaviour
+    public class MonsterHunterAnimationEvents : MonoBehaviour
     {
         public void PlaySound(string soundString)
         {

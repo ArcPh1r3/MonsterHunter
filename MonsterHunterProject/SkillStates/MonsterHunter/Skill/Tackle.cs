@@ -21,6 +21,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
         private Vector3 slipVector;
         private OverlapAttack attack;
         private float previousAirControl;
+        private uint playID;
 
         public override void OnEnter()
         {
@@ -29,6 +30,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
             this.speed = Util.Remap(this.charge, 0f, 1f, this.minSpeed, this.maxSpeed);
 
             this.PlaySound("sfx_mh_tackle");
+            this.playID = this.PlaySound("sfx_mh_ignite_loop");
             base.PlayAnimation("FullBody, Override", "Tackle", "Action.playbackRate", this.duration);
 
             this.previousAirControl = base.characterMotor.airControl;
@@ -104,6 +106,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
             base.characterBody.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
             base.characterMotor.airControl = this.previousAirControl;
             this.monsterHunter.tackleEffect.SetActive(false);
+            AkSoundEngine.StopPlayingID(this.playID);
         }
 
         public override void FixedUpdate()
@@ -120,6 +123,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
                 if (this.attack.Fire())
                 {
                     // add temporaryoverlay
+                    this.PlaySound("sfx_mh_impact_blast");
                     if (this.modelLocator && this.modelLocator.modelTransform)
                     {
                         TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(this.modelLocator.modelTransform.gameObject);
