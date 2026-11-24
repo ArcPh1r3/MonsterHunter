@@ -67,7 +67,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
                 if (this.modelLocator && this.modelLocator.modelTransform)
                 {
                     TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(this.modelLocator.modelTransform.gameObject);
-                    temporaryOverlay.duration = 0.5f;
+                    temporaryOverlay.duration = 1f;
                     temporaryOverlay.destroyComponentOnEnd = true;
                     temporaryOverlay.originalMaterial = Addressables.LoadAssetAsync<Material>("RoR2/DLC2/Chef/matYesChefOverlay.mat").WaitForCompletion();
                     temporaryOverlay.inspectorCharacterModel = this.modelLocator.modelTransform.GetComponent<CharacterModel>();

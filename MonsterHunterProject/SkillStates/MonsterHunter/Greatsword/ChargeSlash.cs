@@ -43,11 +43,6 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                 else base.PlayAnimation("FullBody, Override", "ChargeAir", "Action.playbackRate", this.duration);
                 this.characterMotor.velocity *= 0.25f;
                 this.characterMotor.velocity.y = 3f;
-                if (this.isBoosted)
-                {
-                    this.characterMotor.velocity.y = 8f;
-                    this.cap = 8f;
-                }
                 this.airSlash = true;
                 this.duration = 0.36f;
             }

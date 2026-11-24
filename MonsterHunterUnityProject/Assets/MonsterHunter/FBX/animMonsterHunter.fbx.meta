@@ -201,6 +201,18 @@ ModelImporter:
   - first:
       74: -3097013815288819039
     second: Armature|ChargeAirBoosted.001
+  - first:
+      74: 3988511826699276324
+    second: Armature|Combo1Air.001
+  - first:
+      74: -5507441209041282615
+    second: Armature|Combo1.002
+  - first:
+      74: -8321918985900472307
+    second: Armature|Combo2
+  - first:
+      74: -3341685027351213494
+    second: Armature|Combo2Air
   externalObjects: {}
   materials:
     materialImportMode: 1

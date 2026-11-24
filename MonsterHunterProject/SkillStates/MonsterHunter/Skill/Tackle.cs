@@ -13,8 +13,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
 
         public float maxSpeed = 7f;
         public float minSpeed = 3f;
-        public float minDamage = 1f;
-        public float maxDamage = 2.8f;
+        public float minDamage = 0.5f;
+        public float maxDamage = 2f;
 
         private float speed;
         private float duration = 0.35f;
@@ -53,7 +53,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
             this.attack.teamIndex = base.GetTeam();
             this.attack.damage = Util.Remap(this.charge, 0f, 1f, this.minDamage, this.maxDamage) * this.damageStat;
             this.attack.procCoefficient = 1;
-            this.attack.hitEffectPrefab = Modules.MonsterHunterAssets.kickImpactEffect;
+            this.attack.hitEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/VFX/OmniExplosionVFX.prefab").WaitForCompletion();
             this.attack.forceVector = Vector3.up * -800f;
             this.attack.pushAwayForce = 500f;
             this.attack.hitBoxGroup = hitBoxGroup;
@@ -67,13 +67,15 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
             EffectManager.SpawnEffect(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/LunarGolem/MuzzleflashLunarGolemTwinShot.prefab").WaitForCompletion(), new EffectData
             {
                 origin = base.characterBody.corePosition,
-                rotation = Util.QuaternionSafeLookRotation(this.slipVector)
+                rotation = Util.QuaternionSafeLookRotation(this.slipVector),
+                scale = 3f
             }, false);
 
             EffectManager.SpawnEffect(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/VFX/OmniExplosionVFX.prefab").WaitForCompletion(), new EffectData
             {
                 origin = base.characterBody.corePosition,
-                rotation = Util.QuaternionSafeLookRotation(this.slipVector)
+                rotation = Util.QuaternionSafeLookRotation(this.slipVector),
+                scale = 3f
             }, false);
 
             EffectManager.SpawnEffect(Modules.MonsterHunterAssets.tackleEffect, new EffectData
@@ -117,6 +119,22 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Skill
             {
                 if (this.attack.Fire())
                 {
+                    // add temporaryoverlay
+                    if (this.modelLocator && this.modelLocator.modelTransform)
+                    {
+                        TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(this.modelLocator.modelTransform.gameObject);
+                        temporaryOverlay.duration = 1f;
+                        temporaryOverlay.destroyComponentOnEnd = true;
+                        temporaryOverlay.originalMaterial = Addressables.LoadAssetAsync<Material>("RoR2/DLC2/Chef/matYesChefOverlay.mat").WaitForCompletion();
+                        temporaryOverlay.inspectorCharacterModel = this.modelLocator.modelTransform.GetComponent<CharacterModel>();
+                        temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 15f, 1f, 0f);
+                        temporaryOverlay.animateShaderAlpha = true;
+                    }
+                    EffectManager.SpawnEffect(Addressables.LoadAssetAsync<GameObject>("RoR2/DLC2/Scorchling/VFXScorchlingBreachExplosion.prefab").WaitForCompletion(), new EffectData
+                    {
+                        origin = this.characterBody.corePosition,
+                        scale = 8f
+                    }, true);
                     this.monsterHunter.boostTimer = 3f;
                     this.characterMotor.Motor.ForceUnground();
                     this.characterMotor.velocity = (Vector3.up * 25f) + (this.slipVector * -5f);

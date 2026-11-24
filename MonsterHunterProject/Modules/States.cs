@@ -23,6 +23,12 @@ namespace MonsterHunter.Modules
             entityStates.Add(typeof(SkillStates.MonsterHunter.BaseMonsterHunterSkillState));
             entityStates.Add(typeof(SkillStates.MonsterHunter.MainState));
 
+            entityStates.Add(typeof(SkillStates.MonsterHunter.Skill.ChargeTackle));
+            entityStates.Add(typeof(SkillStates.MonsterHunter.Skill.ChargeTackleMobile));
+            entityStates.Add(typeof(SkillStates.MonsterHunter.Skill.TackleStartup));
+            entityStates.Add(typeof(SkillStates.MonsterHunter.Skill.Tackle));
+            entityStates.Add(typeof(SkillStates.MonsterHunter.Skill.TackleLanding));
+
             entityStates.Add(typeof(SkillStates.MonsterHunter.Greatsword.Combo));
             entityStates.Add(typeof(SkillStates.MonsterHunter.Greatsword.ChargeSlash));
             entityStates.Add(typeof(SkillStates.MonsterHunter.Greatsword.AirSlash));
@@ -30,6 +36,7 @@ namespace MonsterHunter.Modules
             entityStates.Add(typeof(SkillStates.MonsterHunter.Greatsword.SlashStartup));
             entityStates.Add(typeof(SkillStates.MonsterHunter.Greatsword.SlashEnd));
             entityStates.Add(typeof(SkillStates.MonsterHunter.Greatsword.LeapSlash));
+            entityStates.Add(typeof(SkillStates.MonsterHunter.Greatsword.Quickstep));
         }
 
         internal static void AddSkill(Type t)

@@ -8,7 +8,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 {
     public class SlashStartup : BaseMonsterHunterSkillState
     {
-        public static float damageCoefficient = 6f;
+        public static float damageCoefficient = 7f;
 
         protected override bool normalizeModel => true;
 

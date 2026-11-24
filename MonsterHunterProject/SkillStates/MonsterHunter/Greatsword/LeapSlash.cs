@@ -10,7 +10,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 {
     public class LeapSlash : BaseMonsterHunterSkillState
     {
-        public static float damageCoefficient = 8f;
+        public static float damageCoefficient = 7f;
         public static float leapDuration = 0.6f;
         public static float dropVelocity = 18f;
 
@@ -46,8 +46,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 
                 direction.y = Mathf.Max(direction.y, 1.5f * EntityStates.Croco.Leap.minimumY);
                 Vector3 a = direction.normalized * (0.9f * EntityStates.Croco.Leap.aimVelocity) * this.moveSpeedStat;
-                Vector3 b = Vector3.up * 0.95f * EntityStates.Croco.Leap.upwardVelocity;
-                Vector3 b2 = new Vector3(direction.x, 0f, direction.z).normalized * (1.25f * EntityStates.Croco.Leap.forwardVelocity);
+                Vector3 b = Vector3.up * 1.2f * EntityStates.Croco.Leap.upwardVelocity;
+                Vector3 b2 = new Vector3(direction.x, 0f, direction.z).normalized * (1.75f * EntityStates.Croco.Leap.forwardVelocity);
 
                 base.characterMotor.Motor.ForceUnground();
                 base.characterMotor.velocity = a + b + b2;

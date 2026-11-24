@@ -10,7 +10,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 {
     public class AirSlash : BaseMonsterHunterSkillState
     {
-        public static float damageCoefficient = 6f;
+        public static float damageCoefficient = 3.5f;
         public static float leapDuration = 0.6f;
         public static float dropVelocity = 18f;
 
@@ -56,6 +56,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             else base.PlayAnimation("FullBody, Override", "AirSlash", "Action.playbackRate", 0.25f);
             //Util.PlaySound(Modules.Sounds.Lunge, base.gameObject);
             //Util.PlaySound(Modules.Sounds.Cloth2, base.gameObject);
+            if (this.isBoosted) this.charge++;
 
             float dmg = AirSlash.damageCoefficient;
 
@@ -73,8 +74,6 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.attack.hitBoxGroup = hitBoxGroup;
             this.attack.isCrit = base.RollCrit();
             this.attack.impactSound = Modules.MonsterHunterAssets.swordImpactSoundEvent.index;
-
-            if (this.isBoosted) this.attack.damage *= 1.5f;
 
             if (this.charge >= 1)
             {

@@ -86,6 +86,7 @@ namespace MonsterHunter.Content.Survivors
         //internal static SkillDef cancelSkillDef;
         //internal static SkillDef lockOnSkillDef;
         //internal static SkillDef trickSkillDef;
+        internal static SkillDef chargeSlashSkillDef;
 
         // scepter
         //public static SkillDef holyWaterScepterSkillDef;
@@ -530,11 +531,11 @@ namespace MonsterHunter.Content.Survivors
             #endregion
 
             #region Secondary
-            SkillDef chargeSlashSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            chargeSlashSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {   
                 skillName = "MonsterHunterChargeSlash",
-                skillNameToken = "ROB_DANTE_BODY_MELEE_NAME",
-                skillDescriptionToken = "ROB_DANTE_BODY_MELEE_DESCRIPTION",
+                skillNameToken = "ROB_MONSTERHUNTER_BODY_SECONDARY_NAME",
+                skillDescriptionToken = "ROB_MONSTERHUNTER_BODY_SECONDARY_DESCRIPTION",
                 icon = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Sprite>("texWIPIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MonsterHunter.Greatsword.ChargeSlash)),
                 activationStateMachineName = "Weapon",
@@ -555,7 +556,7 @@ namespace MonsterHunter.Content.Survivors
                 keywordTokens = new string[0]
             });
 
-            chargeSlashSkillDef.autoHandleLuminousShot = true;
+            chargeSlashSkillDef.autoHandleLuminousShot = false;
             chargeSlashSkillDef.attackSpeedBuffsRestockSpeed = true;
 
             Modules.Skills.AddSecondarySkills(prefab, chargeSlashSkillDef);
@@ -595,12 +596,12 @@ namespace MonsterHunter.Content.Survivors
             #region Special
             SkillDef devilTriggerSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "DanteDevilTrigger",
-                skillNameToken = "ROB_DANTE_BODY_SPECIAL_DEVILTRIGGER_NAME",
-                skillDescriptionToken = "ROB_DANTE_BODY_SPECIAL_DEVILTRIGGER_DESCRIPTION",
+                skillName = "MonsterHunterSpecial",
+                skillNameToken = "ROB_MONSTERHUNTER_BODY_SPECIAL_NAME",
+                skillDescriptionToken = "ROB_MONSTERHUNTER_BODY_SPECIAL_DESCRIPTION",
                 icon = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Sprite>("texWIPIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MonsterHunter.MainState)),
-                activationStateMachineName = "Weapon",
+                activationStateMachineName = "fart",
                 baseMaxStock = 1,
                 baseRechargeInterval = 0.5f,
                 beginSkillCooldownOnSkillEnd = true,
@@ -615,10 +616,7 @@ namespace MonsterHunter.Content.Survivors
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                keywordTokens = new string[]
-                {
-                    "KEYWORD_HELLBENT"
-                }
+                keywordTokens = new string[0]
             });
 
             Modules.Skills.AddSpecialSkills(prefab, devilTriggerSkillDef);

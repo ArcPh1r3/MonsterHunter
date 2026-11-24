@@ -3,7 +3,7 @@ using RoR2;
 using EntityStates;
 using UnityEngine.AddressableAssets;
 
-namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
+namespace MonsterHunter.SkillStates.MonsterHunter.Skill
 {
     public class TackleLanding : BaseMonsterHunterSkillState
     {
@@ -27,11 +27,29 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 
             EffectManager.SpawnEffect(Modules.MonsterHunterAssets.groundPunchHeavyEffectPrefab, new EffectData
             {
-                origin = this.characterBody.footPosition + (this.characterDirection.forward * 0.5f),
+                origin = this.characterBody.footPosition + (this.characterDirection.forward * 0.75f),
                 scale = 1f
             }, false);
 
+            EffectManager.SpawnEffect(Addressables.LoadAssetAsync<GameObject>("RoR2/DLC2/Scorchling/VFXScorchlingBreachExplosion.prefab").WaitForCompletion(), new EffectData
+            {
+                origin = this.characterBody.footPosition,
+                scale = 3f
+            }, false);
+
             Util.PlaySound("sfx_mh_impact_ground", this.gameObject);
+
+            // add temporaryoverlay
+            if (this.modelLocator && this.modelLocator.modelTransform)
+            {
+                TemporaryOverlayInstance temporaryOverlay = TemporaryOverlayManager.AddOverlay(this.modelLocator.modelTransform.gameObject);
+                temporaryOverlay.duration = 1f;
+                temporaryOverlay.destroyComponentOnEnd = true;
+                temporaryOverlay.originalMaterial = Addressables.LoadAssetAsync<Material>("RoR2/DLC2/Chef/matYesChefOverlay.mat").WaitForCompletion();
+                temporaryOverlay.inspectorCharacterModel = this.modelLocator.modelTransform.GetComponent<CharacterModel>();
+                temporaryOverlay.alphaCurve = AnimationCurve.EaseInOut(0f, 5f, 1f, 0f);
+                temporaryOverlay.animateShaderAlpha = true;
+            }
         }
 
         public override void OnExit()

@@ -130,6 +130,7 @@ namespace MonsterHunter.Content.MonsterParts
         }
 
         // would be nice to only update as needed but this is also what vanilla does even for lunar coins :')
+        //  feels wrong but no real downside to doing it constantly so whatever right
         public void FixedUpdate()
         {
             if (profile != null && moneyText != null)

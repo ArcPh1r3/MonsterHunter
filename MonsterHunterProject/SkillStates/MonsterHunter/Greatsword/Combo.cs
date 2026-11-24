@@ -11,13 +11,13 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 {
     public class Combo : BaseMonsterHunterSkillState, SteppedSkillDef.IStepSetter
     {
-        public static float damageCoefficient = 4.44f;
+        public static float damageCoefficient = 3.4f;
         public float baseDuration = 1.2f;
         public static float attackRecoil = 3f;
         public static float hitHopVelocity = 6f;
-        private const float attackStartTime = 0.384f;
+        private const float attackStartTime = 0.34f;
         private const float attackEndTime = 0.5f;
-        public static float earlyExitTime = 0.67f;
+        public static float earlyExitTime = 0.75f;
         public int swingIndex;
 
         private bool inCombo;
@@ -67,9 +67,9 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             //Util.PlaySound(Modules.Sounds.Cloth1, base.gameObject);
 
             //Slash1 is first swing, Slash2 is second swing
-            string animString = "Combo1";//"Slash" + (1 + swingIndex).ToString();
+            string animString = "Combo" + (1 + swingIndex);//"Slash" + (1 + swingIndex).ToString();
             //SlashCombo1 is Slash1 but coming off Slash2
-            base.PlayCrossfade("FullBody, Override", animString, "Action.playbackRate", this.duration, 0.05f * duration);
+            base.PlayCrossfade("FullBody, Override", animString, "Action.playbackRate", this.duration, 0.1f);
 
             float dmg = Combo.damageCoefficient;
 
@@ -101,7 +101,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
         {
             base.OnExit();
 
-            if (!this.hasFired) this.FireAttack();
+            //if (!this.hasFired) this.FireAttack();
 
             if (this.inHitPause)
             {
@@ -160,8 +160,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                 if (this.characterMotor)
                 {
                     this.characterMotor.Motor.ForceUnground();
-                    this.characterMotor.velocity = (this.inputBank.moveVector * 10f) + (this.characterDirection.forward * 4f);
-                    this.characterMotor.velocity.y = 6f;
+                    this.characterMotor.velocity = (this.inputBank.moveVector * 16f) + (this.characterDirection.forward * 6f);
+                    this.characterMotor.velocity.y = 8f;
                 }
 
                 if (base.isAuthority)
@@ -199,7 +199,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 
             if (!this.hasFired) this.characterMotor.moveDirection *= 0.2f;
 
-            if (this.characterMotor.velocity.y < 0f && !this.hasFired) this.characterMotor.velocity.y *= 0.9f;
+            if (this.characterMotor.velocity.y < 0f && !this.hasFired) this.characterMotor.velocity.y *= 0.95f;
 
             if (this.hitPauseTimer <= 0f && this.inHitPause)
             {
@@ -260,7 +260,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             if (this.stopwatch >= this.earlyExitDuration)
                 return InterruptPriority.Any;
 
-            return InterruptPriority.Skill;
+            return InterruptPriority.Pain;
         }
 
         public void SetStep(int i)
