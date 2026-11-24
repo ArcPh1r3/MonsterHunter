@@ -202,7 +202,7 @@ namespace MonsterHunter.Content.Survivors
             #region Body
             GameObject newPrefab = Modules.Prefabs.CreatePrefab(bodyName, "mdlMonsterHunter", new BodyInfo
             {
-                armor = 30f,
+                armor = 20f,
                 armorGrowth = 0f,
                 bodyName = "RobMonsterHunterBody",
                 bodyNameToken = bodyNameToken,
@@ -210,7 +210,7 @@ namespace MonsterHunter.Content.Survivors
                 characterPortrait = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Texture>("texMonsterHunterIcon"),
                 crosshair = Modules.MonsterHunterAssets.crosshairPrefab,
                 damage = 12f,
-                healthGrowth = 64f,
+                healthGrowth = 54f,
                 healthRegen = 1f,
                 jumpCount = 1,
                 maxHealth = 180f,
@@ -466,7 +466,7 @@ namespace MonsterHunter.Content.Survivors
 
             SkillLocator skillLocator = prefab.GetComponent<SkillLocator>();
 
-            skillLocator.passiveSkill.enabled = true;
+            skillLocator.passiveSkill.enabled = false;
             skillLocator.passiveSkill.skillNameToken = "ROB_MONSTERHUNTER_BODY_PASSIVE_NAME";
             skillLocator.passiveSkill.skillDescriptionToken = "ROB_MONSTERHUNTER_BODY_PASSIVE_DESCRIPTION";
             skillLocator.passiveSkill.icon = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Sprite>("texPassiveIcon");
@@ -542,7 +542,7 @@ namespace MonsterHunter.Content.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MonsterHunter.Greatsword.ChargeSlash)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 3,
-                baseRechargeInterval = 3f,
+                baseRechargeInterval = 5f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -555,7 +555,10 @@ namespace MonsterHunter.Content.Survivors
                 rechargeStock = 3,
                 requiredStock = 1,
                 stockToConsume = 0,
-                keywordTokens = new string[0]
+                keywordTokens = new string[]
+                {
+                    "KEYWORD_MIGHTY"
+                }
             });
 
             chargeSlashSkillDef.autoHandleLuminousShot = false;
@@ -582,7 +585,7 @@ namespace MonsterHunter.Content.Survivors
                     interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                     resetCooldownTimerOnUse = true,
                     isCombatSkill = true,
-                    mustKeyPress = true,
+                    mustKeyPress = false,
                     cancelSprintingOnActivation = true,
                     rechargeStock = 1,
                     requiredStock = 1,
@@ -596,32 +599,32 @@ namespace MonsterHunter.Content.Survivors
             #endregion
 
             #region Special
-            SkillDef devilTriggerSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef moonbreakerSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = "MonsterHunterSpecial",
-                skillNameToken = "ROB_MONSTERHUNTER_BODY_SPECIAL_NAME",
-                skillDescriptionToken = "ROB_MONSTERHUNTER_BODY_SPECIAL_DESCRIPTION",
+                skillName = "MonsterHunterMoonbreaker",
+                skillNameToken = "ROB_MONSTERHUNTER_BODY_MOONBREAKER_NAME",
+                skillDescriptionToken = "ROB_MONSTERHUNTER_BODY_MOONBREAKER_DESCRIPTION",
                 icon = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<Sprite>("texWIPIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MonsterHunter.MainState)),
-                activationStateMachineName = "fart",
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.MonsterHunter.HunterArts.Moonbreaker)),
+                activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 0.5f,
-                beginSkillCooldownOnSkillEnd = true,
+                baseRechargeInterval = 8f,
+                beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
-                forceSprintDuringState = false,
+                forceSprintDuringState = true,
                 fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.Frozen,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = true,
                 isCombatSkill = true,
-                mustKeyPress = true,
-                cancelSprintingOnActivation = false,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = true,
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
                 keywordTokens = new string[0]
             });
 
-            Modules.Skills.AddSpecialSkills(prefab, devilTriggerSkillDef);
+            Modules.Skills.AddSpecialSkills(prefab, moonbreakerSkillDef);
 
             //Modules.Skills.AddUnlockablesToFamily(skillLocator.special.skillFamily, null, crossUnlockableDef, pistolUnlockableDef);
             #endregion

@@ -87,6 +87,8 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.attack.isCrit = base.RollCrit();
             this.attack.impactSound = Modules.MonsterHunterAssets.swordImpactSoundEvent.index;
 
+            if (this.attack.isCrit) this.attack.hitEffectPrefab = Modules.MonsterHunterAssets.critImpactEffect;
+
             this.PlaySound("sfx_mh_swordfoley");
         }
 
@@ -168,19 +170,21 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
 
                 if (base.isAuthority)
                 {
-                    string muzzleString = null;
-                    if (this.swingIndex == 0) muzzleString = "Swing1Muzzle";
-                    else muzzleString = "Swing2Muzzle";
-
                     base.AddRecoil(-1f * Combo.attackRecoil, -2f * Combo.attackRecoil, -0.5f * Combo.attackRecoil, 0.5f * Combo.attackRecoil);
+                }
 
-                    Transform muzzleTransform = this.FindModelChild(muzzleString);
-                    if (muzzleTransform)
-                    {
-                        this.swingEffectInstance = UnityEngine.Object.Instantiate<GameObject>(Modules.MonsterHunterAssets.swingEffect, muzzleTransform);
-                        ScaleParticleSystemDuration fuck = this.swingEffectInstance.GetComponent<ScaleParticleSystemDuration>();
-                        if (fuck) fuck.newDuration = fuck.initialDuration;
-                    }
+                GameObject fx = Modules.MonsterHunterAssets.swingEffect;
+                if (this.attack.isCrit) fx = Modules.MonsterHunterAssets.critSwingEffect;
+                string muzzleString = null;
+                if (this.swingIndex == 0) muzzleString = "Swing1Muzzle";
+                else muzzleString = "Swing2Muzzle";
+
+                Transform muzzleTransform = this.FindModelChild(muzzleString);
+                if (muzzleTransform)
+                {
+                    this.swingEffectInstance = UnityEngine.Object.Instantiate<GameObject>(fx, muzzleTransform);
+                    ScaleParticleSystemDuration fuck = this.swingEffectInstance.GetComponent<ScaleParticleSystemDuration>();
+                    if (fuck) fuck.newDuration = fuck.initialDuration;
                 }
             }
 

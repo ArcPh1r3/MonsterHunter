@@ -37,6 +37,8 @@ namespace MonsterHunter.Modules
             entityStates.Add(typeof(SkillStates.MonsterHunter.Greatsword.SlashEnd));
             entityStates.Add(typeof(SkillStates.MonsterHunter.Greatsword.LeapSlash));
             entityStates.Add(typeof(SkillStates.MonsterHunter.Greatsword.Quickstep));
+
+            entityStates.Add(typeof(SkillStates.MonsterHunter.HunterArts.Moonbreaker));
         }
 
         internal static void AddSkill(Type t)

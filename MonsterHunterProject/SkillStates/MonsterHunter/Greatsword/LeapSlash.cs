@@ -94,11 +94,25 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             this.attack.isCrit = base.RollCrit();
             this.attack.impactSound = Modules.MonsterHunterAssets.swordImpactSoundEvent.index;
 
+            if (this.attack.isCrit) this.attack.hitEffectPrefab = Modules.MonsterHunterAssets.critImpactEffect;
+
             if (this.charge >= 1)
             {
                 this.attack.hitEffectPrefab = Modules.MonsterHunterAssets.finisherImpactEffect;
                 this.attack.damageType = DamageTypeCombo.GenericSecondary | DamageType.Stun1s;
             }
+
+            // for every 1% of basemaxhealth in bonus health, add 1% to the damage
+            float baseHealth = this.characterBody.baseMaxHealth + (this.characterBody.levelMaxHealth * this.characterBody.level);
+            float bonusHealth = this.healthComponent.fullCombinedHealth - baseHealth;
+            float bonusHealthMultiplier = 1f;
+            if (baseHealth > 0f && bonusHealth > 0f)
+            {
+                bonusHealthMultiplier += (bonusHealth / baseHealth);
+            }
+
+            //Chat.AddMessage("health multiplier " + bonusHealthMultiplier);
+            this.attack.damage *= bonusHealthMultiplier;
 
             this.PlaySound("sfx_mh_dash");
         }

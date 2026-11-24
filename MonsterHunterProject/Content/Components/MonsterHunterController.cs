@@ -15,6 +15,7 @@ namespace MonsterHunter.Content.Components
     {
         public float fallSpeedModifier = 1.1665f;
         public float slashMovementModifier = 3f;
+        public float leapSpeed = 25f;
         public float boostTimer = 0f;
         private float zoom;
         private float targetZoom;

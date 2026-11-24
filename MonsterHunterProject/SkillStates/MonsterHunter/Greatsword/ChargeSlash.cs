@@ -81,7 +81,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
             if (this.isGrounded) this.characterMotor.moveDirection *= 0f;
             else this.characterMotor.moveDirection *= 0.75f;
 
-            if (!this.airSlash && base.isAuthority)
+            /*if (!this.airSlash && base.isAuthority)
             {
                 if (this.inputBank.jump.justPressed && base.fixedAge >= 0.5f)
                 {
@@ -91,7 +91,7 @@ namespace MonsterHunter.SkillStates.MonsterHunter.Greatsword
                     });
                     return;
                 }
-            }
+            }*/
 
             if (this.characterMotor.velocity.y > 0f && this.airSlash) this.characterMotor.velocity.y *= this.monsterHunter.fallSpeedModifier;
 

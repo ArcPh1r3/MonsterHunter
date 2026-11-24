@@ -34,6 +34,7 @@ namespace MonsterHunter.Modules
         internal static GameObject kickSwingEffect;
 
         internal static GameObject slashImpactEffect;
+        internal static GameObject critImpactEffect;
         internal static GameObject redSlashImpactEffect;
         internal static GameObject finisherImpactEffect;
         internal static GameObject kickImpactEffect;
@@ -69,7 +70,7 @@ namespace MonsterHunter.Modules
 
             //
 
-            swingEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/MercSwordSlash.prefab").WaitForCompletion().InstantiateClone("RobDanteBladeSwing", false);
+            swingEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/MercSwordSlash.prefab").WaitForCompletion().InstantiateClone("RobMonsterHunterSwing", false);
 
             Material swingMat = Material.Instantiate(Addressables.LoadAssetAsync<Material>("RoR2/Base/Huntress/matHuntressSwingTrail.mat").WaitForCompletion());
             swingMat.SetTexture("_RemapTex", Addressables.LoadAssetAsync<Texture>("RoR2/Base/Common/ColorRamps/texRampMagmaWorm.png").WaitForCompletion());
@@ -81,7 +82,7 @@ namespace MonsterHunter.Modules
 
             //
 
-            critSwingEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/MercSwordSlash.prefab").WaitForCompletion().InstantiateClone("RobDanteBladeSwingCrit", false);
+            critSwingEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/MercSwordSlash.prefab").WaitForCompletion().InstantiateClone("RobMonsterHunterSwingCrit", false);
 
             Material critSwingMat = Material.Instantiate(Addressables.LoadAssetAsync<Material>("RoR2/Base/Huntress/matHuntressSwingTrail.mat").WaitForCompletion());
             critSwingMat.SetTexture("_RemapTex", Addressables.LoadAssetAsync<Texture>("RoR2/Base/Common/ColorRamps/texRampGolem.png").WaitForCompletion());
@@ -89,6 +90,7 @@ namespace MonsterHunter.Modules
             critSwingMat.SetFloat("_AlphaBoost", 3f);
 
             critSwingEffect.transform.GetChild(0).GetComponent<ParticleSystemRenderer>().material = critSwingMat;
+            critSwingEffect.transform.GetChild(0).localScale = new Vector3(1.5f, 1.5f, 3f);
 
             //
 
@@ -158,6 +160,58 @@ namespace MonsterHunter.Modules
 
             //
 
+            critImpactEffect = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/VFX/OmniImpactVFXSlash.prefab").WaitForCompletion(), "RobMonsterHunterCritImpactVFX", false);
+
+            critImpactEffect.transform.Find("Flash, Hard").localScale = Vector3.one * 4f;
+            critImpactEffect.transform.Find("Scaled Hitspark 3, Radial (Random Color)").localScale = Vector3.one * 3f;
+            critImpactEffect.transform.Find("Scaled Hitspark 2 (Random Color)").localScale = Vector3.one * 2f;
+            critImpactEffect.transform.Find("Flash, Hard").localScale = Vector3.one * 4f;
+            critImpactEffect.GetComponent<OmniEffect>().enabled = false;
+
+            critImpactEffect.transform.Find("Dash, Bright").localScale = new Vector3(7f, 7f, 7f);
+            critImpactEffect.transform.Find("Dash, Bright").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matBloodHumanLarge.mat").WaitForCompletion();
+            critImpactEffect.transform.Find("ScaledSmokeRing, Mesh").localScale = new Vector3(8f, 8f, 8f);
+            critImpactEffect.transform.Find("ScaledSmokeRing, Mesh").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matBloodHumanLarge.mat").WaitForCompletion();
+            critImpactEffect.transform.Find("Impact Slash").localScale = new Vector3(6f, 6f, 6f);
+            critImpactEffect.transform.Find("Impact Slash").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matBloodHumanLarge.mat").WaitForCompletion();
+
+            critImpactEffect.transform.Find("Scaled Hitspark 3, Radial (Random Color)").gameObject.SetActive(true);
+            critImpactEffect.transform.Find("Flash, Hard").gameObject.SetActive(true);
+            critImpactEffect.transform.Find("Dash, Bright").gameObject.SetActive(true);
+            critImpactEffect.transform.Find("ScaledSmokeRing, Mesh").gameObject.SetActive(true);
+            critImpactEffect.transform.Find("Impact Slash").gameObject.SetActive(true);
+            critImpactEffect.transform.Find("Scaled Hitspark 2 (Random Color)").gameObject.SetActive(true);
+
+            foreach (ParticleSystem poopfart00 in critImpactEffect.GetComponentsInChildren<ParticleSystem>())
+            {
+                if (poopfart00)
+                {
+                    var shitandpiss = poopfart00.main;
+                    shitandpiss.playOnAwake = true;
+                }
+            }
+
+            var sex2 = critImpactEffect.transform.Find("Impact Slash").GetComponent<ParticleSystem>().main;
+            sex2.startLifetimeMultiplier *= 6f;
+            sex2 = critImpactEffect.transform.Find("Dash, Bright").GetComponent<ParticleSystem>().main;
+            sex2.startLifetimeMultiplier *= 10f;
+            sex2 = critImpactEffect.transform.Find("ScaledSmokeRing, Mesh").GetComponent<ParticleSystem>().main;
+            sex2.startLifetimeMultiplier *= 6f;
+
+            v = slashImpactEffect.GetComponent<VFXAttributes>();
+            v.vfxPriority = VFXAttributes.VFXPriority.Always;
+            v.DoNotPool = true;
+
+            GameObject p = GameObject.Instantiate(slashImpactEffect);
+            p.transform.parent = critImpactEffect.transform;
+            p.transform.localScale = Vector3.one;
+            p.transform.localPosition = Vector3.zero;
+            p.transform.localRotation = Quaternion.identity;
+
+            AddNewEffectDef(critImpactEffect);
+
+            //
+
             finisherImpactEffect = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/OmniImpactVFXSlashMerc.prefab").WaitForCompletion(), "RobMonsterHunterFinisherImpactVFX", false);
 
             finisherImpactEffect.transform.Find("Flash, Hard").localScale = new Vector3(9f, 9f, 9f);
@@ -174,7 +228,7 @@ namespace MonsterHunter.Modules
             finisherImpactEffect.transform.Find("Scaled Hitspark 2 (Random Color)").localScale = new Vector3(2f, 2f, 2f);
             finisherImpactEffect.GetComponent<OmniEffect>().enabled = false;
 
-            var sex2 = finisherImpactEffect.transform.Find("Impact Slash").GetComponent<ParticleSystem>().main;
+            sex2 = finisherImpactEffect.transform.Find("Impact Slash").GetComponent<ParticleSystem>().main;
             sex2.startLifetimeMultiplier *= 8f;
             sex2 = finisherImpactEffect.transform.Find("Dash, Bright").GetComponent<ParticleSystem>().main;
             sex2.startLifetimeMultiplier *= 10f;

@@ -222,6 +222,15 @@ ModelImporter:
   - first:
       74: -7304068189903988303
     second: Armature|RunR
+  - first:
+      74: 8321919392108019878
+    second: Armature|ChargeAirBoosted.002
+  - first:
+      74: -5498637774889123485
+    second: Armature|Moonbreaker
+  - first:
+      74: 3702952913743919344
+    second: Armature|Moonbreaker.001
   externalObjects: {}
   materials:
     materialImportMode: 1
