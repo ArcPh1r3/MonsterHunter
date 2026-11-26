@@ -94,6 +94,11 @@ namespace MonsterHunter.Content.Survivors
         // stage props
         //public static GameObject spardaInteractable;
 
+        // o
+        internal static GameObject monsterPartPickupInteractable;
+        internal static ItemDef monsterPartItem;
+        public static List<ItemDef> logbookBlacklist = new List<ItemDef>();
+
         public const string bodyNameToken = "ROB_MONSTERHUNTER_BODY_NAME";
 
         internal void CreateCharacter()
@@ -134,11 +139,53 @@ namespace MonsterHunter.Content.Survivors
 
             //lockedOnBuff = Modules.Buffs.AddNewBuff("bdLockedOn", null, Color.white, false, false, true);
 
+            CreateMonsterPartInteractable();
+
             Hook();
         }
 
-        public static void CreateSparda()
+        public static void CreateMonsterPartInteractable()
         {
+            monsterPartItem = ItemDef.Instantiate(Addressables.LoadAssetAsync<ItemDef>("RoR2/Base/ArtifactKey/ArtifactKey.asset").WaitForCompletion());
+            monsterPartItem.name = "RobMonsterHunterPart";
+            monsterPartItem.nameToken = "ROB_HUNK_AMMOITEM_NAME";
+            monsterPartItem.descriptionToken = "ROB_HUNK_AMMOITEM_DESC";
+            monsterPartItem.pickupToken = "ROB_HUNK_AMMOITEM_DESC";
+            monsterPartItem.loreToken = "ROB_HUNK_AMMOITEM_DESC";
+            monsterPartItem.canRemove = false;
+            monsterPartItem.hidden = true;
+            monsterPartItem.requiredExpansion = null;
+            monsterPartItem.tags = new ItemTag[]
+            {
+                ItemTag.AIBlacklist,
+                ItemTag.BrotherBlacklist,
+                ItemTag.CannotCopy,
+                ItemTag.CannotDuplicate,
+                ItemTag.CannotSteal,
+                ItemTag.WorldUnique
+            };
+            monsterPartItem.unlockableDef = null;
+
+            logbookBlacklist.Add(monsterPartItem);
+
+            monsterPartPickupInteractable = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Barrel1/Barrel1.prefab").WaitForCompletion().InstantiateClone("RobMonsterHunterPartPickupInteractable", true);
+
+            MainPlugin.Destroy(monsterPartPickupInteractable.GetComponent<BarrelInteraction>());
+            MainPlugin.Destroy(monsterPartPickupInteractable.GetComponent<Highlight>());
+            MainPlugin.Destroy(monsterPartPickupInteractable.GetComponent<GenericDisplayNameProvider>());
+
+            monsterPartPickupInteractable.GetComponent<SfxLocator>().openSound = "sfx_hunk_pickup";
+
+            Transform modelTransform = monsterPartPickupInteractable.GetComponent<ModelLocator>().modelTransform;
+            monsterPartPickupInteractable.AddComponent<MonsterPartInteraction>().destroyOnOpen = modelTransform.gameObject;
+            modelTransform.GetComponent<Animator>().enabled = false;
+            modelTransform.Find("BarrelMesh").GetComponent<SkinnedMeshRenderer>().enabled = false;
+            monsterPartPickupInteractable.GetComponent<MonsterPartInteraction>().identifier = "rob_monHun_impEye";
+
+            GameObject interactionEffect = GameObject.Instantiate(Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<GameObject>("MonsterPartInteraction"));
+            interactionEffect.transform.SetParent(modelTransform, false);
+            interactionEffect.transform.localPosition = new Vector3(0f, 0f, 0f);
+            interactionEffect.transform.localRotation = Quaternion.identity;
             /*GameObject spardaModel = Modules.MonsterHunterAssets.mainAssetBundle.LoadAsset<GameObject>("SpardaProp");
             Modules.MonsterHunterAssets.ConvertAllRenderersToHopooShader(spardaModel);
 
@@ -711,8 +758,30 @@ namespace MonsterHunter.Content.Survivors
             // place stuff
             On.RoR2.SceneDirector.Start += SceneDirector_Start;
 
-            // devil arm drops
+            // monster part drops
             RoR2.GlobalEventManager.onCharacterDeathGlobal += GlobalEventManager_onCharacterDeathGlobal;
+
+            // monster part pickups
+            On.RoR2.PickupDropletController.OnCollisionEnter += PickupDropletController_OnCollisionEnter;
+        }
+
+        private static void PickupDropletController_OnCollisionEnter(On.RoR2.PickupDropletController.orig_OnCollisionEnter orig, PickupDropletController self, Collision collision)
+        {
+            if (self)
+            {
+                if (self.pickupState.pickupIndex == PickupCatalog.FindPickupIndex(MonsterHunter.monsterPartItem.itemIndex))
+                {
+                    if (NetworkServer.active && self.alive)
+                    {
+                        self.alive = false;
+                        NetworkServer.Spawn(GameObject.Instantiate(MonsterHunter.monsterPartPickupInteractable, self.transform.position, Quaternion.identity));
+                        UnityEngine.Object.Destroy(self.gameObject);
+                    }
+                    return;
+                }
+            }
+
+            orig(self, collision);
         }
 
         private static void AttemptSpawnSparda(string stageName)
@@ -728,6 +797,19 @@ namespace MonsterHunter.Content.Survivors
         {
             if (damageReport.attackerBody && damageReport.attackerMaster && damageReport.victim)
             {
+                if (Modules.Helpers.isMonsterHunterInPlay)
+                {
+                    // ough
+                    Vector3 position = Vector3.zero;
+                    Transform transform = damageReport.victim.transform;
+                    if (transform)
+                    {
+                        position = damageReport.victim.transform.position;
+                    }
+                    PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(MonsterHunter.monsterPartItem.itemIndex),
+                        position + Vector3.up,
+                        new Vector3(UnityEngine.Random.Range(-4f, 4f), UnityEngine.Random.Range(8f, 12f), UnityEngine.Random.Range(-4f, 4f)));
+                }
             }
         }
 

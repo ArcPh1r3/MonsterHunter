@@ -25,7 +25,7 @@ namespace MonsterHunter.Modules
             contentPack.effectDefs.Add(MonsterHunterAssets.effectDefs.ToArray());
             contentPack.entityStateTypes.Add(States.entityStates.ToArray());
             contentPack.itemDefs.Add(MonsterHunterAssets.itemDefs.ToArray());
-            //contentPack.itemDefs.Add(DanteWeaponCatalog.itemDefs.ToArray());
+            contentPack.itemDefs.Add(Content.Survivors.MonsterHunter.logbookBlacklist.ToArray());
             /*contentPack.itemTierDefs.Add(new RoR2.ItemTierDef[]
                 {
                     Content.Survivors.MonsterHunter.devilArmTier

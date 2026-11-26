@@ -65,7 +65,7 @@ namespace MonsterHunter.Modules
                     if (player != null && player.networkUser != null)
                     {
                         GameObject bodyPrefab = BodyCatalog.GetBodyPrefab(player.networkUser.bodyIndexPreference);
-                        if (bodyPrefab && bodyPrefab == Content.Survivors.MonsterHunter.characterPrefab && player.hasAuthority) return true;
+                        if (bodyPrefab && bodyPrefab == Content.Survivors.MonsterHunter.characterPrefab && Util.HasEffectiveAuthority(player.gameObject)) return true;
                     }
                 }
                 return false;

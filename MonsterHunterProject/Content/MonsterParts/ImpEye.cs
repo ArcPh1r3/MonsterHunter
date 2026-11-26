@@ -11,6 +11,6 @@ namespace MonsterHunter.Content.MonsterParts
     {
         public override string xmlKey => "rob_monHun_impEye";
         public override Color32 partColor => new Color32(242, 4, 67, 255);
-        public override string partName => "Imp Eyes";
+        public override string partName => "Imp Eye";
     }
 }

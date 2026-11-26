@@ -9,6 +9,7 @@ using ThreeEyedGames;
 using RoR2.UI;
 using UnityEngine.UI;
 using MonsterHunter.Content.Components;
+using RoR2.Orbs;
 
 namespace MonsterHunter.Modules
 {
@@ -50,6 +51,10 @@ namespace MonsterHunter.Modules
         public static GameObject tackleEffect;
 
         public static GameObject trackerPrefab;
+
+        public static GameObject monsterPartOrb;
+        public static GameObject monsterPartSpawnEffect;
+        public static GameObject monsterPartPickupSparkle;
 
         internal static NetworkSoundEventDef swordImpactSoundEvent;
         internal static NetworkSoundEventDef kickImpactSoundEvent;
@@ -413,7 +418,72 @@ namespace MonsterHunter.Modules
             }
 
             //
-            
+
+            Material sparkleMat = Material.Instantiate(Addressables.LoadAssetAsync<Material>("RoR2/Base/Firework/matFireworkSparkle.mat").WaitForCompletion());
+            sparkleMat.SetColor("_TintColor", new Color(1f, 47f / 255f, 0f, 1f));
+
+            monsterPartPickupSparkle = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Infusion/InfusionOrbFlash.prefab").WaitForCompletion().InstantiateClone("RobMonsterHunterPartFlash", false);
+            monsterPartPickupSparkle.transform.Find("Blood").GetComponent<ParticleSystemRenderer>().material = sparkleMat;
+            AddNewEffectDef(monsterPartPickupSparkle);
+
+            //
+
+            monsterPartSpawnEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/StunChanceOnHit/ImpactStunGrenade.prefab").WaitForCompletion().InstantiateClone("RobMonsterHunterPartSpawnEffect", false);
+
+            monsterPartSpawnEffect.transform.Find("Sparks, Long Life").gameObject.SetActive(false);
+            monsterPartSpawnEffect.transform.Find("Sparks, Short Life").transform.localScale = Vector3.one * 0.2f;
+            monsterPartSpawnEffect.transform.Find("Flash").gameObject.SetActive(false);
+            monsterPartSpawnEffect.transform.Find("SoftGlow").gameObject.SetActive(false);
+
+            AddNewEffectDef(monsterPartSpawnEffect);
+
+            //
+
+            GameObject iLovePenis = mainAssetBundle.LoadAsset<GameObject>("MonsterPartInteraction");
+            iLovePenis.transform.Find("Ring/Pillar").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matTracerBright.mat").WaitForCompletion();
+            iLovePenis.transform.Find("Ring/Spark").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matWideGlow.mat").WaitForCompletion();
+
+            Material ammoPillarMat = Material.Instantiate(Addressables.LoadAssetAsync<Material>("RoR2/Base/moon2/matMoonElevatorPillarSubtle.mat").WaitForCompletion());
+            ammoPillarMat.SetTexture("_RemapTex", Addressables.LoadAssetAsync<Texture>("RoR2/Base/Common/ColorRamps/texRampParent.png").WaitForCompletion());
+            ammoPillarMat.SetTexture("_Cloud1Tex", Addressables.LoadAssetAsync<Texture>("RoR2/Base/Common/texCloudCaustic2.png").WaitForCompletion());
+            ammoPillarMat.SetColor("_TintColor", new Color(1f, 235f / 255f, 0.5f, 1f));
+            ammoPillarMat.SetFloat("_Boost", 5f);
+            ammoPillarMat.SetFloat("_AlphaBoost", 3f);
+            ammoPillarMat.SetFloat("_AlphaBias", 0.49f);
+
+            iLovePenis.transform.Find("Ring/SphereBorder").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/SlowOnHit/matBaubleTimestopSphere.mat").WaitForCompletion();
+            iLovePenis.transform.Find("Ring/SphereBorder").localScale = Vector3.one * 0.9f;
+            iLovePenis.transform.Find("Ring/Ring (1)").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/Common/VFX/matGlow1Soft.mat").WaitForCompletion();
+            iLovePenis.transform.Find("Ring/Ring (1)").localScale = Vector3.one * 0.85f;
+            //iLovePenis.transform.Find("Ring/CylinderBorder").GetComponent<ParticleSystemRenderer>().material = ammoPillarMat;
+
+            //
+
+            monsterPartOrb = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/Effects/OrbEffects/InfusionOrbEffect"), "MonsterPartOrbEffect", false);
+
+            TrailRenderer trail = monsterPartOrb.transform.Find("TrailParent").Find("Trail").GetComponent<TrailRenderer>();
+            trail.widthMultiplier = 0.25f;
+            trail.material = Addressables.LoadAssetAsync<Material>("RoR2/Base/Grandparent/matGrandparentTeleportOutBoom.mat").WaitForCompletion();
+
+            monsterPartOrb.transform.Find("VFX/Core").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/Loader/matOmniRing2Loader.mat").WaitForCompletion();
+            monsterPartOrb.transform.Find("VFX").localScale = Vector3.one * 0.8f;
+
+            monsterPartOrb.transform.Find("VFX/Core").localScale = Vector3.one * 2.5f;
+
+            monsterPartOrb.transform.Find("VFX/PulseGlow").GetComponent<ParticleSystemRenderer>().material = Addressables.LoadAssetAsync<Material>("RoR2/Base/Grandparent/matGrandParentSunGlow.mat").WaitForCompletion();
+
+            OrbEffect orb = monsterPartOrb.GetComponent<OrbEffect>();
+            orb.startVelocity1 = new Vector3(0f, 0f, 0f);
+            orb.startVelocity2 = new Vector3(1f, 1f, 1f);
+
+            orb.startEffect = Modules.MonsterHunterAssets.monsterPartSpawnEffect;
+            orb.endEffect = Modules.MonsterHunterAssets.monsterPartPickupSparkle;
+            orb.onArrival = new UnityEngine.Events.UnityEvent();
+
+            Modules.MonsterHunterAssets.AddNewEffectDef(monsterPartOrb);
+
+            //
+
             groundSlamImpact = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Brother/BrotherSlamImpact.prefab").WaitForCompletion().InstantiateClone("RobMonsterHunterGroundSlamImpact", false);
 
             groundSlamImpact.transform.Find("Spikes, Small").gameObject.SetActive(false);

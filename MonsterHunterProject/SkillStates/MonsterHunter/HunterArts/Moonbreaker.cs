@@ -16,10 +16,10 @@ namespace MonsterHunter.SkillStates.MonsterHunter.HunterArts
         public float baseDuration = 1.5f;
         public static float attackRecoil = 5f;
         public static float hitHopVelocity = 6f;
-        private const float attackStartTime = 0.13f;
-        private const float attackRefreshTime1 = 0.18f;
-        private const float attackRefreshTime2 = 0.23f;
-        private const float attackEndTime = 0.27f;
+        private const float attackStartTime = 0.134f;
+        private const float attackRefreshTime1 = 0.25f;
+        private const float attackRefreshTime2 = 0.35f;
+        private const float attackEndTime = 0.417f;
         public static float earlyExitTime = 0.5f;
         public int swingIndex;
 
